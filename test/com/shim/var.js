@@ -37,7 +37,6 @@ test.serial('$randomInt', t => {
 
 test.serial('$randomPhoneNumber', t => {
   const value = pm[Var]('$randomPhoneNumber');
-  console.log('length',value.length)
   t.true(value.length === 12);
 });
 
