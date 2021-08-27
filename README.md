@@ -169,7 +169,7 @@ $ postman-to-k6 collection.json --k6-params k6-params.json -o k6-script.js
 ### K6 Handle Summary as JSON
 
 Output the [K6 summary](https://k6.io/docs/results-visualization/end-of-test-summary/#handlesummary-callback) as a file in JSON format.
-This will add the K6 `handleSummary(data)` to the generated script and will store the full output as JSON file locally.
+This will add the K6 `handleSummary(data)` to the generated script, providing the functionality that K6 will store the summary output as JSON file locally.
 
 | Flag | Verbose                    | Default |
 | ---- | -------------------------- | ------- |
