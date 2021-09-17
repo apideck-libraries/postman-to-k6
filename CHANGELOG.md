@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased](https://github.com/apideck-libraries/postman-to-k6/compare/v1.7.0...HEAD)
 
+### Added
+
+- Added the option to generate K6 Request tags for reporting purpose.
+
 ## [1.7.0] - 2020-09-01
 
 ### Added
