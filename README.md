@@ -192,18 +192,18 @@ Generate [K6 request name tags](https://k6.io/docs/using-k6/http-requests/#http-
 - `request`: uses the request name as tag (example "Show all accounts")
 - `folder-request`: uses Postman folder name and the request name (example: "Accounts - Show all accounts")
 
-| Flag | Verbose             | Default |
-| ---- | ------------------- | ------- |
-|      | `--request-tagging` | N/A     |
+| Flag | Verbose                | Default |
+| ---- | ---------------------- | ------- |
+|      | `--k6-request-tagging` | N/A     |
 
 Example for `request` strategy
 ```shell
-$ postman-to-k6 collection.json --request-tagging=request -o k6-script.js
+$ postman-to-k6 collection.json --k6-request-tagging=request -o k6-script.js
 ```
 
 Example for `folder-request` strategy
 ```shell
-$ postman-to-k6 collection.json --request-tagging=folder-request -o k6-script.js
+$ postman-to-k6 collection.json --k6-request-tagging=folder-request -o k6-script.js
 ```
 
 ### Separate
@@ -244,6 +244,21 @@ Skips any post-request scripts during conversion
 
 ```shell
 $ postman-to-k6 collection.json --skip-pre -o k6-script.js
+```
+
+### CLI options file
+
+Manage all the CLI options in a separate configuration file and pass them along to the postman-to-k6 command. 
+To make the CLI usage easier, especially in CI/CD implementations.
+
+All the available CLI options can be used in the config file. By passing the CLI options as parameters, you can overwrite the defined CLI options defined in the file.
+
+| Flag | Verbose              | Default |
+| ---- | -------------------- | ------- |
+|      | `--cli-options-file` | false   |
+
+```shell
+$ postman-to-k6 collection.json --cli-options-file cli-config.json
 ```
 
 ## Examples

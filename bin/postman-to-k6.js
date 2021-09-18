@@ -19,9 +19,10 @@ program
   .option('-i, --iterations <count>', 'Number of iterations.')
   .option('-g, --global <path>', 'JSON export of global variables.')
   .option('-e, --environment <path>', 'JSON export of environment.')
+  .option('--cli-options-file <path>','postman-to-k6 CLI options file. Useful for CI/CD integrations.')
   .option('-c, --csv <path>', 'CSV data file. Used to fill data variables.')
   .option('-j, --json <path>', 'JSON data file. Used to fill data variables.')
-  .option('--k6-params <path>', 'K6 param options config file. Used to set the K6 params used during HTTP requests.')
+  .option('--k6-params <path>', 'K6 param options config file. Sets K6 params used during HTTP requests.')
   .option('--k6-handle-summary-json <path>', 'Output the K6 handle summary as a JSON file.')
   .option('--k6-request-tagging <value>', 'Apply K6 tags to the requests for reporting.')
   .option('--skip-pre', 'Skips pre-request scripts')
@@ -47,8 +48,25 @@ async function run(...args) {
     console.error('Provide path to Postman collection');
     return;
   }
-  const options = args.pop();
+  let options = args.pop();
   const input = args.shift();
+
+  let cliOptions = {};
+  if (options.cliOptionsFile) {
+    try {
+      const cliOptionsFilePath = path.resolve(options.cliOptionsFile);
+      cliOptions = JSON.parse(await fs.readFile(cliOptionsFilePath, 'utf8'));
+    } catch (err) {
+      console.error(
+        '\x1b[31m',
+        `postman-to-k6 CLI options error - no such file or directory "${options.cliOptionsFile}"`
+      );
+      process.exit(1);
+    }
+  }
+
+  // Merge CLI configuration file with CLI parameters
+  options = Object.assign({}, cliOptions, options);
 
   // Convert
   let main, requests;
@@ -98,17 +116,17 @@ function translateOptions(options) {
     csv: !!options.csv,
     json: !!options.json,
     k6Params: options.k6Params,
+    k6RequestTagging: options.k6RequestTagging,
     iterations: options.iterations,
     id: true,
     oauth1: translateOauth1Options(options),
     separate: !!options.separate,
-    requestTagging: options.requestTagging,
     skip: {
       pre: options.skipPre,
       post: options.skipPost,
     },
     k6HandleSummary: {
-      json: options.k6HandleSummaryJson
+      json: options.k6HandleSummaryJson,
     },
   };
 }
