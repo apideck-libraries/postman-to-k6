@@ -45,22 +45,22 @@ converter, actively maintained and open for new contributions.
 
 ## Features
 
-- Prerequest scripts.
-- Test scripts.
-- Variables (at all scopes + dynamic).
-- Data files.
-- Authentication methods (except Hawk).
-- File uploads.
-- `postman.*` interface ([exceptions below](#unsupported-features)).
-- `pm.*` interface ([exceptions below](#unsupported-features)).
-- Support for
+- [x] Pre-request scripts.
+- [x] Test scripts.
+- [x] Variables (at all scopes + dynamic).
+- [x] Data files.
+- [x] Authentication methods (except Hawk).
+- [x] File uploads.
+- [x] `postman.*` interface ([exceptions below](#unsupported-features)).
+- [x] `pm.*` interface ([exceptions below](#unsupported-features)).
+- [x] Support for
   Postman [Dynamic Variables](https://learning.postman.com/docs/writing-scripts/script-references/variables-list/)
   & [ReplaceIn](https://learning.postman.com/docs/writing-scripts/script-references/postman-sandbox-api-reference/#using-variables-in-scripts)
   function.
-- Global variables exposed by Postman: `globals` `environment` `data`
+- [x] Global variables exposed by Postman: `globals` `environment` `data`
   `iteration`.
-- `xml2Json` conversion.
-- All [Postman Schema](https://schema.getpostman.com/) versions.
+- [x] `xml2Json` conversion.
+- [x] All [Postman Schema](https://schema.getpostman.com/) versions.
 
 ## Installation
 
@@ -71,9 +71,11 @@ test project using:
 
 ```shell
 $ npm install -D @apideck/postman-to-k6
+```
 
-# or using yarn...
+or using yarn...
 
+```shell
 $ yarn add @apideck/postman-to-k6
 ```
 
