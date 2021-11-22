@@ -2,38 +2,42 @@
 
 ![postman-to-k6-cover](./assets/postman-to-k6-cover.png)
 
+</div>
+
 # Postman-to-k6
 
 Converts a [Postman collection](https://www.getpostman.com/docs/collections) to a [k6 script](https://docs.k6.io/docs).
 
+The "postman-to-k6" converter will use your Postman collection and convert all the Postman requests, including tests,
+variables, ... to K6 scripts that can executed by K6 to run performance tests.
+
 ![Github badge](https://github.com/apideck-libraries/postman-to-k6/actions/workflows/build-on-tag.yml/badge.svg)
 <a href="https://www.npmjs.com/package/@apideck/postman-to-k6" alt="Latest Stable Version">![npm](https://img.shields.io/npm/v/@apideck/postman-to-k6.svg)</a>
 <a href="https://www.npmjs.com/package/@apideck/postman-to-k6" alt="Total Downloads">![npm](https://img.shields.io/npm/dw/@apideck/postman-to-k6.svg)</a>
-    
-</div>
 
-<br/><br/>
+This project is a friendly fork of the original [grafana/postman-to-k6](https://github.com/grafana/postman-to-k6)
+converter, actively maintained and open for new contributions.
 
 ## Content
 
 - [Features](#features)
 - [Installation](#installation)
-  - [Local Installation (recommended)](#local-installation-recommended)
-  - [Global Installation](#global-installation)
+    - [Local Installation (recommended)](#local-installation-recommended)
+    - [Global Installation](#global-installation)
 - [Usage](#usage)
 - [Options](#options)
-  - [Iterations](#iterations)
-  - [Environment Variables](#environment-variables)
-  - [Global Variables](#global-variables)
-  - [CSV Data File](#csv-data-file)
-  - [JSON Data File](#json-data-file)
-  - [K6 Param Options File](#k6-param-options-file)
-  - [K6 Handle Summary as JSON](#k6-handle-summary-as-json)
-  - [K6 Request tag](#k6-request-tag)
-  - [Separate](#separate)
-  - [Skip Post](#skip-pre)
-  - [Skip Post](#skip-post)
-  - [CLI options file](#cli-options-file)
+    - [Iterations](#iterations)
+    - [Environment Variables](#environment-variables)
+    - [Global Variables](#global-variables)
+    - [CSV Data File](#csv-data-file)
+    - [JSON Data File](#json-data-file)
+    - [K6 Param Options File](#k6-param-options-file)
+    - [K6 Handle Summary as JSON](#k6-handle-summary-as-json)
+    - [K6 Request tag](#k6-request-tag)
+    - [Separate](#separate)
+    - [Skip Post](#skip-pre)
+    - [Skip Post](#skip-post)
+    - [CLI options file](#cli-options-file)
 - [Examples](#examples)
 - [Unsupported Features](#unsupported-features)
 - [Other similar tools](#other-similar-tools)
@@ -49,7 +53,10 @@ Converts a [Postman collection](https://www.getpostman.com/docs/collections) to 
 - File uploads.
 - `postman.*` interface ([exceptions below](#unsupported-features)).
 - `pm.*` interface ([exceptions below](#unsupported-features)).
-- Support for Postman [Dynamic Variables](https://learning.postman.com/docs/writing-scripts/script-references/variables-list/) & [ReplaceIn](https://learning.postman.com/docs/writing-scripts/script-references/postman-sandbox-api-reference/#using-variables-in-scripts) function.
+- Support for
+  Postman [Dynamic Variables](https://learning.postman.com/docs/writing-scripts/script-references/variables-list/)
+  & [ReplaceIn](https://learning.postman.com/docs/writing-scripts/script-references/postman-sandbox-api-reference/#using-variables-in-scripts)
+  function.
 - Global variables exposed by Postman: `globals` `environment` `data`
   `iteration`.
 - `xml2Json` conversion.
@@ -59,7 +66,8 @@ Converts a [Postman collection](https://www.getpostman.com/docs/collections) to 
 
 ### Local Installation (recommended)
 
-While possible to install globally, we recommend that you, if possible, add the converter to the `node_modules` of your test project using:
+While possible to install globally, we recommend that you, if possible, add the converter to the `node_modules` of your
+test project using:
 
 ```shell
 $ npm install -D @apideck/postman-to-k6
@@ -69,7 +77,8 @@ $ npm install -D @apideck/postman-to-k6
 $ yarn add @apideck/postman-to-k6
 ```
 
-Note that this will require you to run the converter with `npx @apideck/postman-to-k6 your-postman-file` or, if you are using an older versions of npm, `./node_modules/.bin/postman-to-k6 your-postman-file`.
+Note that this will require you to run the converter with `npx @apideck/postman-to-k6 your-postman-file` or, if you are
+using an older versions of npm, `./node_modules/.bin/postman-to-k6 your-postman-file`.
 
 ### Global Installation
 
@@ -171,8 +180,9 @@ $ postman-to-k6 collection.json --k6-params k6-params.json -o k6-script.js
 
 ### K6 Handle Summary as JSON
 
-Output the [K6 summary](https://k6.io/docs/results-visualization/end-of-test-summary/#handlesummary-callback) as a file in JSON format.
-This will add the K6 `handleSummary(data)` to the generated script, providing the functionality that K6 will store the summary output as JSON file locally.
+Output the [K6 summary](https://k6.io/docs/results-visualization/end-of-test-summary/#handlesummary-callback) as a file
+in JSON format. This will add the K6 `handleSummary(data)` to the generated script, providing the functionality that K6
+will store the summary output as JSON file locally.
 
 | Flag | Verbose                    | Default |
 | ---- | -------------------------- | ------- |
@@ -184,7 +194,9 @@ $ postman-to-k6 collection.json --k6-handle-summary-json summary-report.json -o 
 
 ### K6 Request tag
 
-Generate [K6 request name tags](https://k6.io/docs/using-k6/http-requests/#http-request-tags) based on available naming strategies:
+Generate [K6 request name tags](https://k6.io/docs/using-k6/http-requests/#http-request-tags) based on available naming
+strategies:
+
 - none: no automatic generated tags | default
 - `request`: uses the request name as tag (example "Show all accounts")
 - `folder-request`: uses Postman folder name and the request name (example: "Accounts - Show all accounts")
@@ -194,11 +206,13 @@ Generate [K6 request name tags](https://k6.io/docs/using-k6/http-requests/#http-
 |      | `--k6-request-tagging` | N/A     |
 
 Example for `request` strategy
+
 ```shell
 $ postman-to-k6 collection.json --k6-request-tagging=request -o k6-script.js
 ```
 
 Example for `folder-request` strategy
+
 ```shell
 $ postman-to-k6 collection.json --k6-request-tagging=folder-request -o k6-script.js
 ```
@@ -245,10 +259,11 @@ $ postman-to-k6 collection.json --skip-pre -o k6-script.js
 
 ### CLI options file
 
-Manage all the CLI options in a separate configuration file and pass them along to the postman-to-k6 command. 
-To make the CLI usage easier, especially in CI/CD implementations.
+Manage all the CLI options in a separate configuration file and pass them along to the postman-to-k6 command. To make
+the CLI usage easier, especially in CI/CD implementations.
 
-All the available CLI options can be used in the config file. By passing the CLI options as parameters, you can overwrite the defined CLI options defined in the file.
+All the available CLI options can be used in the config file. By passing the CLI options as parameters, you can
+overwrite the defined CLI options defined in the file.
 
 | Flag | Verbose              | Default |
 | ---- | -------------------- | ------- |
@@ -262,17 +277,17 @@ Example of JSON CLI config file
 
 ```json
 {
-  "output": "k6-script.js",
-  "k6-params": "config/k6-params.json",
-  "environment": "config/envs/team.env.json",
-  "separate": true
+    "output": "k6-script.js",
+    "k6-params": "config/k6-params.json",
+    "environment": "config/envs/team.env.json",
+    "separate": true
 }
 ```
 
 ## Examples
 
-A collection of Postman examples are located under `example`.
-To run one of the examples, just run it as you would any other command:
+A collection of Postman examples are located under `example`. To run one of the examples, just run it as you would any
+other command:
 
 ```shell
 $ postman-to-k6 example/v2/echo.json -o k6-script.js
@@ -284,23 +299,24 @@ $ postman-to-k6 example/v2/echo.json -o k6-script.js
 - Controlling request execution order using `postman.setNextRequest`.
 - Cookie properties, like `hostOnly`, `session`, and `storeId`.
 - Textual response messages:
-  - `responseCode.name`
-  - `responseCode.detail`
-  - `pm.response.reason`
-  - `pm.response.to.have.status(reason)`
-  - `pm.response.to.not.have.status(reason)`
+    - `responseCode.name`
+    - `responseCode.detail`
+    - `pm.response.reason`
+    - `pm.response.to.have.status(reason)`
+    - `pm.response.to.not.have.status(reason)`
 - Properties returning Postman classes:
-  - `pm.request.url` `pm.request.headers`
-  - `pm.response.headers`
+    - `pm.request.url` `pm.request.headers`
+    - `pm.response.headers`
 - The Hawk authentication method.
 - Deprecated `xmlToJson` method.
 - Request IDs are changed. Postman doesn't provide them in the export, so we have to generate new ones.
 
 ## Other similar tools
 
-- [jmeter-to-k6](https://github.com/loadimpact/jmeter-to-k6/): Convert
-  JMeter JMX files to k6 JS.
+- [jmeter-to-k6](https://github.com/loadimpact/jmeter-to-k6/): Convert JMeter JMX files to k6 JS.
 
 ## Credits
 
-Thanks to [bookmoons](https://github.com/bookmoons) for creating this tool. Also, thanks to [borjacampina](https://github.com/borjacampina) for creating the original incarnation of the tool.
+Special credits to the team from [Grafana/LoadImpact](https://github.com/grafana) for open-sourcing growing the converter and contributing it to the community.
+Thanks to [bookmoons](https://github.com/bookmoons) for creating this tool. Also, thanks
+to [borjacampina](https://github.com/borjacampina) for creating the original incarnation of the tool.
