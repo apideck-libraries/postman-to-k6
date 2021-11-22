@@ -4,8 +4,6 @@
 
 # Postman-to-k6
 
-> This is a fork of the original [postman-to-k6](https://github.com/grafana/postman-to-k6) repo, which contains [new features & fixes](CHANGELOG.md).
-
 Converts a [Postman collection](https://www.getpostman.com/docs/collections) to a [k6 script](https://docs.k6.io/docs).
 
 ![Github badge](https://github.com/apideck-libraries/postman-to-k6/actions/workflows/build-on-tag.yml/badge.svg)
@@ -22,7 +20,6 @@ Converts a [Postman collection](https://www.getpostman.com/docs/collections) to 
 - [Installation](#installation)
   - [Local Installation (recommended)](#local-installation-recommended)
   - [Global Installation](#global-installation)
-  - [Docker](#docker)
 - [Usage](#usage)
 - [Options](#options)
   - [Iterations](#iterations)
@@ -37,7 +34,6 @@ Converts a [Postman collection](https://www.getpostman.com/docs/collections) to 
   - [Skip Post](#skip-pre)
   - [Skip Post](#skip-post)
   - [CLI options file](#cli-options-file)
-- [Docker Usage](#docker-usage)
 - [Examples](#examples)
 - [Unsupported Features](#unsupported-features)
 - [Other similar tools](#other-similar-tools)
