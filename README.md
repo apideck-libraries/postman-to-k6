@@ -8,8 +8,8 @@
 
 Converts a [Postman collection](https://www.getpostman.com/docs/collections) to a [k6 script](https://docs.k6.io/docs).
 
-The "postman-to-k6" converter will use your Postman collection and convert all the Postman requests, including tests,
-variables, ... to K6 scripts that can executed by K6 to run performance tests.
+The postman-to-k6 converter utilizes your Postman collection and converts all the Postman requests, including tests,
+variables, ... to K6 scripts that can be executed by K6 to run performance tests.
 
 ![Github badge](https://github.com/apideck-libraries/postman-to-k6/actions/workflows/build-on-tag.yml/badge.svg)
 <a href="https://www.npmjs.com/package/@apideck/postman-to-k6" alt="Latest Stable Version">![npm](https://img.shields.io/npm/v/@apideck/postman-to-k6.svg)</a>
@@ -317,6 +317,6 @@ $ postman-to-k6 example/v2/echo.json -o k6-script.js
 
 ## Credits
 
-Special credits to the team from [Grafana/LoadImpact](https://github.com/grafana) for open-sourcing growing the converter and contributing it to the community.
-Thanks to [bookmoons](https://github.com/bookmoons) for creating this tool. Also, thanks
-to [borjacampina](https://github.com/borjacampina) for creating the original incarnation of the tool.
+Special credits to the team from [Grafana/LoadImpact](https://github.com/grafana) for open-sourcing & growing the
+converter and contributing it to the community. Thanks to [bookmoons](https://github.com/bookmoons) for creating this
+tool. Also, thanks to [borjacampina](https://github.com/borjacampina) for creating the original incarnation of the tool.
