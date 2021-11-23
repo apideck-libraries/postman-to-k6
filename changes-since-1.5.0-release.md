@@ -15,7 +15,7 @@ highlights:
 ## Full support of the Postman random functions/dynamic variables
 
 By adding support for the
-Postman[Dynamic Variables](https://learning.postman.com/docs/writing-scripts/script-references/variables-list/)
+Postman [Dynamic Variables](https://learning.postman.com/docs/writing-scripts/script-references/variables-list/)
 & [ReplaceIn](https://learning.postman.com/docs/writing-scripts/script-references/postman-sandbox-api-reference/#using-variables-in-scripts)
 functions to the postman-to-k6 converter, it is now possible to apply any of the `{{$random}}` methods available in
 Postman being used by K6 in the converted K6 scripts.
@@ -24,14 +24,14 @@ Postman being used by K6 in the converted K6 scripts.
 
 ## K6 Handle Summary as JSON
 
-K6 has built-in[summary](https://k6.io/docs/results-visualization/end-of-test-summary/#handlesummary-callback) options
+K6 has built-in [summary](https://k6.io/docs/results-visualization/end-of-test-summary/#handlesummary-callback) options
 to provide the results of a load test. To access the full summary, it is advised to use
-the[handleSummary() callback](https://k6.io/docs/results-visualization/end-of-test-summary#handlesummary-callback),
+the [handleSummary() callback](https://k6.io/docs/results-visualization/end-of-test-summary#handlesummary-callback),
 since it allows completely customizing the end-of-test summary and exporting the summary report data in any desired
 format (e.g. JSON, CSV, XML (JUnit/xUnit/etc.), HTML, TXT, etc.).
 
 To facilitate the K6 summary capabilities, the postman-to-k6 converter allows the output of
-the[K6 summary](https://k6.io/docs/results-visualization/end-of-test-summary/#handlesummary-callback) to be saved as a
+the [K6 summary](https://k6.io/docs/results-visualization/end-of-test-summary/#handlesummary-callback) to be saved as a
 file in JSON format.
 
 ```shell
@@ -51,7 +51,7 @@ Link: <https://github.com/apideck-libraries/postman-to-k6#k6-handle-summary-as-j
 
 ## Generate K6 Request tags
 
-K6 can add[ request name tags](https://k6.io/docs/using-k6/http-requests/#http-request-tags). These tags allow you to
+K6 can add [ request name tags](https://k6.io/docs/using-k6/http-requests/#http-request-tags). These tags allow you to
 filter your results during analysis. The generated postman-to-k6 requests support the tagging method, but that requires
 manually adding the desired tags to all the generated requests.
 
