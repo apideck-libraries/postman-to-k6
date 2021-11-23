@@ -14,7 +14,7 @@ The postman-to-k6 converter has received some new features & bug fixes, since th
 
 By adding support for the Postman[Dynamic Variables](https://learning.postman.com/docs/writing-scripts/script-references/variables-list/) & [ReplaceIn](https://learning.postman.com/docs/writing-scripts/script-references/postman-sandbox-api-reference/#using-variables-in-scripts) functions to the postman-to-k6 converter, it is now possible to apply any of the \`{{$random}}\` methods available in Postman being used by K6 in the converted K6 scripts.
 
-![](./assets/img/k6-pm-dynamic-variables.png)
+![](./assets/k6-pm-dynamic-variables.png)
 
 
 ## K6 Handle Summary as JSON
@@ -25,7 +25,7 @@ To facilitate the K6 summary capabilities, the postman-to-k6 converter allows th
 
 $ postman-to-k6 collection.json --k6-handle-summary-json summary-report.json -o k6-script.js
 
-![](./assets/img/k6-handle-summary.png)
+![](./assets/k6-handle-summary.png)
 
 By using the postman-to-k6 option--k6-handle-summary-json,the converter will add the K6handleSummary(data) function to the generated K6 script, providing the functionality that K6 will store the summary output as JSON file locally. After the K6 run, the K6 summary will be available in the “summary-report.json” file.
 
@@ -48,13 +48,13 @@ Example `request` strategy
 
 $ postman-to-k6 collection.json --k6-request-tagging=request -o k6-script.js
 
-![](./assets/img/k6-request-tagging.png)
+![](./assets/k6-request-tagging.png)
 
 Example `folder-request` strategy
 
 $ postman-to-k6 collection.json --k6-request-tagging=folder-request -o k6-script.js
 
-![](./assets/img/k6-request-folder-tagging.png)
+![](./assets/k6-request-folder-tagging.png)
 
 Link:<https://github.com/apideck-libraries/postman-to-k6#k6-request-tag>
 
@@ -67,7 +67,7 @@ So we add a way to manage all the options in a separate configuration file and p
 
 $ postman-to-k6 collection.json --cli-options-file cli-config.json
 
-![](./assets/img/k6-cli-options-file.png)
+![](./assets/k6-cli-options-file.png)
 
 All the available CLI options can be used in the config file. By passing the CLI options as parameters, you can overwrite the defined CLI options defined in the file.
 
