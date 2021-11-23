@@ -40,12 +40,8 @@
         "test-com": "cross-env NODE_PATH=lib:test ava test/com/**/*.js",
         "test-hoc": "cross-env NODE_PATH=lib:test ava",
         "test-int": "cross-env NODE_PATH=lib:test ava test/int/*.js",
-        "test-unit": "cross-env NODE_PATH=lib:test ava test/unit/**/*.js"
-    },
-    "husky": {
-        "hooks": {
-            "pre-commit": "yarn lint"
-        }
+        "test-unit": "cross-env NODE_PATH=lib:test ava test/unit/**/*.js",
+        "prepare": "husky install"
     },
     "dependencies": {
         "ajv": "^6.12.6",
@@ -58,7 +54,6 @@
         "eslint": "^7.32.0",
         "eslint-config-prettier": "^6.11.0",
         "fs-extra": "^8.1.0",
-        "husky": "^4.2.5",
         "lodash": "^4.17.21",
         "oauth-1.0a": "^2.2.5",
         "papaparse": "^5.1.0",
@@ -84,7 +79,8 @@
         "npm-run-all": "^4.1.5",
         "sinon": "^7.5.0",
         "snazzy": "^8.0.0",
-        "standard": "^14.3.1"
+        "standard": "^14.3.1",
+        "husky": "^7.0.0"
     },
     "engines": {
         "node": ">= 0.10.0"
