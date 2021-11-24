@@ -319,6 +319,6 @@ $ postman-to-k6 example/v2/echo.json -o k6-script.js
 
 ## Credits
 
-Special credits to the team from [Grafana/LoadImpact](https://github.com/grafana) for open-sourcing & growing the
+Special thanks to the K6 team from [Grafana](https://github.com/grafana) for open-sourcing & growing the
 converter and contributing it to the community. Thanks to [bookmoons](https://github.com/bookmoons) for creating this
 tool. Also, thanks to [borjacampina](https://github.com/borjacampina) for creating the original incarnation of the tool.
