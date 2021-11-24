@@ -5,10 +5,10 @@ As you might have noticed, the postman-to-k6 converter was rather inactive the l
 The postman-to-k6 converter has received some new features & bug fixes, since the 1.5.0 release. Let’s summarise some
 highlights:
 
-- Full support of the Postman random functions/dynamic variables
-- K6 Handle Summary as JSON
-- Generate K6 Request tags
-- Manage postman-to-k6 CLI options in a file
+- [Full support of the Postman random functions/dynamic variables](#full-support-of-the-postman-random-functionsdynamic-variables)
+- [K6 Handle Summary as JSON](#k6-handle-summary-as-json)
+- [Generate K6 Request tags](#generate-k6-request-tags)
+- [Manage postman-to-k6 CLI options in a file](#manage-postman-to-k6-cli-options)
 
 ## Full support of the Postman random functions/dynamic variables
 
