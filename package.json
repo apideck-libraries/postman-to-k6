@@ -68,7 +68,7 @@
         "prettier": "^1.19.1",
         "spo-gpo": "^1.0.0",
         "strip-json-comments": "^3.1.1",
-        "urijs": "^1.19.7",
+        "urijs": "^1.19.8",
         "uuid": "^3.3.2",
         "verror": "^1.10.0",
         "xml2js": "^0.4.22"
