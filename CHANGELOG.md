@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased](https://github.com/apideck-libraries/postman-to-k6/compare/v1.8.3...HEAD)
 
+### Fixed
+
+- Bump dependencies like husky, urijs, papaparse, chai, aws4, shell-quote, trim-off-newlines, minimist (#70)
+
 ## [1.8.3] - 2020-11-22
 
 ### Fixed
