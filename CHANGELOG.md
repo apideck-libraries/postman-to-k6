@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Use correct directory paths for importing libs (#49)
 - Auth headers with `-` in the key name are handled properly (#62)
 - Bump dependencies like husky, urijs, papaparse, chai, aws4, shell-quote, trim-off-newlines, minimist (#70)
 
