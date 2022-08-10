@@ -37,6 +37,14 @@ test('request --separate', async t => {
   const options = {
     separate: true,
   };
-  const main = await convertFile('test/material/2.1/format-v2.1.json', options);
-  t.snapshot(main);
+  const [main, requests] = await convertFile(
+    'test/material/2.1/format-v2.1.json',
+    options
+  );
+
+  // remove changing ID from requests
+  const requestsClean = JSON.parse(
+    JSON.stringify(requests).replace(/(?=id: )(.*?)(.*?)(?=,)/gm, `id: \\" \\"`)
+  );
+  t.snapshot([main, requestsClean]);
 });

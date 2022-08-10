@@ -1,0 +1,40 @@
+{
+	"info": {
+		"_postman_id": "dc81cecd-1e89-4c65-b5f8-9a69618c9e9f",
+		"name": "echo-moment",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+    "item": [
+        {
+            "name": "moment",
+            "event": [
+                {
+                    "listen": "prerequest",
+                    "script": {
+                        "exec": [
+                            "let moment = require('moment');",
+                            "const momentJS = moment('2021-08-15').add(1, 'days').format('DD.MM.YYYY');"
+                        ],
+                        "type": "text/javascript"
+                    }
+                }
+            ],
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "https://postman-echo.com/get",
+                    "protocol": "https",
+                    "host": [
+                        "postman-echo",
+                        "com"
+                    ],
+                    "path": [
+                        "get"
+                    ]
+                }
+            },
+            "response": []
+        }
+    ]
+}
