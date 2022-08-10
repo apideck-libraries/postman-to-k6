@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Transform Postman API exported wrapped collection & environment objects (#67)
 - Enhanced auto-import of libs (#68)
 - Replace the Postman variables in the global, environment and collection scopes (#64)
 - Use correct directory paths for importing libs (#49)
