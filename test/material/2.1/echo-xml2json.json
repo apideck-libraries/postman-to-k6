@@ -1,0 +1,39 @@
+{
+	"info": {
+		"_postman_id": "dc81cecd-1e89-4c65-b5f8-9a69618c9e9f",
+		"name": "echo-xml2json",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+    "item": [
+        {
+            "name": "xml2json",
+            "event": [
+                {
+                    "listen": "prerequest",
+                    "script": {
+                        "exec": [
+                            "const json = xml2Json(<root>Text</root>);"
+                        ],
+                        "type": "text/javascript"
+                    }
+                }
+            ],
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "https://postman-echo.com/get",
+                    "protocol": "https",
+                    "host": [
+                        "postman-echo",
+                        "com"
+                    ],
+                    "path": [
+                        "get"
+                    ]
+                }
+            },
+            "response": []
+        }
+    ]
+}
