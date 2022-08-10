@@ -1,5 +1,6 @@
 import test from 'ava';
 import map from 'generate/separate/map';
+import convertFile from 'convert/file';
 
 test('map', t => {
   const tree = {
@@ -30,4 +31,12 @@ test('map', t => {
       'public.js.A': {},
     },
   });
+});
+
+test('request --separate', async t => {
+  const options = {
+    separate: true,
+  };
+  const main = await convertFile('test/material/2.1/format-v2.1.json', options);
+  t.snapshot(main);
 });
