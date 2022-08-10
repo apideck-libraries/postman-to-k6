@@ -1,0 +1,40 @@
+{
+    "id": "316d196c-5033-4a1e-bb76-8a498fcbeb15",
+    "name": "stage",
+    "owner": "15658843",
+    "createdAt": "2022-01-10T22:25:29.000Z",
+    "updatedAt": "2022-05-13T21:45:13.000Z",
+    "values": [
+        {
+            "key": "base_url",
+            "value": "https://example.com",
+            "enabled": true
+        },
+        {
+            "key": "disabled",
+            "value": "{{stage_auth_token}}",
+            "enabled": false
+        },{
+            "key": "auth_token",
+            "value": "{{stage_auth_token}}",
+            "enabled": true
+        },
+        {
+            "key": "hierarchy_token",
+            "value": "{{hierarchy}}",
+            "enabled": true
+        },
+        {
+            "key": "hierarchy",
+            "value": "environment",
+            "enabled": true
+        },
+        {
+            "key": "product_zulu",
+            "value": "zulu",
+            "enabled": true,
+            "type": "default"
+        }
+    ],
+    "isPublic": false
+}
