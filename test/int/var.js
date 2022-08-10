@@ -22,6 +22,13 @@ test('environment', async t => {
   t.snapshot(main);
 });
 
+test('environment Postman API', async t => {
+  const [main] = await convertFile('test/material/2/var-environment.json', {
+    environment: 'test/material/2/environment-postman.json',
+  });
+  t.snapshot(main);
+});
+
 test('global environment collection vars', async t => {
   const [main] = await convertFile('test/material/2/var-collection-vars.json', {
     globals: 'test/material/2/global-vars.json',

@@ -1,0 +1,27 @@
+{
+    "environment": {
+        "id": "1234080a-1bf2-4da6-b76a-f59437b942ce",
+        "name": "TestEnv",
+        "owner": "1234567",
+        "createdAt": "2022-03-28T11:00:55.000Z",
+        "updatedAt": "2022-04-29T13:55:24.000Z",
+        "values": [
+            {
+                "key": "first",
+                "value": "one",
+                "enabled": true
+            },
+            {
+                "key": "second",
+                "value": "two",
+                "enabled": true
+            },
+            {
+                "key": "third",
+                "value": "three",
+                "enabled": true
+            }
+        ],
+        "isPublic": false
+    }
+}
