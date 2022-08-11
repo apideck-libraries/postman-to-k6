@@ -25,6 +25,10 @@
     "bin": {
         "postman-to-k6": "bin/postman-to-k6.js"
     },
+    "files": [
+        "bin/**/*",
+        "lib/**/*"
+    ],
     "directories": {
         "bin": "bin",
         "lib": "lib"
@@ -41,7 +45,8 @@
         "test-hoc": "cross-env NODE_PATH=lib:test ava",
         "test-int": "cross-env NODE_PATH=lib:test ava test/int/*.js",
         "test-unit": "cross-env NODE_PATH=lib:test ava test/unit/**/*.js",
-        "prepare": "husky install"
+        "prepare": "husky install",
+        "release": "yarn format && yarn lint && yarn bundle && np --branch main"
     },
     "dependencies": {
         "ajv": "^6.12.6",

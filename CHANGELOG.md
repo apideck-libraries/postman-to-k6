@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased](https://github.com/apideck-libraries/postman-to-k6/compare/v1.8.3...HEAD)
 
+## [1.8.4] - 2022-08-11
+
 ### Fixed
 
 - Extend pm.variables.replaceIn to support Postman static & dynamic variables (#69)
@@ -17,32 +19,32 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Auth headers with `-` in the key name are handled properly (#62)
 - Bump dependencies like husky, urijs, papaparse, chai, aws4, shell-quote, trim-off-newlines, minimist (#70)
 
-## [1.8.3] - 2020-11-22
+## [1.8.3] - 2021-11-22
 
 ### Fixed
 
 - Allows variables that evaluate to falsy to be returned (#23)
 
-## [1.8.2] - 2020-10-08
+## [1.8.2] - 2021-10-08
 
 ### Changed
 
 - Temporary fix to overcome missing optional chaining support
 
-## [1.8.1] - 2020-09-20
+## [1.8.1] - 2021-09-20
 
 ### Changed
 
 - Minor enhancement to convert the CLI parameter to camelCased options for easier usage in the CLI options file
 
-## [1.8.0] - 2020-09-18
+## [1.8.0] - 2021-09-18
 
 ### Added
 
 - Added the option to generate K6 Request tags for reporting purpose.
 - Added option to use a file to pass all CLI options.
 
-## [1.7.0] - 2020-09-01
+## [1.7.0] - 2021-09-01
 
 ### Added
 
@@ -53,7 +55,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updated readme
 - Migrated the "integration" tests to use Ava snapshots instead of the hardcoded comparison for easier maintenance
 
-## [1.6.1] - 2020-08-18
+## [1.6.1] - 2021-08-18
 
 ### Fixed
 
@@ -63,7 +65,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Updated readme to remove the docker hub reference to prevent confusion with the original package, since this fork does not build dockers.
 
-## [1.6.0] - 2020-08-18
+## [1.6.0] - 2021-08-18
 
 ### Added
 
@@ -79,13 +81,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Bumped dependencies for ajv, browserify, eslint, lodash, postman-collection, postman-collection-transformer, strip-json-comments, urijs
 - Bumped dev dependencies for ava
 
-## [1.5.1] - 2020-08-16
+## [1.5.1] - 2021-08-16
 
 ### Fixed
 
 - Bug fix for unwanted conversion of Postman query variables (#106 / #104)
 
-## [1.1.0] - 202-05-22
+## [1.1.0] - 2020-05-22
 
 ### Added
 
