@@ -34,8 +34,10 @@
 							"    pm.expect(resp.json.email).to.be.equal(pm.collectionVariables.get(\"email\"));",
 							"    pm.expect(resp.json.name).to.be.equal(pm.collectionVariables.get(\"name\"));",
 							"    pm.expect(resp.json.phone_number).to.be.equal(pm.collectionVariables.get(\"phone_number\"));",
-							"});"
-						],
+							"});",
+                            "console.log(pm.variables.replaceIn('Replaces PM variable name with {{name}}'));",
+                            "console.log(pm.variables.replaceIn('Replaces PM variable $randomFirstName with {{$randomFirstName}}'));"
+                        ],
 						"type": "text/javascript"
 					}
 				}
