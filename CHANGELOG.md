@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased](https://github.com/apideck-libraries/postman-to-k6/compare/v1.8.3...HEAD)
 
+## [1.8.5] - 2022-08-11
+
+### Fixed
+
+- Added missing scripts to the `package.json` file.
+
 ## [1.8.4] - 2022-08-11
 
 ### Fixed

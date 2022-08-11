@@ -27,7 +27,8 @@
     },
     "files": [
         "bin/**/*",
-        "lib/**/*"
+        "lib/**/*",
+        "scripts/**/*"
     ],
     "directories": {
         "bin": "bin",
