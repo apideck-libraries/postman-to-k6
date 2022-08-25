@@ -35,7 +35,7 @@ converter, actively maintained and open for new contributions.
     - [K6 Handle Summary as JSON](#k6-handle-summary-as-json)
     - [K6 Request tag](#k6-request-tag)
     - [Separate](#separate)
-    - [Skip Post](#skip-pre)
+    - [Skip Pre](#skip-pre)
     - [Skip Post](#skip-post)
     - [CLI options file](#cli-options-file)
 - [Examples](#examples)
