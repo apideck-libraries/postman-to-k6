@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased](https://github.com/apideck-libraries/postman-to-k6/compare/v1.8.5...HEAD)
 
+- Build postman-to-k6 as a Docker image
+
 ## [1.8.6] - 2022-11-12
 
 ### Security
