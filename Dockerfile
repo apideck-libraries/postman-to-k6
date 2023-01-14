@@ -1,4 +1,4 @@
-FROM node:11-alpine
+FROM node:lts-alpine
 
 RUN mkdir -p /home/node/postman-to-k6/node_modules && chown -R node:node /home/node/postman-to-k6
 WORKDIR /home/node/postman-to-k6
