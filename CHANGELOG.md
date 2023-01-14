@@ -7,7 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased](https://github.com/apideck-libraries/postman-to-k6/compare/v1.8.5...HEAD)
 
+## [1.8.7] - 2023-01-14
+
+### Added
+
+- Support for Postman files upload (experimental)(#93, #28, #83)
 - Build postman-to-k6 as a Docker image
+
+### Security
+
+- Bump json5 from 2.1.3 to 2.2.3
 
 ## [1.8.6] - 2022-11-12
 
