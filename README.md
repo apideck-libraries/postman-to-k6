@@ -51,7 +51,7 @@ converter, actively maintained and open for new contributions.
 - [x] Variables (at all scopes + dynamic).
 - [x] Data files.
 - [x] Authentication methods (except Hawk).
-- [x] File uploads.
+- [x] File uploads (experimental).
 - [x] `postman.*` interface ([exceptions below](#unsupported-features)).
 - [x] `pm.*` interface ([exceptions below](#unsupported-features)).
 - [x] Support for
