@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased](https://github.com/apideck-libraries/postman-to-k6/compare/v1.8.7...HEAD)
 
+## [1.8.8] - 2023-02-09
+
+### Fixed
+
+- Fixed missing module prettier (#96)
+
 ## [1.8.7] - 2023-01-14
 
 ### Added
