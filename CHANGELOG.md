@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased](https://github.com/apideck-libraries/postman-to-k6/compare/v1.8.7...HEAD)
 
+## [1.8.9] - 2023-09-28
+
+### Fixed
+
+- Docker build -t postman-to-k6 (#114)
+
+### Security
+
+- Upgraded dependencies: get-func-name, word-wrap, semver, xmi2js
+
 ## [1.8.8] - 2023-02-09
 
 ### Fixed
