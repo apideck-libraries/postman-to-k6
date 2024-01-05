@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased](https://github.com/apideck-libraries/postman-to-k6/compare/v1.8.7...HEAD)
 
+- Upgraded dependencies: crypto-js 4.2.0, postman-collection 4.3.0, postman-collection-transformer 4.1.8
+
 ## [1.8.9] - 2023-09-28
 
 ### Fixed
