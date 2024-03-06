@@ -108,7 +108,7 @@ $ k6 run k6-script.js
 Together with [Nicole van der Hoeven](https://twitter.com/n_vanderhoeven) & [Paul Balogh](https://twitter.com/javaducky) from the [K6 team](https://www.youtube.com/@k6io), we talked about "[postman-to-k6](https://github.com/apideck-libraries/postman-to-k6)" in the [K6 Office Hours](http://www.youtube.com/watch?v=Be66Db4wHLA) podcast. We talked about how to convert a Postman collection to a k6 load test, the advantages of Postman, and the benefits of reusing automation testing scripts for performance.
 
 <a href="https://www.youtube.com/watch?v=Be66Db4wHLA" target="_blank" title="Postman for load testing using k6, with Tim Haselaars (k6 Office Hours #43)" rel="nofollow">
-<img src="https://camo.githubusercontent.com/fe8d65ea79fcdb60c7e541d75259871d9846f96348feda261093ea2b20fa4299/68747470733a2f2f696d672e796f75747562652e636f6d2f76692f4265363644623477484c412f6d617872657364656661756c742e6a7067" alt="Postman for load testing using k6, with Tim Haselaars (k6 Office Hours #43)" width="50%"></a>
+<img src="https://raw.githubusercontent.com/apideck-libraries/postman-to-k6/main/assets/youtube-still.png" alt="Postman for load testing using k6, with Tim Haselaars (k6 Office Hours #43)" width="50%"></a>
 
 Watch it on Youtube >> https://www.youtube.com/watch?v=Be66Db4wHLA
 
