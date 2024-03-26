@@ -1,22 +1,25 @@
-<div align="center">
+# POSTMAN TO k6
 
-![postman-to-k6-cover](./assets/postman-to-k6-cover.png)
 
-</div>
+This project is a friendly fork of [apideck-libraries/postman-to-k6](https://github.com/apideck-libraries/postman-to-k6) from the original [grafana/postman-to-k6](https://github.com/grafana/postman-to-k6), where I will focus on **building out new features not currently supported** alongside maintenance.   
 
-# Postman-to-k6
+#### Request a New Features
+Open an issue with your feature request (must me something currently supported in postman) and I'll work on the requests with the most votes in order.   
+   
+Also feel free to contribute or pass any suggestions along!
+
+
+---
 
 Converts a [Postman collection](https://www.getpostman.com/docs/collections) to a [k6 script](https://docs.k6.io/docs).
 
 The postman-to-k6 converter utilizes your Postman collection and converts all the Postman requests, including tests,
 variables, ... to K6 scripts that can be executed by K6 to run performance tests.
 
-![Github badge](https://github.com/apideck-libraries/postman-to-k6/actions/workflows/build-on-tag.yml/badge.svg)
-<a href="https://www.npmjs.com/package/@apideck/postman-to-k6" alt="Latest Stable Version">![npm](https://img.shields.io/npm/v/@apideck/postman-to-k6.svg)</a>
-<a href="https://www.npmjs.com/package/@apideck/postman-to-k6" alt="Total Downloads">![npm](https://img.shields.io/npm/dw/@apideck/postman-to-k6.svg)</a>
+![Github badge](https://github.com/aegrey/postman-to-k6/actions/workflows/build-on-tag.yml/badge.svg)
+<a href="https://www.npmjs.com/package/@aegrey/postman-to-k6" alt="Latest Stable Version">![npm](https://img.shields.io/npm/v/@aegrey/postman-to-k6.svg)</a>
+<a href="https://www.npmjs.com/package/@aegrey/postman-to-k6" alt="Total Downloads">![npm](https://img.shields.io/npm/dw/@aegrey/postman-to-k6.svg)</a>
 
-This project is a friendly fork of the original [grafana/postman-to-k6](https://github.com/grafana/postman-to-k6)
-converter, actively maintained and open for new contributions.
 
 ## Content
 

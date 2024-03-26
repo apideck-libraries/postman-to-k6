@@ -1,4 +1,4 @@
-# Changelog highlights
+# Changelog highlights - by apideck-libraries
 
 As you might have noticed, the postman-to-k6 converter was rather inactive the last couple of months. With the help of the k6 team, the project will continue to be actively developed and maintained in a friendly fork => https://github.com/apideck-libraries/postman-to-k6. 
 
