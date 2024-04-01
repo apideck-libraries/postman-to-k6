@@ -18,7 +18,7 @@ variables, ... to K6 scripts that can be executed by K6 to run performance tests
 This project is a friendly fork of the original [grafana/postman-to-k6](https://github.com/grafana/postman-to-k6)
 converter, actively maintained and open for new contributions.
 
-Feel free to contribute or pass any suggestion
+Feel free to contribute or pass any suggestion to improve postman-to-k6.
 
 ## Content
 
@@ -326,7 +326,7 @@ $ postman-to-k6 example/v2/echo.json -o k6-script.js
     - `pm.response.to.have.status(reason)`
     - `pm.response.to.not.have.status(reason)`
 - Properties returning Postman classes:
-    - `pm.request.url`
+    - `pm.request.url` `pm.request.headers`
 - The Hawk authentication method.
 - Deprecated `xmlToJson` method.
 - Request IDs are changed. Postman doesn't provide them in the export, so we have to generate new ones.
