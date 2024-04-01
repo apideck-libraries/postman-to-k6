@@ -104,11 +104,34 @@ test.serial('pm.response.code', t => {
   });
 });
 
-test.serial('pm.response.headers', t => {
+test.serial('pm.response.headers.get', t => {
+  http.request.returns({
+    headers: {
+      'Content-Type': 'application/json',
+      'Server': 'GitHub Copilot'
+    }
+  });
   postman[Request]({
     post() {
-      t.throws(() => {
-        pm.response.headers; /* eslint-disable-line no-unused-expressions */
+      t.deepEqual(pm.response.headers.get('Server'),
+        'GitHub Copilot'
+      );
+    }
+  });
+});
+
+test.serial('pm.response.headers.all', t => {
+  http.request.returns({
+    headers: {
+      'Content-Type': 'application/json',
+      'Server': 'GitHub Copilot'
+    }
+  });
+  postman[Request]({
+    post() {
+      t.deepEqual(pm.response.headers.all(), {
+        'Content-Type': 'application/json',
+        'Server': 'GitHub Copilot'
       });
     }
   });
