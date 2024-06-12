@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased](https://github.com/apideck-libraries/postman-to-k6/compare/v1.8.7...HEAD)
 
+- Bump minimal Node version to 18.x
+
 ## [1.9.0] - 2024-04-01 
 
 - Support for pm.response.headers.all() & pm.response.headers.get() (thanks to the contribution of @aegrey)

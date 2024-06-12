@@ -3,7 +3,7 @@
   "ignorePatterns": ["node_modules", "vendor", "libs"],
   "parserOptions": {
     "sourceType": "module",
-    "ecmaVersion": 8
+    "ecmaVersion": 2020
   },
   "rules": {
     "semi": [2, "always"],
