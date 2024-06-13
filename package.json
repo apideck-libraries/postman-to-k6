@@ -46,6 +46,7 @@
         "test-hoc": "cross-env NODE_PATH=lib:test ava",
         "test-int": "cross-env NODE_PATH=lib:test ava test/int/*.js",
         "test-unit": "cross-env NODE_PATH=lib:test ava test/unit/**/*.js",
+        "test-jest": "jest --colors --verbose --reporters=default --collectCoverage --no-cache",
         "prepare": "husky install",
         "release": "yarn format && yarn lint && yarn bundle && np --branch main"
     },
@@ -82,6 +83,7 @@
         "ava": "^2.4.0",
         "cross-env": "^7.0.3",
         "husky": "^7.0.4",
+        "jest": "^29.7.0",
         "mock-require": "^3.0.3",
         "np": "^7.6.2",
         "npm-run-all": "^4.1.5",
