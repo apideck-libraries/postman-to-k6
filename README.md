@@ -331,6 +331,22 @@ $ postman-to-k6 example/v2/echo.json -o k6-script.js
 - Deprecated `xmlToJson` method.
 - Request IDs are changed. Postman doesn't provide them in the export, so we have to generate new ones.
 
+## Resources
+A collection of blog posts and resources about postman-to-k6
+- [k6 Office Hours #43](https://www.youtube.com/watch?v=Be66Db4wHLA)
+- [Load testing your API with Postman](https://grafana.com/blog/2020/04/19/load-testing-your-api-with-postman/) by [Mostafa Moradian](https://grafana.com/author/mostafa-moradian/) from [Grafana](https://grafana.com/)
+- [Unlocking the Power of Spec-Driven API Development](https://www.youtube.com/watch?v=YXRstde1SeA&t)
+- [API load testing: A beginner's guide](https://grafana.com/blog/2024/01/30/api-load-testing/) by [Grafana/K6](https://k6.io/)
+- [Charge your APIs Volume 6: Perfecting Your APIOps - Harnessing the Power of k6 for API Testing](https://www.codecentric.de/wissens-hub/blog/charge-your-apis-volume-6-perfecting-your-apiops-harnessing-the-power-of-k6-for-api-testing) by [Daniel Kocot](https://www.linkedin.com/in/danielkocot/) from [Codecentric](https://www.codecentric.de/)
+- [Load Testing with Postman and Grafana K6](https://medium.com/kpmg-uk-engineering/load-testing-with-postman-and-grafana-k6-48afb4872a6b) by [Lukman Patel](https://medium.com/@patel.s.lukman?source=post_page-----48afb4872a6b--------------------------------)
+- [Shift left performance test by converting Postman API script to K6 and integrate it with bitbucket](https://icehousecorp.com/shift-left-performance-test-by-converting-postman-api-script-to-k6-and-integrate-it-with-bitbucket/) by sukma ragil
+- [Hacker News](https://news.ycombinator.com/item?id=36540241)
+- [Transformando testes de API com Postman em testes de performance com K6](https://dev.to/marlo2222/transformando-testes-de-api-com-postman-em-testes-de-performance-com-k6-3ked) by [Marlo Henrique](https://dev.to/marlo2222)
+- [Converting Postman Collection to K6 Script](https://blog.nashtechglobal.com/converting-postman-collection-to-k6-script/)
+- [Using Postman with k6](https://medium.com/@rianaik/using-postman-with-k6-6cb4c5852990) by [RiaNaik](https://medium.com/@rianaik)
+- [Postman to K6 Automating Performance Testing with Auto Script Generation](https://www.youtube.com/watch?v=e0QdBoWS72k) by [Huzaifa Asif](https://www.youtube.com/@huzaifa-io)
+- [Postman to k6 in under 5 minutes](https://medium.com/@t79877005/postman-to-k6-in-under-5-minutes-fb98fabaf468) / [YouTube](https://www.youtube.com/watch?v=ddP4HcFfXRw) by [loan Solderea](https://www.linkedin.com/in/%F0%9F%95%B5ioan-s-b0928516/)
+
 ## Other similar tools
 
 - [jmeter-to-k6](https://github.com/loadimpact/jmeter-to-k6/): Convert JMeter JMX files to k6 JS.
