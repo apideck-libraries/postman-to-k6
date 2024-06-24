@@ -335,7 +335,7 @@ $ postman-to-k6 example/v2/echo.json -o k6-script.js
 A collection of blog posts and resources about postman-to-k6
 - [k6 Office Hours #43](https://www.youtube.com/watch?v=Be66Db4wHLA) Podcast by [Grafana/K6](https://k6.io/) & Tim Haselaars (maintainer of [postman-to-k6](https://github.com/apideck-libraries/postman-to-k6))
 - [Load testing your API with Postman](https://grafana.com/blog/2020/04/19/load-testing-your-api-with-postman/) by [Mostafa Moradian](https://grafana.com/author/mostafa-moradian/) from [Grafana](https://grafana.com/)
-- [Unlocking the Power of Spec-Driven API Development](https://www.youtube.com/watch?v=YXRstde1SeA&t)
+- [Unlocking the Power of Spec-Driven API Development](https://www.youtube.com/watch?v=YXRstde1SeA&t) by [Tim Haselaars](https://github.com/thim81)
 - [API load testing: A beginner's guide](https://grafana.com/blog/2024/01/30/api-load-testing/) by [Grafana/K6](https://k6.io/)
 - [Charge your APIs Volume 6: Perfecting Your APIOps - Harnessing the Power of k6 for API Testing](https://www.codecentric.de/wissens-hub/blog/charge-your-apis-volume-6-perfecting-your-apiops-harnessing-the-power-of-k6-for-api-testing) by [Daniel Kocot](https://www.linkedin.com/in/danielkocot/) from [Codecentric](https://www.codecentric.de/)
 - [Load Testing with Postman and Grafana K6](https://medium.com/kpmg-uk-engineering/load-testing-with-postman-and-grafana-k6-48afb4872a6b) by [Lukman Patel](https://medium.com/@patel.s.lukman?source=post_page-----48afb4872a6b--------------------------------)
