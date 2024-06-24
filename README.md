@@ -333,7 +333,7 @@ $ postman-to-k6 example/v2/echo.json -o k6-script.js
 
 ## Resources
 A collection of blog posts and resources about postman-to-k6
-- [k6 Office Hours #43](https://www.youtube.com/watch?v=Be66Db4wHLA)
+- [k6 Office Hours #43](https://www.youtube.com/watch?v=Be66Db4wHLA) Podcast by [Grafana/K6](https://k6.io/) & Tim Haselaars (maintainer of [postman-to-k6](https://github.com/apideck-libraries/postman-to-k6))
 - [Load testing your API with Postman](https://grafana.com/blog/2020/04/19/load-testing-your-api-with-postman/) by [Mostafa Moradian](https://grafana.com/author/mostafa-moradian/) from [Grafana](https://grafana.com/)
 - [Unlocking the Power of Spec-Driven API Development](https://www.youtube.com/watch?v=YXRstde1SeA&t)
 - [API load testing: A beginner's guide](https://grafana.com/blog/2024/01/30/api-load-testing/) by [Grafana/K6](https://k6.io/)
