@@ -44,3 +44,10 @@ test('iterations', async t => {
   });
   t.snapshot(main);
 });
+
+test('multiple requests', async t => {
+  const [main] = await convertFile(
+    'test/material/2.1/multi-request-headers.json'
+  );
+  t.snapshot(main);
+});

@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased](https://github.com/apideck-libraries/postman-to-k6/compare/v1.8.7...HEAD)
 
+- Fix initialization of headers for each K6 request (#98)
+
 ## [1.11.0] - 2024-07-12
 
 - Handle mixing ESM and commonJS to be ready for k6 v0.53.0
