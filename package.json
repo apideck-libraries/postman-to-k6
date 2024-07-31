@@ -48,7 +48,7 @@
         "test-unit": "cross-env NODE_PATH=lib:test ava test/unit/**/*.js",
         "test-jest": "jest --colors --verbose --reporters=default --collectCoverage --no-cache",
         "prepare": "husky install",
-        "release": "yarn format && yarn lint && yarn bundle && np --branch main"
+        "release": "yarn format && yarn lint && yarn bundle && npx np --branch main"
     },
     "dependencies": {
         "ajv": "^6.12.6",
@@ -62,16 +62,16 @@
         "eslint-config-prettier": "^6.11.0",
         "fs-extra": "^8.1.0",
         "lodash": "^4.17.21",
-        "oauth-1.0a": "^2.2.5",
+        "oauth-1.0a": "^2.2.6",
         "papaparse": "^5.3.1",
         "pkginfo": "^0.4.1",
-        "postman-collection": "^4.3.0",
+        "postman-collection": "^4.4.0",
         "postman-collection-transformer": "^4.1.8",
         "prettier": "^1.19.1",
         "spo-gpo": "^1.0.0",
         "strip-json-comments": "^3.1.1",
         "urijs": "^1.19.11",
-        "uuid": "^3.3.2",
+        "uuid": "^3.4.0",
         "verror": "^1.10.0",
         "xml2js": "^0.5.0"
     },
@@ -85,7 +85,6 @@
         "husky": "^7.0.4",
         "jest": "^29.7.0",
         "mock-require": "^3.0.3",
-        "np": "^7.6.2",
         "npm-run-all": "^4.1.5",
         "sinon": "^7.5.0",
         "snazzy": "^8.0.0",
