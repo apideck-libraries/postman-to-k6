@@ -317,16 +317,13 @@ $ postman-to-k6 example/v2/echo.json -o k6-script.js
 ## Unsupported Features
 
 - Sending requests from scripts using `pm.sendRequest`.
-- Controlling request execution order using `postman.setNextRequest`.
+- Controlling request execution order using [`postman.setNextRequest`](https://github.com/apideck-libraries/postman-to-k6/discussions/135#discussioncomment-10229573).
 - Cookie properties, like `hostOnly`, `session`, and `storeId`.
-- Textual response messages:
-    - `responseCode.name`
-    - `responseCode.detail`
+- Postman methods:
     - `pm.response.reason`
     - `pm.response.to.have.status(reason)`
     - `pm.response.to.not.have.status(reason)`
-- Properties returning Postman classes:
-    - `pm.request.url` `pm.request.headers`
+    - `pm.request.auth`
 - The Hawk authentication method.
 - Deprecated `xmlToJson` method.
 - Request IDs are changed. Postman doesn't provide them in the export, so we have to generate new ones.
