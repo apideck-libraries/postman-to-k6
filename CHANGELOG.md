@@ -7,7 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased](https://github.com/apideck-libraries/postman-to-k6/compare/v1.8.7...HEAD)
 
+
 - Implement Atob via K6 encoding (#86)
+- Extended pm.request with support for headers, url, method, name, id, body, body.raw
 
 ## [1.12.0] - 2024-07-31
 
