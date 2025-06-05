@@ -56,6 +56,7 @@ Feel free to contribute or pass any suggestion to improve postman-to-k6.
 - [x] File uploads (experimental).
 - [x] `postman.*` interface ([exceptions below](#unsupported-features)).
 - [x] `pm.*` interface ([exceptions below](#unsupported-features)).
+- [x] Skip executing a request with `pm.execution.skipRequest`.
 - [x] Support for
   Postman [Dynamic Variables](https://learning.postman.com/docs/writing-scripts/script-references/variables-list/)
   & [ReplaceIn](https://learning.postman.com/docs/writing-scripts/script-references/postman-sandbox-api-reference/#using-variables-in-scripts)
