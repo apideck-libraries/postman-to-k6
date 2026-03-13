@@ -1,6 +1,7 @@
 /* global postman */
 
 import mockRequire from 'mock-require';
+import path from 'path';
 const lodash = Symbol('lodash');
 const cheerio = Symbol('cheerio');
 const cryptoJs = Symbol('crypto-js');
@@ -10,13 +11,12 @@ const Reset = Symbol.for('reset');
 const Request = Symbol.for('request');
 
 beforeAll(() => {
-  jest.resetModules();
   global.require = require; // Simulate k6 global require
   mockRequire('k6', 'stub/k6');
   mockRequire('k6/http', 'stub/http');
-  mockRequire('../../../lib/lodash.js', lodash);
-  mockRequire('../../../lib/cheerio.js', cheerio);
-  mockRequire('../../../lib/crypto-js.js', cryptoJs);
+  jest.doMock(path.resolve(__dirname, '../../../lib/lodash.js'), () => lodash, { virtual: true });
+  jest.doMock(path.resolve(__dirname, '../../../lib/cheerio.js'), () => cheerio, { virtual: true });
+  jest.doMock(path.resolve(__dirname, '../../../lib/crypto-js.js'), () => cryptoJs, { virtual: true });
   k6 = require('k6');
   http = require('k6/http');
   require('shim/core');

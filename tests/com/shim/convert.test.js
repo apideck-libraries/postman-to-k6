@@ -1,15 +1,19 @@
 /* global postman xml2Json xmlToJson */
 
 import mockRequire from 'mock-require';
+import path from 'path';
 let k6, http;
 
 const Reset = Symbol.for('reset');
 
 beforeAll(() => {
-  jest.resetModules();
   mockRequire('k6', 'stub/k6');
   mockRequire('k6/http', 'stub/http');
-  mockRequire('../../../lib/xml2js.js', 'xml2js');
+  jest.doMock(
+    path.resolve(__dirname, '../../../lib/xml2js.js'),
+    () => require('xml2js'),
+    { virtual: true }
+  );
   k6 = require('k6');
   http = require('k6/http');
   require('shim/core');

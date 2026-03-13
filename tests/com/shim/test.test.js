@@ -2,6 +2,7 @@
 /* eslint-disable no-unused-expressions */
 
 import mockRequire from 'mock-require';
+import path from 'path';
 let k6, http;
 
 const Reset = Symbol.for('reset');
@@ -28,11 +29,10 @@ function define(logic) {
 }
 
 beforeAll(() => {
-  jest.resetModules();
   mockRequire('k6', 'stub/k6');
   mockRequire('k6/http', 'stub/http');
-  mockRequire('../../../lib/ajv.js', 'ajv');
-  mockRequire('../../../lib/chai.js', 'chai');
+  jest.doMock(path.resolve(__dirname, '../../../lib/ajv.js'), () => require('ajv'), { virtual: true });
+  jest.doMock(path.resolve(__dirname, '../../../lib/chai.js'), () => require('chai'), { virtual: true });
   k6 = require('k6');
   http = require('k6/http');
   require('shim/core');

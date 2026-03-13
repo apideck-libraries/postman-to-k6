@@ -112,7 +112,3 @@ ensureLegacyBindingsDeclared();
 beforeEach(() => {
   syncLegacyBindingsFromGlobalObject();
 });
-
-afterEach(() => {
-  clearLegacyBindings();
-});
