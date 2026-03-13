@@ -57,7 +57,7 @@
     "coverage-combine": "node scripts/coverage-combine.js",
     "coverage-all": "npm-run-all coverage-ava coverage-jest coverage-combine",
     "prepare": "husky install",
-    "release": "yarn format && yarn lint && yarn bundle && npx np --branch main"
+    "release": "npm run format && npm run lint && npm run bundle && npx np --branch main"
   },
   "dependencies": {
     "ajv": "^6.14.0",
