@@ -1,0 +1,546 @@
+{
+  "info": {
+    "_postman_id": "d72e7431-f4ac-4e7d-9f16-627e303f8a57",
+    "name": "QuickPizza Public Endpoints Flow",
+    "description": "Auth-free QuickPizza collection for stable postman-to-k6 conversion and k6 execution.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://quickpizza.grafana.com"
+    }
+  ],
+  "item": [
+    {
+      "name": "1. Health",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/healthz",
+          "host": ["{{baseUrl}}"],
+          "path": ["healthz"]
+        }
+      },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('status is 200', function () {", "  pm.response.to.have.status(200);", "});"] } }]
+    },
+    {
+      "name": "2. Ready",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/ready",
+          "host": ["{{baseUrl}}"],
+          "path": ["ready"]
+        }
+      },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('status is 200', function () {", "  pm.response.to.have.status(200);", "});"] } }]
+    },
+    {
+      "name": "3. Status 418",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/status/418",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "status", "418"]
+        }
+      },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('status is 418', function () {", "  pm.response.to.have.status(418);", "});"] } }]
+    },
+    {
+      "name": "4. GET Echo",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/get?source=postman-to-k6&kind=smoke",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "get"],
+          "query": [
+            { "key": "source", "value": "postman-to-k6" },
+            { "key": "kind", "value": "smoke" }
+          ]
+        }
+      },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('status is 200', function () {", "  pm.response.to.have.status(200);", "});"] } }]
+    },
+    {
+      "name": "5. POST Echo JSON",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"hello\": \"quickpizza\",\n  \"count\": 1\n}",
+          "options": { "raw": { "language": "json" } }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/post",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "post"]
+        }
+      },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('status is 200', function () {", "  pm.response.to.have.status(200);", "});"] } }]
+    },
+    {
+      "name": "6. PUT Echo Text",
+      "request": {
+        "method": "PUT",
+        "body": { "mode": "raw", "raw": "put-body" },
+        "url": {
+          "raw": "{{baseUrl}}/api/put",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "put"]
+        }
+      },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('status is 200', function () {", "  pm.response.to.have.status(200);", "});"] } }]
+    },
+    {
+      "name": "7. PATCH Echo Text",
+      "request": {
+        "method": "PATCH",
+        "body": { "mode": "raw", "raw": "patch-body" },
+        "url": {
+          "raw": "{{baseUrl}}/api/patch",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "patch"]
+        }
+      },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('status is 200', function () {", "  pm.response.to.have.status(200);", "});"] } }]
+    },
+    {
+      "name": "8. DELETE Echo",
+      "request": {
+        "method": "DELETE",
+        "url": {
+          "raw": "{{baseUrl}}/api/delete",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "delete"]
+        }
+      },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('status is 200', function () {", "  pm.response.to.have.status(200);", "});"] } }]
+    },
+    {
+      "name": "9. Quotes",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/quotes",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "quotes"]
+        }
+      },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('status is 200', function () {", "  pm.response.to.have.status(200);", "});"] } }]
+    },
+    {
+      "name": "10. Names",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/names",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "names"]
+        }
+      },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('status is 200', function () {", "  pm.response.to.have.status(200);", "});"] } }]
+    },
+    {
+      "name": "11. Adjectives",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/adjectives",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "adjectives"]
+        }
+      },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('status is 200', function () {", "  pm.response.to.have.status(200);", "});"] } }]
+    },
+    {
+      "name": "12. Config",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/config",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "config"]
+        }
+      },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('status is 200', function () {", "  pm.response.to.have.status(200);", "});"] } }]
+    },
+    {
+      "name": "13. Headers",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/headers",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "headers"]
+        }
+      },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('status is 200', function () {", "  pm.response.to.have.status(200);", "});"] } }]
+    },
+    {
+      "name": "14. JSON Params",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/json?param1=value1&param2=value2",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "json"],
+          "query": [
+            { "key": "param1", "value": "value1" },
+            { "key": "param2", "value": "value2" }
+          ]
+        }
+      },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('status is 200', function () {", "  pm.response.to.have.status(200);", "});"] } }]
+    },
+    {
+      "name": "15. XML Params",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/xml?param1=value1&param2=value2",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "xml"],
+          "query": [
+            { "key": "param1", "value": "value1" },
+            { "key": "param2", "value": "value2" }
+          ]
+        }
+      },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('status is 200', function () {", "  pm.response.to.have.status(200);", "});"] } }]
+    },
+    {
+      "name": "16. Bytes 64",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/bytes/64",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "bytes", "64"]
+        }
+      },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('status is 200', function () {", "  pm.response.to.have.status(200);", "});"] } }]
+    },
+    {
+      "name": "17. Delay 1s",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/delay/1s",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "delay", "1s"]
+        }
+      },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('status is 200', function () {", "  pm.response.to.have.status(200);", "});"] } }]
+    },
+    {
+      "name": "18. Metrics",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/metrics",
+          "host": ["{{baseUrl}}"],
+          "path": ["metrics"]
+        }
+      },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('status is 200', function () {", "  pm.response.to.have.status(200);", "});"] } }]
+    },
+    {
+      "name": "19. Capabilities Variables",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.collectionVariables.set('capFromPre', 'from-pre');",
+              "pm.globals.set('capGlobal', 'from-global');",
+              "pm.variables.set('capLocal', 'from-local');"
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('status is 200', function () {",
+              "  pm.response.to.have.status(200);",
+              "});",
+              "pm.test('collection/global/local vars are available', function () {",
+              "  pm.expect(pm.collectionVariables.get('capFromPre')).to.eql('from-pre');",
+              "  pm.expect(pm.globals.get('capGlobal')).to.eql('from-global');",
+              "  pm.expect(pm.variables.get('capLocal')).to.eql('from-local');",
+              "});",
+              "pm.test('pm.info values are exposed', function () {",
+              "  pm.expect(pm.info.eventName).to.eql('test');",
+              "  pm.expect(pm.info.requestName).to.eql('19. Capabilities Variables');",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/get?from={{capFromPre}}",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "get"],
+          "query": [
+            { "key": "from", "value": "{{capFromPre}}" }
+          ]
+        }
+      }
+    },
+    {
+      "name": "20. Capabilities Json Assertions",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/json?param1=value1&param2=value2",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "json"],
+          "query": [
+            { "key": "param1", "value": "value1" },
+            { "key": "param2", "value": "value2" }
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('status is 200', function () {",
+              "  pm.response.to.have.status(200);",
+              "});",
+              "var body = pm.response.json();",
+              "pm.test('pm.response.json works', function () {",
+              "  pm.expect(body.param1).to.eql('value1');",
+              "});",
+              "pm.test('jsonBody path/value works', function () {",
+              "  pm.response.to.have.jsonBody('param1', 'value1');",
+              "});",
+              "pm.test('negative status assertion works', function () {",
+              "  pm.response.to.not.have.status(500);",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "21. Capabilities Header Assertions",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/headers",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "headers"]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('status is 200', function () {",
+              "  pm.response.to.have.status(200);",
+              "});",
+              "pm.test('header assertion works', function () {",
+              "  pm.response.to.have.header('content-type');",
+              "});",
+              "pm.test('headers API is available', function () {",
+              "  var headers = pm.response.headers.all();",
+              "  pm.expect(typeof headers).to.eql('object');",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "22. Capabilities Body Assertions",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/xml?paramA=one",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "xml"],
+          "query": [
+            { "key": "paramA", "value": "one" }
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('status is 200', function () {",
+              "  pm.response.to.have.status(200);",
+              "});",
+              "pm.test('body exists', function () {",
+              "  pm.response.to.have.body();",
+              "});",
+              "pm.test('body regex assertion works', function () {",
+              "  pm.response.to.have.body(/response/);",
+              "});",
+              "pm.test('negative body regex assertion works', function () {",
+              "  pm.response.to.not.have.body(/definitely_not_in_xml_body/);",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "23. Capabilities Set Cookie",
+      "request": {
+        "method": "POST",
+        "url": {
+          "raw": "{{baseUrl}}/api/cookies?session_id=abc123",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "cookies"],
+          "query": [
+            { "key": "session_id", "value": "abc123" }
+          ]
+        }
+      },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('status is 200', function () {", "  pm.response.to.have.status(200);", "});"] } }]
+    },
+    {
+      "name": "24. Capabilities Read Cookie",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/cookies",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "cookies"]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('status is 200', function () {",
+              "  pm.response.to.have.status(200);",
+              "});",
+              "var body = pm.response.json();",
+              "pm.test('cookie roundtrip works', function () {",
+              "  pm.expect(body.cookies.session_id).to.eql('abc123');",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "25. Capabilities Request Metadata",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/get?meta=true",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "get"],
+          "query": [
+            { "key": "meta", "value": "true" }
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('status is 200', function () {",
+              "  pm.response.to.have.status(200);",
+              "});",
+              "pm.test('request metadata is exposed', function () {",
+              "  pm.expect(pm.request.method).to.eql('GET');",
+              "  pm.expect(pm.info.requestName).to.eql('25. Capabilities Request Metadata');",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "26. Faker GET Params",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/json?firstName={{$randomFirstName}}&lastName={{$randomLastName}}&email={{$randomEmail}}&guid={{$guid}}&ts={{$timestamp}}",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "json"],
+          "query": [
+            { "key": "firstName", "value": "{{$randomFirstName}}" },
+            { "key": "lastName", "value": "{{$randomLastName}}" },
+            { "key": "email", "value": "{{$randomEmail}}" },
+            { "key": "guid", "value": "{{$guid}}" },
+            { "key": "ts", "value": "{{$timestamp}}" }
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('status is 200', function () {",
+              "  pm.response.to.have.status(200);",
+              "});",
+              "var body = pm.response.json();",
+              "pm.test('faker request returned a json payload', function () {",
+              "  pm.expect(typeof body).to.eql('object');",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "27. Faker POST JSON",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"id\": \"{{$guid}}\",\n  \"profile\": {\n    \"username\": \"{{$randomUserName}}\",\n    \"city\": \"{{$randomCity}}\",\n    \"country\": \"{{$randomCountry}}\"\n  },\n  \"meta\": {\n    \"requestTime\": \"{{$isoTimestamp}}\",\n    \"randInt\": \"{{$randomInt}}\"\n  }\n}",
+          "options": { "raw": { "language": "json" } }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/post",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "post"]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('status is 200', function () {",
+              "  pm.response.to.have.status(200);",
+              "});",
+              "pm.test('post body exists', function () {",
+              "  pm.response.to.have.body();",
+              "});"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

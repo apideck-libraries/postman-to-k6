@@ -27,6 +27,8 @@
       ".codex/**",
       "tmp/**",
       ".tmp/**",
+      "examples/quickpizza/libs/**",
+      "examples/quickpizza/quickpizza.k6.js",
       "lib/shim/faker.js"
     ]
   },
