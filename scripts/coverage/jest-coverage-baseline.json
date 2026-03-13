@@ -1,0 +1,11 @@
+{
+  "generatedAt": "2026-03-13T00:00:00.000Z",
+  "source": "github-actions-node24",
+  "tolerancePct": 0.3,
+  "jest": {
+    "lines": 91.46,
+    "statements": 91.46,
+    "functions": 85.77,
+    "branches": 91.85
+  }
+}
