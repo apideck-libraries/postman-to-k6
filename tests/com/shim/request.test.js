@@ -296,3 +296,56 @@ test('request.body.raw', () => {
   expect(args[1]).toBe('http://example.com');
   expect(args[2]).toBe(rawBody);
 });
+
+test('postman[Request] invalid params', () => {
+  expect(() => {
+    postman[Request](123);
+  }).toThrow('Invalid postman[Request] params');
+});
+
+test('variable at address start requires urijs shim', () => {
+  postman[Initial]({
+    global: {
+      domain: 'example.com'
+    }
+  });
+  expect(() => {
+    postman[Request]({
+      method: 'GET',
+      address: '{{domain}}/index.html'
+    });
+  }).toThrow('To use a variable at address start import "./libs/shim/urijs.js"');
+});
+
+test('variable at address start defaults protocol with urijs shim', () => {
+  postman[Initial]({
+    global: {
+      domain: 'example.com'
+    }
+  });
+  require('shim/urijs');
+  postman[Request]({
+    method: 'GET',
+    address: '{{domain}}/index.html'
+  });
+
+  expect(http.request.calledOnce).toBe(true);
+  const args = http.request.firstCall.args;
+  expect(args[1]).toBe('http://example.com/index.html');
+});
+
+test('pm.execution.skipRequest skips http call', () => {
+  let ranPost = false;
+  const result = postman[Request]({
+    pre() {
+      pm.execution.skipRequest();
+    },
+    post() {
+      ranPost = true;
+    }
+  });
+
+  expect(result).toBe(undefined);
+  expect(http.request.called).toBe(false);
+  expect(ranPost).toBe(false);
+});

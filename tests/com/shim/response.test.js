@@ -186,3 +186,15 @@ test('pm.response.text binary', () => {
     }
   });
 });
+
+test('postman.getResponseHeader requires post scope', () => {
+  expect(() => {
+    postman.getResponseHeader('Server');
+  }).toThrow('May only be used in a postrequest script');
+});
+
+test('postman.getResponseCookie requires post scope', () => {
+  expect(() => {
+    postman.getResponseCookie('session');
+  }).toThrow('May only be used in a postrequest script');
+});

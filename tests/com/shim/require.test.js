@@ -54,6 +54,15 @@ test('require released', () => {
     global.require('console');
   }).not.toThrow();
 });
+test('lodash missing shim', () => {
+  postman[Request]({
+    pre() {
+      expect(() => {
+        global.require('lodash');
+      }).toThrow('To use module lodash import ./libs/shim/lodash.js');
+    }
+  });
+});
 test('lodash', () => {
   require('shim/lodash');
   postman[Request]({

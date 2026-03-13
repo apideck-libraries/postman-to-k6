@@ -64,6 +64,20 @@ test('pm.test', () => {
   expectPass();
   define(() => {});
 });
+test('pm.test nested not allowed', () => {
+  expect(() => {
+    define(() => {
+      pm.test('nested', () => {});
+    });
+  }).toThrow('Nested pm.test calls not allowed');
+});
+test('pm.test rethrows non-assertion errors', () => {
+  expect(() => {
+    define(() => {
+      throw new Error('boom');
+    });
+  }).toThrow('boom');
+});
 test('pm.response.to.be.accepted fail', () => {
   http.request.returns({
     status: 200
@@ -455,6 +469,15 @@ test('pm.response.to.have.jsonBody path pass', () => {
   expectPass();
   define(() => {
     pm.response.to.have.jsonBody('test2');
+  });
+});
+test('pm.response.to.have.jsonBody invalid path', () => {
+  http.request.returns({
+    body: '{"test":"a"}'
+  });
+  expectFail();
+  define(() => {
+    pm.response.to.have.jsonBody('test[');
   });
 });
 test('pm.response.to.have.jsonBody value fail', () => {

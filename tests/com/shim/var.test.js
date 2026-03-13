@@ -172,6 +172,11 @@ test('postman.getEnvironmentVariable clear', () => {
   });
   expect(postman.getEnvironmentVariable('test')).toBe(undef);
 });
+test('postman.getEnvironmentVariable requires environment', () => {
+  expect(() => {
+    postman.getEnvironmentVariable('test');
+  }).toThrow('Missing Postman environment');
+});
 test('postman.getEnvironmentVariable set', () => {
   postman[Initial]({
     environment: {
@@ -512,6 +517,11 @@ test('pm.variables.set scoped', () => {
     pm.variables.set('test', 'a');
   }).toThrow();
 });
+test('unsupported dynamic variable', () => {
+  expect(() => {
+    pm[Var]('$unknownDynamic');
+  }).toThrow('Unsupported dynamic variable: unknownDynamic');
+});
 test('pm.variables.set clear', () => {
   postman[Request]({
     pre() {
@@ -562,4 +572,23 @@ test('pm[Var] simple', () => {
     }
   });
   expect(pm[Var]('test')).toBe('a');
+});
+
+test('pm.variables.replaceIn dynamic', () => {
+  const result = pm.variables.replaceIn('id={{$guid}}');
+  expect(result.startsWith('id=')).toBe(true);
+  expect(result.includes('{{')).toBe(false);
+});
+
+test('pm.variables.replaceIn passthrough', () => {
+  const template = 'no-variables-here';
+  expect(pm.variables.replaceIn(template)).toBe(template);
+});
+test('pm.variables.replaceIn standard variables', () => {
+  postman[Initial]({
+    global: {
+      planet: 'earth'
+    }
+  });
+  expect(pm.variables.replaceIn('hello {{planet}}')).toBe('hello earth');
 });

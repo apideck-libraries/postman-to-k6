@@ -65,3 +65,23 @@ test('3', () => {
   });
   postman[Request]('Home Page', 3);
 });
+
+test('missing index', () => {
+  postman[Define]({
+    name: 'Home Page',
+    method: 'GET',
+    address: 'http://example.com'
+  });
+  expect(() => {
+    postman[Request]('Home Page', 2);
+  }).toThrow("No request with name 'Home Page' and index 2");
+});
+
+test('define without name', () => {
+  expect(() => {
+    postman[Define]({
+      method: 'GET',
+      address: 'http://example.com'
+    });
+  }).toThrow('Attempted to define request without name');
+});
