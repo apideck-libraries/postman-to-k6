@@ -18,7 +18,9 @@
 /build
 /doc
 /example
+/examples
 /test
+/tests
 /vendor
 
 # CI related files

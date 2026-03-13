@@ -15,7 +15,7 @@ const modules = [
   'papaparse',
   'spo-gpo/polyfill',
   'urijs',
-  'xml2js'
+  'xml2js',
 ];
 
 fs.ensureDirSync(dir);

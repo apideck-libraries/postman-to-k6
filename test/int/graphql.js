@@ -7,7 +7,7 @@ function render(body) {
   return `'${escaped}'`;
 }
 
-test('body simple', async t => {
+test('body simple', async (t) => {
   const [main] = await convertFile(
     'test/material/2.1/graphql-body-simple.json'
   );
@@ -46,7 +46,7 @@ test('body simple', async t => {
   //   );
 });
 
-test('body var', async t => {
+test('body var', async (t) => {
   const [main] = await convertFile('test/material/2.1/graphql-body-var.json');
   t.snapshot(main);
 

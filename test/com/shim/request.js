@@ -3,7 +3,8 @@
 import test from 'ava';
 import mockRequire from 'mock-require';
 import uuidv4 from 'uuid/v4';
-let k6, http;
+let k6;
+let http;
 
 const undef = void 0; /* eslint-disable-line no-void */
 
@@ -11,7 +12,7 @@ const Reset = Symbol.for('reset');
 const Initial = Symbol.for('initial');
 const Request = Symbol.for('request');
 
-test.before(t => {
+test.before((t) => {
   mockRequire('k6', 'stub/k6');
   mockRequire('k6/http', 'stub/http');
   k6 = require('k6');
@@ -19,13 +20,13 @@ test.before(t => {
   require('shim/core');
 });
 
-test.afterEach.always(t => {
+test.afterEach.always((t) => {
   k6[Reset]();
   http[Reset]();
   postman[Reset]();
 });
 
-test.serial('pre', t => {
+test.serial('pre', (t) => {
   postman[Request]({
     pre() {
       t.pass();
@@ -33,7 +34,7 @@ test.serial('pre', t => {
   });
 });
 
-test.serial('post', t => {
+test.serial('post', (t) => {
   postman[Request]({
     post() {
       t.pass();
@@ -41,7 +42,7 @@ test.serial('post', t => {
   });
 });
 
-test.serial('request', t => {
+test.serial('request', (t) => {
   t.plan(4);
   t.is(request, undef);
   postman[Request]({
@@ -55,7 +56,7 @@ test.serial('request', t => {
   t.is(request, undef);
 });
 
-test.serial('request.data', t => {
+test.serial('request.data', (t) => {
   const data = {
     First: 'One',
     Second: 'Two',
@@ -69,7 +70,7 @@ test.serial('request.data', t => {
   });
 });
 
-test.serial('request.headers', t => {
+test.serial('request.headers', (t) => {
   const headers = {
     First: 'One',
     Second: 'Two',
@@ -83,7 +84,7 @@ test.serial('request.headers', t => {
   });
 });
 
-test.serial('request.id', t => {
+test.serial('request.id', (t) => {
   const id = uuidv4();
   postman[Request]({
     id,
@@ -93,7 +94,7 @@ test.serial('request.id', t => {
   });
 });
 
-test.serial('request.method', t => {
+test.serial('request.method', (t) => {
   postman[Request]({
     method: 'get',
     pre() {
@@ -102,7 +103,7 @@ test.serial('request.method', t => {
   });
 });
 
-test.serial('request.name', t => {
+test.serial('request.name', (t) => {
   postman[Request]({
     name: 'Test Request',
     pre() {
@@ -111,7 +112,7 @@ test.serial('request.name', t => {
   });
 });
 
-test.serial('request.url', t => {
+test.serial('request.url', (t) => {
   postman[Request]({
     address: 'http://example.com',
     pre() {
@@ -120,7 +121,7 @@ test.serial('request.url', t => {
   });
 });
 
-test.serial('pm.request.headers', t => {
+test.serial('pm.request.headers', (t) => {
   postman[Request]({
     headers: {
       marco: 'polo',
@@ -135,7 +136,7 @@ test.serial('pm.request.headers', t => {
   });
 });
 
-test.serial('pm.request.method', t => {
+test.serial('pm.request.method', (t) => {
   postman[Request]({
     method: 'POST',
     pre() {
@@ -144,7 +145,7 @@ test.serial('pm.request.method', t => {
   });
 });
 
-test.serial('pm.request.id', t => {
+test.serial('pm.request.id', (t) => {
   const input = '33d2dd9f-e4fc-46fb-9885-df53f1b2310b';
   postman[Request]({
     id: input,
@@ -154,7 +155,7 @@ test.serial('pm.request.id', t => {
   });
 });
 
-test.serial('pm.request.name', t => {
+test.serial('pm.request.name', (t) => {
   const input = 'Postman request name';
   postman[Request]({
     name: input,
@@ -164,7 +165,7 @@ test.serial('pm.request.name', t => {
   });
 });
 
-test.serial('pm.request.auth', t => {
+test.serial('pm.request.auth', (t) => {
   postman[Request]({
     pre() {
       t.deepEqual(pm.request.auth, undefined);
@@ -176,7 +177,7 @@ test.serial('pm.request.auth', t => {
   });
 });
 
-test.serial('pm.request.body', t => {
+test.serial('pm.request.body', (t) => {
   const bodyRaw =
     '{\n    "booleanVar": true,\n    "dynVar": "{{$randomCity}}",\n    "numberVar": 12345,\n    "stringVar": "my-tax"\n}';
   postman[Request]({
@@ -187,7 +188,7 @@ test.serial('pm.request.body', t => {
   });
 });
 
-test.serial('pm.request.body.raw', t => {
+test.serial('pm.request.body.raw', (t) => {
   const bodyRaw =
     '{\n    "booleanVar": true,\n    "dynVar": "{{$randomCity}}",\n    "numberVar": 12345,\n    "stringVar": "my-tax"\n}';
   postman[Request]({
@@ -198,7 +199,7 @@ test.serial('pm.request.body.raw', t => {
   });
 });
 
-test.serial('pm.request.body.urlencoded', t => {
+test.serial('pm.request.body.urlencoded', (t) => {
   const bodyUrlencoded = {
     booleanVar: true,
     dynVar: '{{$randomCity}}',
@@ -227,7 +228,7 @@ test.serial('pm.request.body.urlencoded', t => {
   });
 });
 
-test.serial('pm.request.url', t => {
+test.serial('pm.request.url', (t) => {
   postman[Request]({
     address:
       'http://127.0.0.1:4010/widget/:id?name=widget1&type=small#section2',
@@ -251,7 +252,7 @@ test.serial('pm.request.url', t => {
   });
 });
 
-test.serial('variable', t => {
+test.serial('variable', (t) => {
   postman[Initial]({
     global: { domain: 'example.com', path: '/index.html' },
   });
@@ -263,7 +264,7 @@ test.serial('variable', t => {
   t.is(args[1], 'http://example.com/index.html');
 });
 
-test.serial('args', t => {
+test.serial('args', (t) => {
   postman[Request]({
     method: 'GET',
     address: 'http://example.com',
@@ -279,13 +280,13 @@ test.serial('args', t => {
   t.deepEqual(args[3], { auth: 'basic', headers: { Test: 'a', Test2: 'b' } });
 });
 
-test.serial('pm.sendRequest', t => {
+test.serial('pm.sendRequest', (t) => {
   t.throws(() => {
     pm.sendRequest();
   });
 });
 
-test.serial('request.body.raw', t => {
+test.serial('request.body.raw', (t) => {
   const rawBody = JSON.stringify({ key1: 'value1', key2: 'value2' });
 
   postman[Request]({

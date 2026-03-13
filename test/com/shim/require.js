@@ -5,12 +5,13 @@ import mockRequire from 'mock-require';
 const lodash = Symbol('lodash');
 const cheerio = Symbol('cheerio');
 const cryptoJs = Symbol('crypto-js');
-let k6, http;
+let k6;
+let http;
 
 const Reset = Symbol.for('reset');
 const Request = Symbol.for('request');
 
-test.before(t => {
+test.before((t) => {
   global.require = require; // Simulate k6 global require
   mockRequire('k6', 'stub/k6');
   mockRequire('k6/http', 'stub/http');
@@ -22,68 +23,68 @@ test.before(t => {
   require('shim/core');
 });
 
-test.afterEach.always(t => {
+test.afterEach.always((t) => {
   k6[Reset]();
   http[Reset]();
   postman[Reset]();
 });
 
-test.serial('require standard', t => {
+test.serial('require standard', (t) => {
   t.notThrows(() => {
     global.require('console');
   });
 });
 
-test.serial('require prerequest', t => {
+test.serial('require prerequest', (t) => {
   postman[Request]({
     pre() {
       t.throws(() => {
         global.require('console');
       });
-    }
+    },
   });
 });
 
-test.serial('require postrequest', t => {
+test.serial('require postrequest', (t) => {
   postman[Request]({
     post() {
       t.throws(() => {
         global.require('console');
       });
-    }
+    },
   });
 });
 
-test.serial('require released', t => {
+test.serial('require released', (t) => {
   postman[Request]({});
   t.notThrows(() => {
     global.require('console');
   });
 });
 
-test.serial('lodash', t => {
+test.serial('lodash', (t) => {
   require('shim/lodash');
   postman[Request]({
     pre() {
       t.is(global.require('lodash'), lodash);
-    }
+    },
   });
 });
 
-test.serial('cheerio', t => {
+test.serial('cheerio', (t) => {
   require('shim/cheerio');
   postman[Request]({
     pre() {
       t.is(global.require('cheerio'), cheerio);
-    }
+    },
   });
 });
 
-test.serial('crypto-js', t => {
+test.serial('crypto-js', (t) => {
   require('shim/crypto-js');
   postman[Request]({
     pre() {
       t.is(global.require('crypto-js'), cryptoJs);
-    }
+    },
   });
 });

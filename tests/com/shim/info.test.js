@@ -2,7 +2,8 @@
 
 import uuidv4 from 'uuid/v4';
 import { loadShimCore, resetShimState } from '../../helpers/shimHarness';
-let k6, http;
+let k6;
+let http;
 let harness;
 const Initial = Symbol.for('initial');
 const Request = Symbol.for('request');
@@ -12,11 +13,11 @@ beforeAll(() => {
 });
 afterEach(() => {
   resetShimState(harness);
-  delete global.__ITER;
+  global.__ITER = undefined;
 });
 afterAll(() => {
   resetShimState(harness);
-  delete global.__ITER;
+  global.__ITER = undefined;
 });
 test('iteration', () => {
   global.__ITER = 7;
@@ -26,14 +27,14 @@ test('pm.info.eventName pre', () => {
   postman[Request]({
     pre() {
       expect(pm.info.eventName).toBe('prerequest');
-    }
+    },
   });
 });
 test('pm.info.eventName post', () => {
   postman[Request]({
     post() {
       expect(pm.info.eventName).toBe('test');
-    }
+    },
   });
 });
 test('pm.info.iteration', () => {
@@ -43,16 +44,16 @@ test('pm.info.iteration', () => {
 test('pm.info.iterationCount clear', () => {
   const options = {};
   postman[Initial]({
-    options
+    options,
   });
   expect(pm.info.iterationCount).toBe(Number.POSITIVE_INFINITY);
 });
 test('pm.info.iterationCount set', () => {
   const options = {
-    iterations: 25
+    iterations: 25,
   };
   postman[Initial]({
-    options
+    options,
   });
   expect(pm.info.iterationCount).toBe(25);
 });
@@ -62,7 +63,7 @@ test('pm.info.requestId', () => {
     id,
     pre() {
       expect(pm.info.requestId).toBe(id);
-    }
+    },
   });
 });
 test('pm.info.requestName', () => {
@@ -70,6 +71,6 @@ test('pm.info.requestName', () => {
     name: 'Test Request',
     pre() {
       expect(pm.info.requestName).toBe('Test Request');
-    }
+    },
   });
 });

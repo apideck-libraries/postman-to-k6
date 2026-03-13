@@ -1,0 +1,58 @@
+{
+  "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineEnding": "lf"
+  },
+  "javascript": {
+    "formatter": {
+      "quoteStyle": "single",
+      "semicolons": "always",
+      "trailingCommas": "es5"
+    }
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true
+    }
+  },
+  "files": {
+    "ignore": [
+      "coverage/**",
+      "node_modules/**",
+      "vendor/**",
+      ".codex/**",
+      "tmp/**",
+      ".tmp/**",
+      "examples/quickpizza/libs/**",
+      "examples/quickpizza/quickpizza.k6.js",
+      "lib/shim/faker.js"
+    ]
+  },
+  "overrides": [
+    {
+      "include": [
+        "lib/shim/core.js"
+      ],
+      "linter": {
+        "rules": {
+          "suspicious": {
+            "useGetterReturn": "off"
+          },
+          "style": {
+            "noArguments": "off"
+          },
+          "complexity": {
+            "useOptionalChain": "off"
+          },
+          "security": {
+            "noGlobalEval": "off"
+          }
+        }
+      }
+    }
+  ]
+}

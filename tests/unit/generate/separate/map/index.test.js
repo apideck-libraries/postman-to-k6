@@ -7,7 +7,10 @@ function designate(name, container, generators, suffix = '') {
 }
 
 beforeAll(() => {
-  jest.doMock('../../../../../lib/generate/separate/map/designate.js', () => designate);
+  jest.doMock(
+    '../../../../../lib/generate/separate/map/designate.js',
+    () => designate
+  );
   map = require('../../../../../lib/generate/separate/map/index.js');
 });
 
@@ -20,31 +23,31 @@ test('empty', () => {
 test('1 item', () => {
   const tree = {
     items: [{ name: 'apple' }],
-    locations: []
+    locations: [],
   };
   const result = map(tree);
   expect(result).toEqual({
-    'apple.js': { name: 'apple' }
+    'apple.js': { name: 'apple' },
   });
 });
 
 test('3 items', () => {
   const tree = {
     items: [{ name: 'apple' }, { name: 'orange' }, { name: 'pear' }],
-    locations: []
+    locations: [],
   };
   const result = map(tree);
   expect(result).toEqual({
     'apple.js': { name: 'apple' },
     'orange.js': { name: 'orange' },
-    'pear.js': { name: 'pear' }
+    'pear.js': { name: 'pear' },
   });
 });
 
 test('1 location', () => {
   const tree = {
     items: [],
-    locations: [{ name: 'setup', items: [], locations: [] }]
+    locations: [{ name: 'setup', items: [], locations: [] }],
   };
   const result = map(tree);
   expect(result).toEqual({ setup: {} });
@@ -56,14 +59,14 @@ test('3 locations', () => {
     locations: [
       { name: 'setup', items: [], locations: [] },
       { name: 'exercise', items: [], locations: [] },
-      { name: 'cleanup', items: [], locations: [] }
-    ]
+      { name: 'cleanup', items: [], locations: [] },
+    ],
   };
   const result = map(tree);
   expect(result).toEqual({
     setup: {},
     exercise: {},
-    cleanup: {}
+    cleanup: {},
   });
 });
 
@@ -72,7 +75,7 @@ test('auth', () => {
   const tree = {
     auth,
     items: [],
-    locations: []
+    locations: [],
   };
   const result = map(tree);
   expect(result).toEqual({ [Auth]: auth });
@@ -85,15 +88,15 @@ test('nested item', () => {
       {
         name: 'exercise',
         items: [{ name: 'home' }],
-        locations: []
-      }
-    ]
+        locations: [],
+      },
+    ],
   };
   const result = map(tree);
   expect(result).toEqual({
     exercise: {
-      'home.js': { name: 'home' }
-    }
+      'home.js': { name: 'home' },
+    },
   });
 });
 
@@ -104,14 +107,14 @@ test('nested location', () => {
       {
         name: 'exercise',
         items: [],
-        locations: [{ name: 'public', items: [], locations: [] }]
-      }
-    ]
+        locations: [{ name: 'public', items: [], locations: [] }],
+      },
+    ],
   };
   const result = map(tree);
   expect(result).toEqual({
     exercise: {
-      public: {}
-    }
+      public: {},
+    },
   });
 });

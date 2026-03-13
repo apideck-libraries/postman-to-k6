@@ -1,5 +1,5 @@
-const fs = require('fs');
-const path = require('path');
+const fs = require('node:fs');
+const path = require('node:path');
 
 const root = path.resolve(__dirname, '..');
 const coverageDir = path.join(root, 'coverage');
@@ -18,7 +18,9 @@ const historyPath = path.join(coverageDir, 'history.jsonl');
 function readSummary(candidates, key) {
   const filePath = candidates.find((candidate) => fs.existsSync(candidate));
   if (!filePath) {
-    throw new Error(`${key} summary not found in any of: ${candidates.join(', ')}`);
+    throw new Error(
+      `${key} summary not found in any of: ${candidates.join(', ')}`
+    );
   }
   const data = JSON.parse(fs.readFileSync(filePath, 'utf8'));
   if (!data.total) {

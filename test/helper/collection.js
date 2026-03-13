@@ -1,4 +1,4 @@
-const fs = require('fs');
+const fs = require('node:fs');
 const postman = require('postman-collection');
 
 // Read and parse collection file

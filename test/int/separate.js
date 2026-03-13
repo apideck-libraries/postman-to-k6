@@ -2,7 +2,7 @@ import test from 'ava';
 import map from 'generate/separate/map';
 import convertFile from 'convert/file';
 
-test('map', t => {
+test('map', (t) => {
   const tree = {
     items: [{ name: 'apple' }, { name: 'apple' }, { name: 'orange' }],
     locations: [
@@ -33,7 +33,7 @@ test('map', t => {
   });
 });
 
-test('request --separate', async t => {
+test('request --separate', async (t) => {
   const options = {
     separate: true,
   };

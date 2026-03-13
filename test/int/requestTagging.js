@@ -3,7 +3,7 @@
 import test from 'ava';
 import convertFile from 'convert/file';
 
-test('request --k6-request-tagging=request', async t => {
+test('request --k6-request-tagging=request', async (t) => {
   const options = {
     k6RequestTagging: 'request',
   };
@@ -11,7 +11,7 @@ test('request --k6-request-tagging=request', async t => {
   t.snapshot(main);
 });
 
-test('request --k6-request-tagging=folder-request', async t => {
+test('request --k6-request-tagging=folder-request', async (t) => {
   const options = {
     k6RequestTagging: 'folder-request',
   };
@@ -19,7 +19,7 @@ test('request --k6-request-tagging=folder-request', async t => {
   t.snapshot(main);
 });
 
-test('request no request-tagging', async t => {
+test('request no request-tagging', async (t) => {
   const options = {
     k6RequestTagging: '',
   };
@@ -27,7 +27,7 @@ test('request no request-tagging', async t => {
   t.snapshot(main);
 });
 
-test('folder request --k6-request-tagging=request', async t => {
+test('folder request --k6-request-tagging=request', async (t) => {
   const options = {
     k6RequestTagging: 'request',
   };
@@ -38,7 +38,7 @@ test('folder request --k6-request-tagging=request', async t => {
   t.snapshot(main);
 });
 
-test('folder request --k6-request-tagging=folder-request', async t => {
+test('folder request --k6-request-tagging=folder-request', async (t) => {
   const options = {
     k6RequestTagging: 'folder-request',
   };
@@ -49,7 +49,7 @@ test('folder request --k6-request-tagging=folder-request', async t => {
   t.snapshot(main);
 });
 
-test('folder request no request-tagging', async t => {
+test('folder request no request-tagging', async (t) => {
   const options = {
     k6RequestTagging: '',
   };
@@ -60,7 +60,7 @@ test('folder request no request-tagging', async t => {
   t.snapshot(main);
 });
 
-test('request separate --k6-request-tagging=request', async t => {
+test('request separate --k6-request-tagging=request', async (t) => {
   const options = {
     separate: true,
     k6RequestTagging: 'request',
@@ -70,13 +70,13 @@ test('request separate --k6-request-tagging=request', async t => {
     options
   );
   // remove ID from requests
-  let lines = requests['TestRequest.js'].split('\n');
+  const lines = requests['TestRequest.js'].split('\n');
   lines.splice(2, 1);
   requests['TestRequest.js'] = lines.join('\n');
   t.snapshot(requests);
 });
 
-test('request separate --k6-request-tagging=folder-request', async t => {
+test('request separate --k6-request-tagging=folder-request', async (t) => {
   const options = {
     separate: true,
     k6RequestTagging: 'folder-request',
@@ -86,13 +86,13 @@ test('request separate --k6-request-tagging=folder-request', async t => {
     options
   );
   // remove ID from requests
-  let lines = requests['TestRequest.js'].split('\n');
+  const lines = requests['TestRequest.js'].split('\n');
   lines.splice(2, 1);
   requests['TestRequest.js'] = lines.join('\n');
   t.snapshot(requests);
 });
 
-test('request separate no request-tagging', async t => {
+test('request separate no request-tagging', async (t) => {
   const options = {
     separate: true,
     k6RequestTagging: '',
@@ -102,13 +102,13 @@ test('request separate no request-tagging', async t => {
     options
   );
   // remove ID from requests
-  let lines = requests['TestRequest.js'].split('\n');
+  const lines = requests['TestRequest.js'].split('\n');
   lines.splice(2, 1);
   requests['TestRequest.js'] = lines.join('\n');
   t.snapshot(requests);
 });
 
-test('folder request separate --k6-request-tagging=request', async t => {
+test('folder request separate --k6-request-tagging=request', async (t) => {
   const options = {
     separate: true,
     k6RequestTagging: 'request',
@@ -118,13 +118,13 @@ test('folder request separate --k6-request-tagging=request', async t => {
     options
   );
   // remove ID from requests
-  let lines = requests['TestFolder']['TestRequest.js'].split('\n');
+  const lines = requests.TestFolder['TestRequest.js'].split('\n');
   lines.splice(2, 1);
-  requests['TestFolder']['TestRequest.js'] = lines.join('\n');
+  requests.TestFolder['TestRequest.js'] = lines.join('\n');
   t.snapshot(requests);
 });
 
-test('folder request separate --k6-request-tagging=folder-request', async t => {
+test('folder request separate --k6-request-tagging=folder-request', async (t) => {
   const options = {
     separate: true,
     k6RequestTagging: 'folder-request',
@@ -134,13 +134,13 @@ test('folder request separate --k6-request-tagging=folder-request', async t => {
     options
   );
   // remove ID from requests
-  let lines = requests['TestFolder']['TestRequest.js'].split('\n');
+  const lines = requests.TestFolder['TestRequest.js'].split('\n');
   lines.splice(2, 1);
-  requests['TestFolder']['TestRequest.js'] = lines.join('\n');
+  requests.TestFolder['TestRequest.js'] = lines.join('\n');
   t.snapshot(requests);
 });
 
-test('folder request separate no request-tagging', async t => {
+test('folder request separate no request-tagging', async (t) => {
   const options = {
     separate: true,
     k6RequestTagging: '',
@@ -150,8 +150,8 @@ test('folder request separate no request-tagging', async t => {
     options
   );
   // remove ID from requests
-  let lines = requests['TestFolder']['TestRequest.js'].split('\n');
+  const lines = requests.TestFolder['TestRequest.js'].split('\n');
   lines.splice(2, 1);
-  requests['TestFolder']['TestRequest.js'] = lines.join('\n');
+  requests.TestFolder['TestRequest.js'] = lines.join('\n');
   t.snapshot(requests);
 });

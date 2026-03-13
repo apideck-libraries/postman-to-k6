@@ -1,5 +1,5 @@
-const fs = require('fs');
-const path = require('path');
+const fs = require('node:fs');
+const path = require('node:path');
 
 const root = path.resolve(__dirname, '../..');
 
@@ -32,10 +32,10 @@ function collectCases(baseDir, matcher, parser) {
       .replace(/^tests?\//, '');
     const content = fs.readFileSync(filePath, 'utf8');
     const regex = parser.regex;
-    let match;
-
-    while ((match = regex.exec(content)) !== null) {
+    let match = regex.exec(content);
+    while (match !== null) {
       cases.add(`${relPath} :: ${match[1]}`);
+      match = regex.exec(content);
     }
   }
 
@@ -47,26 +47,20 @@ function setDiff(left, right) {
 }
 
 test('jest suite covers all ava test case names', () => {
-  const avaCases = collectCases(
-    path.join(root, 'test'),
-    /\.js$/,
-    {
-      strip: /\.js$/,
-      replaceWith: '.test.js',
-      regex: /test(?:\.serial)?\('([^']+)'/g,
-    }
-  );
+  const avaCases = collectCases(path.join(root, 'test'), /\.js$/, {
+    strip: /\.js$/,
+    replaceWith: '.test.js',
+    regex: /test(?:\.serial)?\('([^']+)'/g,
+  });
 
-  const jestCases = collectCases(
-    path.join(root, 'tests'),
-    /\.test\.js$/,
-    {
-      strip: /\.test\.js$/,
-      replaceWith: '.test.js',
-      regex: /test\('([^']+)'/g,
-    }
-  );
+  const jestCases = collectCases(path.join(root, 'tests'), /\.test\.js$/, {
+    strip: /\.test\.js$/,
+    replaceWith: '.test.js',
+    regex: /test\('([^']+)'/g,
+  });
 
-  const missing = setDiff(avaCases, jestCases).filter((item) => !ALLOWLIST.has(item));
+  const missing = setDiff(avaCases, jestCases).filter(
+    (item) => !ALLOWLIST.has(item)
+  );
   expect(missing).toEqual([]);
 });

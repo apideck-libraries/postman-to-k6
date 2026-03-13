@@ -2,7 +2,8 @@
 /* global responseCookies */
 
 import { loadShimCore, resetShimState } from '../../helpers/shimHarness';
-let k6, http;
+let k6;
+let http;
 let harness;
 const Request = Symbol.for('request');
 beforeAll(() => {
@@ -22,12 +23,12 @@ test('responseCookies', () => {
     name: 'Theme',
     path: '/',
     secure: false,
-    value: 'Aqua'
+    value: 'Aqua',
   };
   http.request.returns({
     cookies: {
-      Theme: [cookie]
-    }
+      Theme: [cookie],
+    },
   });
   postman[Request]({
     post() {
@@ -36,14 +37,14 @@ test('responseCookies', () => {
       for (const key of Object.keys(cookie)) {
         expect(responseCookie[key]).toBe(cookie[key]);
       }
-    }
+    },
   });
 });
 test('cookie.hostOnly', () => {
   http.request.returns({
     cookies: {
-      Theme: [{}]
-    }
+      Theme: [{}],
+    },
   });
   postman[Request]({
     post() {
@@ -51,14 +52,14 @@ test('cookie.hostOnly', () => {
         /* eslint-disable-next-line no-unused-expressions */
         responseCookies[0].hostOnly;
       }).toThrow();
-    }
+    },
   });
 });
 test('cookie.session', () => {
   http.request.returns({
     cookies: {
-      Theme: [{}]
-    }
+      Theme: [{}],
+    },
   });
   postman[Request]({
     post() {
@@ -66,14 +67,14 @@ test('cookie.session', () => {
         /* eslint-disable-next-line no-unused-expressions */
         responseCookies[0].session;
       }).toThrow();
-    }
+    },
   });
 });
 test('cookie.storeId', () => {
   http.request.returns({
     cookies: {
-      Theme: [{}]
-    }
+      Theme: [{}],
+    },
   });
   postman[Request]({
     post() {
@@ -81,7 +82,7 @@ test('cookie.storeId', () => {
         /* eslint-disable-next-line no-unused-expressions */
         responseCookies[0].storeId;
       }).toThrow();
-    }
+    },
   });
 });
 test('postman.getResponseCookie', () => {
@@ -91,12 +92,12 @@ test('postman.getResponseCookie', () => {
     name: 'Theme',
     path: '/',
     secure: false,
-    value: 'Aqua'
+    value: 'Aqua',
   };
   http.request.returns({
     cookies: {
-      Theme: [cookie]
-    }
+      Theme: [cookie],
+    },
   });
   postman[Request]({
     post() {
@@ -105,72 +106,78 @@ test('postman.getResponseCookie', () => {
       for (const key of Object.keys(cookie)) {
         expect(responseCookie[key]).toBe(cookie[key]);
       }
-    }
+    },
   });
 });
 test('pm.cookies.get clear', () => {
   postman[Request]({
     post() {
       expect(pm.cookies.get('Theme')).toBe(null);
-    }
+    },
   });
 });
 test('pm.cookies.get set', () => {
   const cookie = {
     name: 'Theme',
-    value: 'Aqua'
+    value: 'Aqua',
   };
   http.request.returns({
     cookies: {
-      Theme: [cookie]
-    }
+      Theme: [cookie],
+    },
   });
   postman[Request]({
     post() {
       expect(pm.cookies.get('Theme')).toBe('Aqua');
-    }
+    },
   });
 });
 test('pm.cookies.has clear', () => {
   postman[Request]({
     post() {
       expect(pm.cookies.has('Theme')).toBe(false);
-    }
+    },
   });
 });
 test('pm.cookies.has set', () => {
   http.request.returns({
     cookies: {
-      Theme: [{
-        name: 'Theme'
-      }]
-    }
+      Theme: [
+        {
+          name: 'Theme',
+        },
+      ],
+    },
   });
   postman[Request]({
     post() {
       expect(pm.cookies.has('Theme')).toBe(true);
-    }
+    },
   });
 });
 test('pm.cookies.toObject', () => {
   http.request.returns({
     cookies: {
-      Theme: [{
-        name: 'Theme',
-        value: 'Aqua'
-      }],
-      Session: [{
-        name: 'Session',
-        value: 'abc123'
-      }]
-    }
+      Theme: [
+        {
+          name: 'Theme',
+          value: 'Aqua',
+        },
+      ],
+      Session: [
+        {
+          name: 'Session',
+          value: 'abc123',
+        },
+      ],
+    },
   });
   postman[Request]({
     post() {
       expect(pm.cookies.toObject()).toEqual({
         Theme: 'Aqua',
-        Session: 'abc123'
+        Session: 'abc123',
       });
-    }
+    },
   });
 });

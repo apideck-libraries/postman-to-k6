@@ -1,5 +1,5 @@
 const fs = require('fs-extra');
-const path = require('path');
+const path = require('node:path');
 
 function outputRequests(dir, requests) {
   const address = [dir, 'requests'];

@@ -4,13 +4,13 @@ test('clear', () => {
 });
 test('noncollision', () => {
   const container = {
-    apple: {}
+    apple: {},
   };
   expect(deconflict('orange', container, {})).toBe('orange');
 });
 test('collision', () => {
   const container = {
-    apple: {}
+    apple: {},
   };
   expect(deconflict('apple', container, {})).toBe('apple.A');
 });
@@ -18,19 +18,19 @@ test('collision repeated', () => {
   const container = {
     apple: {},
     'apple.A': {},
-    'apple.B': {}
+    'apple.B': {},
   };
   expect(deconflict('apple', container, {})).toBe('apple.C');
 });
 test('noncollision suffix', () => {
   const container = {
-    apple: {}
+    apple: {},
   };
   expect(deconflict('apple', container, {}, '.js')).toBe('apple');
 });
 test('collision suffix', () => {
   const container = {
-    'apple.js': {}
+    'apple.js': {},
   };
   expect(deconflict('apple', container, {}, '.js')).toBe('apple.A');
 });
@@ -38,7 +38,7 @@ test('collision repeated suffix', () => {
   const container = {
     'apple.js': {},
     'apple.A.js': {},
-    'apple.B.js': {}
+    'apple.B.js': {},
   };
   expect(deconflict('apple', container, {}, '.js')).toBe('apple.C');
 });

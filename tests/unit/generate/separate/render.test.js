@@ -14,7 +14,7 @@ function loadRender(itemImpl = () => {}) {
     },
     Item: {
       isItem(node) {
-        return Boolean(node && node.__isItem);
+        return Boolean(node?.__isItem);
       },
     },
   }));

@@ -2,7 +2,8 @@
 
 import test from 'ava';
 import mockRequire from 'mock-require';
-let k6, http;
+let k6;
+let http;
 
 const undef = void 0; /* eslint-disable-line no-void */
 const Reset = Symbol.for('reset');
@@ -11,7 +12,7 @@ const Iteration = Symbol.for('iteration');
 const Request = Symbol.for('request');
 const Var = Symbol.for('variable');
 
-test.before(t => {
+test.before((t) => {
   mockRequire('k6', 'stub/k6');
   mockRequire('k6/http', 'stub/http');
   k6 = require('k6');
@@ -19,89 +20,87 @@ test.before(t => {
   require('shim/core');
 });
 
-test.afterEach.always(t => {
+test.afterEach.always((t) => {
   k6[Reset]();
   http[Reset]();
   postman[Reset]();
 });
 
-test.serial('$guid', t => {
+test.serial('$guid', (t) => {
   const value = pm[Var]('$guid');
   t.true(/\w{8}-\w{4}-\w{4}-\w{4}-\w{12}/.test(value));
 });
 
-test.serial('$randomInt', t => {
+test.serial('$randomInt', (t) => {
   const value = pm[Var]('$randomInt');
   t.true(value >= 0 && value <= 1000);
 });
 
-test.serial('$randomPhoneNumber', t => {
+test.serial('$randomPhoneNumber', (t) => {
   const value = pm[Var]('$randomPhoneNumber');
   t.true(value.length === 12);
 });
 
-test.serial('$isoTimestamp', t => {
+test.serial('$isoTimestamp', (t) => {
   const value = pm[Var]('$isoTimestamp');
-  const regex = new RegExp('^(-?(?:[1-9][0-9]*)?[0-9]{4})' + // match year
-    '-(1[0-2]|0[1-9])-(3[01]|0[1-9]|[12][0-9])' + // match month and day
-    'T(2[0-3]|[01][0-9]):([0-5][0-9]):([0-5][0-9])(\\.[0-9]+)?(Z)?$'); // match time
+  const regex = new RegExp(
+    '^(-?(?:[1-9][0-9]*)?[0-9]{4})' + // match year
+      '-(1[0-2]|0[1-9])-(3[01]|0[1-9]|[12][0-9])' + // match month and day
+      'T(2[0-3]|[01][0-9]):([0-5][0-9]):([0-5][0-9])(\\.[0-9]+)?(Z)?$'
+  ); // match time
   t.true(regex.test(value));
 });
 
-test.serial('$timestamp', t => {
+test.serial('$timestamp', (t) => {
   const value = pm[Var]('$timestamp');
   t.is(typeof value, 'number');
 });
 
-test.serial('globals read clear', t => {
+test.serial('globals read clear', (t) => {
   t.is(globals.test, undef);
 });
 
-test.serial('globals read set', t => {
+test.serial('globals read set', (t) => {
   postman[Initial]({ global: { test: 'a' } });
   t.is(globals.test, 'a');
 });
 
-test.serial('globals write', t => {
+test.serial('globals write', (t) => {
   t.throws(() => {
     globals.test = 'a';
   });
 });
 
-test.serial('environment read clear', t => {
+test.serial('environment read clear', (t) => {
   t.is(environment.test, undef);
 });
 
-test.serial('environment read set', t => {
+test.serial('environment read set', (t) => {
   postman[Initial]({ environment: { test: 'a' } });
   t.is(environment.test, 'a');
 });
 
-test.serial('environment write', t => {
+test.serial('environment write', (t) => {
   t.throws(() => {
     environment.test = 'a';
   });
 });
 
-test.serial('data read clear', t => {
+test.serial('data read clear', (t) => {
   postman[Initial]({ data: [] });
   postman[Iteration]();
   t.is(data.test, undef);
 });
 
-test.serial('data read set', t => {
+test.serial('data read set', (t) => {
   postman[Initial]({ data: [{ test: 'a' }] });
   postman[Iteration]();
   t.is(data.test, 'a');
 });
 
-test.serial('data read iterated', t => {
+test.serial('data read iterated', (t) => {
   postman[Initial]({
-    data: [
-      { test: 'a' },
-      { test: 'b' },
-      { test: 'c' }
-    ]
+    data: [{ test: 'a' }, { test: 'b' }, { test: 'c' }],
   });
   postman[Iteration]();
   t.is(data.test, 'a');
@@ -111,7 +110,7 @@ test.serial('data read iterated', t => {
   t.is(data.test, 'c');
 });
 
-test.serial('data write', t => {
+test.serial('data write', (t) => {
   postman[Initial]({ data: [] });
   postman[Iteration]();
   t.throws(() => {
@@ -119,36 +118,36 @@ test.serial('data write', t => {
   });
 });
 
-test.serial('postman.getGlobalVariable clear', t => {
+test.serial('postman.getGlobalVariable clear', (t) => {
   t.is(postman.getGlobalVariable('test'), undef);
 });
 
-test.serial('postman.getGlobalVariable set', t => {
+test.serial('postman.getGlobalVariable set', (t) => {
   postman[Initial]({ global: { test: 'a' } });
   t.is(postman.getGlobalVariable('test'), 'a');
 });
 
-test.serial('postman.setGlobalVariable clear', t => {
+test.serial('postman.setGlobalVariable clear', (t) => {
   t.is(globals.test, undef);
   postman.setGlobalVariable('test', 'a');
   t.is(globals.test, 'a');
 });
 
-test.serial('postman.setGlobalVariable set', t => {
+test.serial('postman.setGlobalVariable set', (t) => {
   postman[Initial]({ global: { test: 'a' } });
   t.is(globals.test, 'a');
   postman.setGlobalVariable('test', 'b');
   t.is(globals.test, 'b');
 });
 
-test.serial('postman.clearGlobalVariable', t => {
+test.serial('postman.clearGlobalVariable', (t) => {
   postman[Initial]({ global: { test: 'a' } });
   t.is(globals.test, 'a');
   postman.clearGlobalVariable('test');
   t.is(globals.test, undef);
 });
 
-test.serial('postman.clearGlobalVariables', t => {
+test.serial('postman.clearGlobalVariables', (t) => {
   postman[Initial]({ global: { test: 'a', test2: 'b' } });
   t.is(globals.test, 'a');
   t.is(globals.test2, 'b');
@@ -157,38 +156,38 @@ test.serial('postman.clearGlobalVariables', t => {
   t.is(globals.test2, undef);
 });
 
-test.serial('postman.getEnvironmentVariable clear', t => {
+test.serial('postman.getEnvironmentVariable clear', (t) => {
   postman[Initial]({ environment: {} });
   t.is(postman.getEnvironmentVariable('test'), undef);
 });
 
-test.serial('postman.getEnvironmentVariable set', t => {
+test.serial('postman.getEnvironmentVariable set', (t) => {
   postman[Initial]({ environment: { test: 'a' } });
   t.is(postman.getEnvironmentVariable('test'), 'a');
 });
 
-test.serial('postman.setEnvironmentVariable clear', t => {
+test.serial('postman.setEnvironmentVariable clear', (t) => {
   postman[Initial]({ environment: {} });
   t.is(environment.test, undef);
   postman.setEnvironmentVariable('test', 'a');
   t.is(environment.test, 'a');
 });
 
-test.serial('postman.setEnvironmentVariable set', t => {
+test.serial('postman.setEnvironmentVariable set', (t) => {
   postman[Initial]({ environment: { test: 'a' } });
   t.is(environment.test, 'a');
   postman.setEnvironmentVariable('test', 'b');
   t.is(environment.test, 'b');
 });
 
-test.serial('postman.clearEnvironmentVariable', t => {
+test.serial('postman.clearEnvironmentVariable', (t) => {
   postman[Initial]({ environment: { test: 'a' } });
   t.is(environment.test, 'a');
   postman.clearEnvironmentVariable('test');
   t.is(environment.test, undef);
 });
 
-test.serial('postman.clearEnvironmentVariables', t => {
+test.serial('postman.clearEnvironmentVariables', (t) => {
   postman[Initial]({ environment: { test: 'a', test2: 'b' } });
   t.is(environment.test, 'a');
   t.is(environment.test2, 'b');
@@ -197,7 +196,7 @@ test.serial('postman.clearEnvironmentVariables', t => {
   t.is(environment.test2, undef);
 });
 
-test.serial('pm.environment.clear', t => {
+test.serial('pm.environment.clear', (t) => {
   postman[Initial]({ environment: { test: 'a', test2: 'b' } });
   t.is(environment.test, 'a');
   t.is(environment.test2, 'b');
@@ -206,41 +205,41 @@ test.serial('pm.environment.clear', t => {
   t.is(environment.test2, undef);
 });
 
-test.serial('pm.environment.get clear', t => {
+test.serial('pm.environment.get clear', (t) => {
   postman[Initial]({ environment: {} });
   t.is(pm.environment.get('test'), undef);
 });
 
-test.serial('pm.environment.get set', t => {
+test.serial('pm.environment.get set', (t) => {
   postman[Initial]({ environment: { test: 'a' } });
   t.is(pm.environment.get('test'), 'a');
 });
 
-test.serial('pm.environment.has clear', t => {
+test.serial('pm.environment.has clear', (t) => {
   postman[Initial]({ environment: {} });
   t.is(pm.environment.has('test'), false);
 });
 
-test.serial('pm.environment.has set', t => {
+test.serial('pm.environment.has set', (t) => {
   postman[Initial]({ environment: { test: 'a' } });
   t.is(pm.environment.has('test'), true);
 });
 
-test.serial('pm.environment.set clear', t => {
+test.serial('pm.environment.set clear', (t) => {
   postman[Initial]({ environment: {} });
   t.is(environment.test, undef);
   pm.environment.set('test', 'a');
   t.is(environment.test, 'a');
 });
 
-test.serial('pm.environment.set set', t => {
+test.serial('pm.environment.set set', (t) => {
   postman[Initial]({ environment: { test: 'a' } });
   t.is(environment.test, 'a');
   pm.environment.set('test', 'b');
   t.is(environment.test, 'b');
 });
 
-test.serial('pm.environment.toObject', t => {
+test.serial('pm.environment.toObject', (t) => {
   postman[Initial]({ environment: { test: 'a', test2: 'b' } });
   const values = pm.environment.toObject();
   t.is(typeof values, 'object');
@@ -248,14 +247,14 @@ test.serial('pm.environment.toObject', t => {
   t.is(values.test2, 'b');
 });
 
-test.serial('pm.environment.unset', t => {
+test.serial('pm.environment.unset', (t) => {
   postman[Initial]({ environment: { test: 'a' } });
   t.is(environment.test, 'a');
   pm.environment.unset('test');
   t.is(environment.test, undef);
 });
 
-test.serial('pm.globals.clear', t => {
+test.serial('pm.globals.clear', (t) => {
   postman[Initial]({ global: { test: 'a', test2: 'b', test3: 'c' } });
   t.is(globals.test, 'a');
   t.is(globals.test2, 'b');
@@ -266,31 +265,31 @@ test.serial('pm.globals.clear', t => {
   t.is(globals.test3, undef);
 });
 
-test.serial('pm.globals.get clear', t => {
+test.serial('pm.globals.get clear', (t) => {
   t.is(pm.globals.get('test'), undef);
 });
 
-test.serial('pm.globals.get set', t => {
+test.serial('pm.globals.get set', (t) => {
   postman[Initial]({ global: { test: 'a' } });
   t.is(pm.globals.get('test'), 'a');
 });
 
-test.serial('pm.globals.has clear', t => {
+test.serial('pm.globals.has clear', (t) => {
   t.is(pm.globals.has('test'), false);
 });
 
-test.serial('pm.globals.has set', t => {
+test.serial('pm.globals.has set', (t) => {
   postman[Initial]({ global: { test: 'a' } });
   t.is(pm.globals.has('test'), true);
 });
 
-test.serial('pm.globals.set clear', t => {
+test.serial('pm.globals.set clear', (t) => {
   t.is(globals.test, undef);
   pm.globals.set('test', 'a');
   t.is(globals.test, 'a');
 });
 
-test.serial('pm.globals.toObject', t => {
+test.serial('pm.globals.toObject', (t) => {
   postman[Initial]({ global: { test: 'a', test2: 'b' } });
   const values = pm.globals.toObject();
   t.is(typeof values, 'object');
@@ -298,36 +297,32 @@ test.serial('pm.globals.toObject', t => {
   t.is(values.test2, 'b');
 });
 
-test.serial('pm.globals.unset', t => {
+test.serial('pm.globals.unset', (t) => {
   postman[Initial]({ global: { test: 'a' } });
   t.is(globals.test, 'a');
   pm.globals.unset('test');
   t.is(globals.test, undef);
 });
 
-test.serial('pm.iterationData unavailable', t => {
+test.serial('pm.iterationData unavailable', (t) => {
   t.is(pm.iterationData, undef);
 });
 
-test.serial('pm.iterationData.get clear', t => {
+test.serial('pm.iterationData.get clear', (t) => {
   postman[Initial]({ data: [{}] });
   postman[Iteration]();
   t.is(pm.iterationData.get('test'), undef);
 });
 
-test.serial('pm.iterationData.get set', t => {
+test.serial('pm.iterationData.get set', (t) => {
   postman[Initial]({ data: [{ test: 'a' }] });
   postman[Iteration]();
   t.is(pm.iterationData.get('test'), 'a');
 });
 
-test.serial('pm.iterationData.get iterated', t => {
+test.serial('pm.iterationData.get iterated', (t) => {
   postman[Initial]({
-    data: [
-      { test: 'a' },
-      { test: 'b' },
-      { test: 'c' }
-    ]
+    data: [{ test: 'a' }, { test: 'b' }, { test: 'c' }],
   });
   postman[Iteration]();
   t.is(pm.iterationData.get('test'), 'a');
@@ -337,7 +332,7 @@ test.serial('pm.iterationData.get iterated', t => {
   t.is(pm.iterationData.get('test'), 'c');
 });
 
-test.serial('pm.iterationData.toObject', t => {
+test.serial('pm.iterationData.toObject', (t) => {
   postman[Initial]({ data: [{ test: 'a', test2: 'b' }] });
   postman[Iteration]();
   const values = pm.iterationData.toObject();
@@ -346,129 +341,125 @@ test.serial('pm.iterationData.toObject', t => {
   t.is(values.test2, 'b');
 });
 
-test.serial('pm.variables.get clear', t => {
+test.serial('pm.variables.get clear', (t) => {
   t.is(pm.variables.get('test'), undef);
 });
 
-test.serial('pm.variables.get global', t => {
+test.serial('pm.variables.get global', (t) => {
   postman[Initial]({
-    global: { test: 'a' }
+    global: { test: 'a' },
   });
   t.is(pm.variables.get('test'), 'a');
 });
 
-test.serial('pm.variables.get collection', t => {
+test.serial('pm.variables.get collection', (t) => {
   postman[Initial]({
     global: { test: 'a' },
-    collection: { test: 'b' }
+    collection: { test: 'b' },
   });
   t.is(pm.variables.get('test'), 'b');
 });
 
-test.serial('pm.variables.get environment', t => {
-  postman[Initial]({
-    global: { test: 'a' },
-    collection: { test: 'b' },
-    environment: { test: 'c' }
-  });
-  t.is(pm.variables.get('test'), 'c');
-});
-
-test.serial('pm.variables.get data', t => {
+test.serial('pm.variables.get environment', (t) => {
   postman[Initial]({
     global: { test: 'a' },
     collection: { test: 'b' },
     environment: { test: 'c' },
-    data: [{ test: 'd' }]
+  });
+  t.is(pm.variables.get('test'), 'c');
+});
+
+test.serial('pm.variables.get data', (t) => {
+  postman[Initial]({
+    global: { test: 'a' },
+    collection: { test: 'b' },
+    environment: { test: 'c' },
+    data: [{ test: 'd' }],
   });
   postman[Iteration]();
   t.is(pm.variables.get('test'), 'd');
 });
 
-test.serial('pm.variables.get data iterated', t => {
+test.serial('pm.variables.get data iterated', (t) => {
   postman[Initial]({
-    data: [
-      { test: 'a' },
-      { test: 'b' },
-      { test: 'c' }
-    ]
+    data: [{ test: 'a' }, { test: 'b' }, { test: 'c' }],
   });
   postman[Iteration]();
   postman[Iteration]();
   t.is(pm.variables.get('test'), 'b');
 });
 
-test.serial('pm.variables.get local', t => {
+test.serial('pm.variables.get local', (t) => {
   postman[Initial]({
     global: { test: 'a' },
     collection: { test: 'b' },
     environment: { test: 'c' },
-    data: [{ test: 'd' }]
+    data: [{ test: 'd' }],
   });
   postman[Iteration]();
   postman[Request]({
     pre() {
       pm.variables.set('test', 'e');
       t.is(pm.variables.get('test'), 'e');
-    }
+    },
   });
 });
 
-test.serial('pm.variables.set scoped', t => {
+test.serial('pm.variables.set scoped', (t) => {
   t.throws(() => {
     pm.variables.set('test', 'a');
   });
 });
 
-test.serial('pm.variables.set clear', t => {
+test.serial('pm.variables.set clear', (t) => {
   postman[Request]({
     pre() {
       t.is(pm.variables.get('test'), undef);
       pm.variables.set('test', 'a');
       t.is(pm.variables.get('test'), 'a');
-    }
+    },
   });
 });
 
-test.serial('pm.variables.set set', t => {
+test.serial('pm.variables.set set', (t) => {
   postman[Request]({
     pre() {
       pm.variables.set('test', 'a');
       t.is(pm.variables.get('test'), 'a');
       pm.variables.set('test', 'b');
       t.is(pm.variables.get('test'), 'b');
-    }
+    },
   });
 });
 
-test.serial('pm.collectionVariables.set scoped', t => {
+test.serial('pm.collectionVariables.set scoped', (t) => {
   t.throws(() => {
     pm.collectionVariables.set('test', 'a');
   });
 });
 
-test.serial('pm.collectionVariables.set clear', t => {
+test.serial('pm.collectionVariables.set clear', (t) => {
   postman[Request]({
     pre() {
       t.is(pm.collectionVariables.get('test'), undef);
       pm.collectionVariables.set('test', 'a');
       t.is(pm.collectionVariables.get('test'), 'a');
-    }
+    },
   });
 });
 
-test.serial('pm.collectionVariables.set set', t => {
+test.serial('pm.collectionVariables.set set', (t) => {
   postman[Request]({
     pre() {
       pm.collectionVariables.set('test', 'a');
       t.is(pm.collectionVariables.get('test'), 'a');
       pm.collectionVariables.set('test', 'b');
       t.is(pm.collectionVariables.get('test'), 'b');
-    }
+    },
   });
 });
 
-test.serial('pm[Var] simple', t => {
+test.serial('pm[Var] simple', (t) => {
   postman[Initial]({ global: { test: 'a' } });
   t.is(pm[Var]('test'), 'a');
 });
