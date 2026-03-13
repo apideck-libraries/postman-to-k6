@@ -132,6 +132,20 @@ test('pm.response.headers.all', () => {
     }
   });
 });
+test('pm.response.headers.get missing', () => {
+  postman[Request]({
+    post() {
+      expect(pm.response.headers.get('Server')).toBeNull();
+    }
+  });
+});
+test('pm.response.headers.all missing', () => {
+  postman[Request]({
+    post() {
+      expect(pm.response.headers.all()).toEqual({});
+    }
+  });
+});
 test('pm.response.json', () => {
   http.request.returns({
     body: '{ "test": "a", "test2": "b" }'
@@ -142,6 +156,18 @@ test('pm.response.json', () => {
         test: 'a',
         test2: 'b'
       });
+    }
+  });
+});
+test('pm.response.json invalid', () => {
+  http.request.returns({
+    body: 'not-json'
+  });
+  postman[Request]({
+    post() {
+      expect(() => {
+        pm.response.json();
+      }).toThrow('JSON parsing of body failed');
     }
   });
 });
@@ -197,4 +223,12 @@ test('postman.getResponseCookie requires post scope', () => {
   expect(() => {
     postman.getResponseCookie('session');
   }).toThrow('May only be used in a postrequest script');
+});
+
+test('pm.response.to in post scope outside pm.test is undefined', () => {
+  postman[Request]({
+    post() {
+      expect(pm.response.to).toBeUndefined();
+    }
+  });
 });

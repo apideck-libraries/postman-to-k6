@@ -373,6 +373,13 @@ test('pm.response.to.have.body regex pass', () => {
     pm.response.to.have.body(/body/);
   });
 });
+test('pm.response.to.have.body invalid argument type', () => {
+  define(() => {
+    expect(() => {
+      pm.response.to.have.body(7);
+    }).toThrow('Unrecognized argument type');
+  });
+});
 test('pm.response.to.have.header exist fail', () => {
   expectFail();
   define(() => {
@@ -496,6 +503,13 @@ test('pm.response.to.have.jsonBody value pass', () => {
   expectPass();
   define(() => {
     pm.response.to.have.jsonBody('test', 'a');
+  });
+});
+test('pm.response.to.have.jsonBody invalid argument type', () => {
+  define(() => {
+    expect(() => {
+      pm.response.to.have.jsonBody(7);
+    }).toThrow('Unrecognized argument type');
   });
 });
 test('pm.response.to.have.jsonSchema fail', () => {
@@ -857,6 +871,13 @@ test('pm.response.to.not.have.body regex pass', () => {
     pm.response.to.not.have.body(/Test/);
   });
 });
+test('pm.response.to.not.have.body invalid argument type', () => {
+  define(() => {
+    expect(() => {
+      pm.response.to.not.have.body(7);
+    }).toThrow('Unrecognized argument type');
+  });
+});
 test('pm.response.to.not.have.header exist fail', () => {
   http.request.returns({
     headers: {
@@ -982,6 +1003,13 @@ test('pm.response.to.not.have.jsonBody value pass', () => {
   expectPass();
   define(() => {
     pm.response.to.not.have.jsonBody('test', 'b');
+  });
+});
+test('pm.response.to.not.have.jsonBody invalid argument type', () => {
+  define(() => {
+    expect(() => {
+      pm.response.to.not.have.jsonBody(7);
+    }).toThrow('Unrecognized argument type');
   });
 });
 test('pm.response.to.not.have.jsonSchema fail', () => {

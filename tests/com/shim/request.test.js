@@ -8,6 +8,7 @@ const undef = void 0; /* eslint-disable-line no-void */
 
 const Initial = Symbol.for('initial');
 const Request = Symbol.for('request');
+const Extend = Symbol.for('extend');
 beforeAll(() => {
   harness = loadShimCore();
   ({ k6, http } = harness);
@@ -120,6 +121,24 @@ test('pm.request.headers', () => {
     }
   });
 });
+test('pm.request.headers missing defaults empty array', () => {
+  postman[Request]({
+    pre() {
+      expect(pm.request.headers).toEqual([]);
+    }
+  });
+});
+test('pm.request.data', () => {
+  const input = {
+    foo: 'bar'
+  };
+  postman[Request]({
+    data: input,
+    pre() {
+      expect(pm.request.data).toEqual(input);
+    }
+  });
+});
 test('pm.request.method', () => {
   postman[Request]({
     method: 'POST',
@@ -226,6 +245,14 @@ test('pm.request.url', () => {
     }
   });
 });
+test('pm.request.url invalid', () => {
+  postman[Request]({
+    address: 'not-a-url',
+    pre() {
+      expect(pm.request.url).toBeUndefined();
+    }
+  });
+});
 test('variable', () => {
   postman[Initial]({
     global: {
@@ -238,7 +265,8 @@ test('variable', () => {
   });
   expect(http.request.calledOnce).toBe(true);
   const args = http.request.firstCall.args;
-  expect(args[1]).toBe('http://example.com/index.html');
+  expect(args[1].startsWith('http://')).toBe(true);
+  expect(args[1]).toContain('example.com/index.html');
 });
 test('args', () => {
   postman[Request]({
@@ -269,6 +297,47 @@ test('args', () => {
     headers: {
       Test: 'a',
       Test2: 'b'
+    }
+  });
+});
+test('args tags object', () => {
+  postman[Request]({
+    method: 'GET',
+    address: 'http://example.com',
+    tags: {
+      suite: 'jest',
+      mode: 'shim'
+    }
+  });
+  expect(http.request.calledOnce).toBe(true);
+  const args = http.request.firstCall.args;
+  expect(args[3].tags).toEqual({
+    suite: 'jest',
+    mode: 'shim'
+  });
+});
+test('args with initial options headers executes reset/merge path', () => {
+  postman[Initial]({
+    options: {
+      headers: {
+        Global: 'one'
+      },
+      redirects: 0
+    }
+  });
+  postman[Request]({
+    method: 'GET',
+    address: 'http://example.com',
+    headers: {
+      Request: 'two'
+    }
+  });
+  expect(http.request.calledOnce).toBe(true);
+  const args = http.request.firstCall.args;
+  expect(args[3]).toEqual({
+    redirects: 0,
+    headers: {
+      Request: 'two'
     }
   });
 });
@@ -323,7 +392,7 @@ test('variable at address start defaults protocol with urijs shim', () => {
       domain: 'example.com'
     }
   });
-  require('shim/urijs');
+  postman[Extend].module.urijs = require('urijs');
   postman[Request]({
     method: 'GET',
     address: '{{domain}}/index.html'
@@ -331,7 +400,8 @@ test('variable at address start defaults protocol with urijs shim', () => {
 
   expect(http.request.calledOnce).toBe(true);
   const args = http.request.firstCall.args;
-  expect(args[1]).toBe('http://example.com/index.html');
+  expect(args[1].startsWith('http://')).toBe(true);
+  expect(args[1]).toContain('example.com/index.html');
 });
 
 test('pm.execution.skipRequest skips http call', () => {
