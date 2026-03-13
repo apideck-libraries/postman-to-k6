@@ -2,13 +2,12 @@ const fs = require('node:fs');
 const os = require('node:os');
 const path = require('node:path');
 
-const {
-  bundleVendor,
-  DEFAULT_MODULES,
-} = require('../../scripts/bundle');
+const { bundleVendor, DEFAULT_MODULES } = require('../../scripts/bundle');
 
 test('bundle script emits expected vendor artifacts', async () => {
-  const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'postman-to-k6-bundle-'));
+  const tempDir = fs.mkdtempSync(
+    path.join(os.tmpdir(), 'postman-to-k6-bundle-')
+  );
 
   try {
     await bundleVendor({ dir: tempDir });

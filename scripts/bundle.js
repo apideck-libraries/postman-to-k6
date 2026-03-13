@@ -33,7 +33,10 @@ function bundleModule(moduleName, dir) {
   });
 }
 
-async function bundleVendor({ dir = DEFAULT_DIR, modules = DEFAULT_MODULES } = {}) {
+async function bundleVendor({
+  dir = DEFAULT_DIR,
+  modules = DEFAULT_MODULES,
+} = {}) {
   fs.ensureDirSync(dir);
   fs.emptyDirSync(dir);
   await Promise.all(modules.map((moduleName) => bundleModule(moduleName, dir)));
