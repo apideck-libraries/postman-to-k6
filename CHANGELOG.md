@@ -5,11 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-- tests: Added jest test suite for test coverage
-- chore: Bump Browserify version
-- chore: Replace ESLint with Biome for linting and formatting
 
 ## [Unreleased](https://github.com/apideck-libraries/postman-to-k6/compare/v1.8.7...HEAD)
+
+## [1.14.0] - 2026-03-13
+
+- tests: Added jest test suite for test coverage
+- chore: Replace ESLint with Biome for linting and formatting
+- chore: Switch Yarn for NPM
+- chore: Bump Browserify version
+- chore: Bump dependencies
+
 
 ## [1.13.0] - 2024-08-18
 

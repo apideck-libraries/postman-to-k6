@@ -28,7 +28,7 @@
   "files": [
     "bin/**/*",
     "lib/**/*",
-    "scripts/**/*"
+    "scripts/bundle.js"
   ],
   "directories": {
     "bin": "bin",
