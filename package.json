@@ -104,6 +104,12 @@
         "node": ">=18"
     },
     "preferGlobal": true,
+    "ava": {
+        "verbose": true,
+        "require": [
+            "@babel/register"
+        ]
+    },
     "publishConfig": {
         "access": "public",
         "registry": "https://registry.npmjs.org"
