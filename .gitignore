@@ -35,3 +35,5 @@ bower_components/*
 testem.log
 .idea
 tests/coverage
+docs/superpowers
+.agents

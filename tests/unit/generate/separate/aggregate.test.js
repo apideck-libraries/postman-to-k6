@@ -1,4 +1,3 @@
-import test from 'ava';
 import collection from 'helper/collection';
 import aggregate from 'generate/separate/aggregate';
 

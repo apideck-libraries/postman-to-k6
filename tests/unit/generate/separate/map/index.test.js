@@ -1,4 +1,3 @@
-import test from 'ava';
 import mockRequire from 'mock-require';
 import { Auth } from 'generate/separate/sym';
 let map;
@@ -7,7 +6,7 @@ function designate(name, container, generators, suffix = '') {
   return name + suffix;
 }
 
-test.before(t => {
+beforeAll(() => {
   mockRequire(
     '../../../../../lib/generate/separate/map/designate.js',
     designate

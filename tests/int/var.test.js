@@ -21,6 +21,21 @@ test('environment', async () => {
   expect(main).toMatchSnapshot();
 });
 
+test('environment Postman API', async () => {
+  const [main] = await convertFile('test/material/2/var-environment.json', {
+    environment: 'test/material/2/environment-postman.json',
+  });
+  expect(main).toMatchSnapshot();
+});
+
+test('global environment collection vars', async () => {
+  const [main] = await convertFile('test/material/2/var-collection-vars.json', {
+    globals: 'test/material/2/global-vars.json',
+    environment: 'test/material/2/environment-vars.json',
+  });
+  expect(main).toMatchSnapshot();
+});
+
 test('data json', async () => {
   const [main] = await convertFile('test/material/2/var-data-json.json', {
     json: 'test/material/2/data-json.json',

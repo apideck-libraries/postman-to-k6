@@ -34,5 +34,17 @@ jobs:
       - name: Test
         run: yarn test
 
+      - name: Coverage (Ava + Jest + Combined)
+        run: yarn coverage-all
+
+      - name: Upload combined coverage artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-combined
+          path: |
+            coverage/combined-summary.json
+            coverage/combined-summary.md
+            coverage/history.jsonl
+
       - name: Bundle
         run: yarn bundle

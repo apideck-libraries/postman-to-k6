@@ -42,6 +42,7 @@ Feel free to contribute or pass any suggestion to improve postman-to-k6.
     - [Skip Post](#skip-post)
     - [CLI options file](#cli-options-file)
 - [Examples](#examples)
+- [Testing](#testing)
 - [Unsupported Features](#unsupported-features)
 - [Other similar tools](#other-similar-tools)
 - [Credits](#credits)
@@ -312,6 +313,27 @@ other command:
 
 ```shell
 $ postman-to-k6 example/v2/echo.json -o k6-script.js
+```
+
+## Testing
+
+Run suites independently:
+
+```shell
+$ yarn test-ava
+$ yarn test-jest
+```
+
+Run both suites:
+
+```shell
+$ yarn test-all
+```
+
+Run coverage for both suites and generate a combined summary/trend artifact:
+
+```shell
+$ yarn coverage-all
 ```
 
 ## Unsupported Features

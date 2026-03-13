@@ -1,4 +1,3 @@
-import test from 'ava';
 import deconflict from 'generate/separate/map/deconflict';
 
 test('clear', t => {
