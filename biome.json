@@ -29,5 +29,28 @@
       ".tmp/**",
       "lib/shim/faker.js"
     ]
-  }
+  },
+  "overrides": [
+    {
+      "include": [
+        "lib/shim/core.js"
+      ],
+      "linter": {
+        "rules": {
+          "suspicious": {
+            "useGetterReturn": "off"
+          },
+          "style": {
+            "noArguments": "off"
+          },
+          "complexity": {
+            "useOptionalChain": "off"
+          },
+          "security": {
+            "noGlobalEval": "off"
+          }
+        }
+      }
+    }
+  ]
 }
