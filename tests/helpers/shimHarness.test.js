@@ -7,7 +7,7 @@ describe('shimHarness', () => {
 
   beforeEach(() => {
     previousPostman = global.postman;
-    hadOwnRequire = Object.prototype.hasOwnProperty.call(global, 'require');
+    hadOwnRequire = Object.hasOwn(global, 'require');
     previousRequire = global.require;
   });
 
@@ -67,6 +67,6 @@ describe('shimHarness', () => {
       previousGlobalRequire: undefined,
     });
 
-    expect(Object.prototype.hasOwnProperty.call(global, 'require')).toBe(false);
+    expect(Object.hasOwn(global, 'require')).toBe(false);
   });
 });

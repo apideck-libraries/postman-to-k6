@@ -1,5 +1,5 @@
 {
-  "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.4.7/schema.json",
   "formatter": {
     "enabled": true,
     "indentStyle": "space",
@@ -20,30 +20,29 @@
     }
   },
   "files": {
-    "ignore": [
-      "coverage/**",
-      "node_modules/**",
-      "vendor/**",
-      ".codex/**",
-      "tmp/**",
-      ".tmp/**",
-      "examples/quickpizza/libs/**",
-      "examples/quickpizza/quickpizza.k6.js",
-      "lib/shim/faker.js"
+    "includes": [
+      "**",
+      "!coverage",
+      "!**/coverage",
+      "!node_modules",
+      "!vendor",
+      "!.codex",
+      "!tmp",
+      "!.tmp",
+      "!examples/quickpizza/libs",
+      "!examples/quickpizza/quickpizza.k6.js",
+      "!lib/shim/faker.js"
     ]
   },
   "overrides": [
     {
-      "include": [
+      "includes": [
         "lib/shim/core.js"
       ],
       "linter": {
         "rules": {
           "suspicious": {
             "useGetterReturn": "off"
-          },
-          "style": {
-            "noArguments": "off"
           },
           "complexity": {
             "useOptionalChain": "off"
