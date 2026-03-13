@@ -17,6 +17,8 @@ function loadShimCore(options = {}) {
     jest.doMock(name, factory);
   }
 
+  const hadGlobalRequire = Object.prototype.hasOwnProperty.call(global, 'require');
+  const previousGlobalRequire = global.require;
   if (withGlobalRequire) {
     global.require = require;
   }
@@ -33,7 +35,16 @@ function loadShimCore(options = {}) {
     }
   });
 
-  return { k6, http, Reset, postman: global.postman, pm: global.pm };
+  return {
+    k6,
+    http,
+    Reset,
+    postman: global.postman,
+    pm: global.pm,
+    withGlobalRequire,
+    hadGlobalRequire,
+    previousGlobalRequire,
+  };
 }
 
 function resetShimState(harness) {
@@ -45,6 +56,13 @@ function resetShimState(harness) {
   }
   if (global.postman && typeof global.postman[Reset] === 'function') {
     global.postman[Reset]();
+  }
+  if (harness && harness.withGlobalRequire) {
+    if (harness.hadGlobalRequire) {
+      global.require = harness.previousGlobalRequire;
+    } else {
+      delete global.require;
+    }
   }
 }
 

@@ -12,6 +12,9 @@ beforeAll(() => {
 afterEach(() => {
   resetShimState(harness);
 });
+afterAll(() => {
+  resetShimState(harness);
+});
 test('undefined', () => {
   expect(() => {
     postman[Request]('Home Page');

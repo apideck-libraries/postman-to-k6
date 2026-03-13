@@ -34,6 +34,9 @@ jobs:
       - name: Test
         run: yarn test
 
+      - name: Jest native guard
+        run: yarn test-jest-native-guard
+
       - name: Coverage (Ava + Jest + Combined)
         run: yarn coverage-all
 

@@ -15,6 +15,9 @@ beforeAll(() => {
 afterEach(() => {
   resetShimState(harness);
 });
+afterAll(() => {
+  resetShimState(harness);
+});
 test('pre', () => {
   postman[Request]({
     pre() {

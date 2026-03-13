@@ -16,6 +16,9 @@ beforeAll(() => {
 afterEach(() => {
   resetShimState(harness);
 });
+afterAll(() => {
+  resetShimState(harness);
+});
 
 test('interpolate raw body', () => {
   global.postman[Initial]({

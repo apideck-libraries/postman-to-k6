@@ -10,6 +10,9 @@ beforeAll(() => {
 afterEach(() => {
   resetShimState(harness);
 });
+afterAll(() => {
+  resetShimState(harness);
+});
 test('setNextRequest', () => {
   expect(() => {
     postman.setNextRequest();

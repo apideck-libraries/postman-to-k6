@@ -15,6 +15,9 @@ beforeAll(() => {
 afterEach(() => {
   resetShimState(harness);
 });
+afterAll(() => {
+  resetShimState(harness);
+});
 test('$guid', () => {
   const value = pm[Var]('$guid');
   expect(/\w{8}-\w{4}-\w{4}-\w{4}-\w{12}/.test(value)).toBe(true);

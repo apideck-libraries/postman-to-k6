@@ -12,6 +12,9 @@ beforeAll(() => {
 afterEach(() => {
   resetShimState(harness);
 });
+afterAll(() => {
+  resetShimState(harness);
+});
 test('responseCookies', () => {
   const cookie = {
     domain: 'example.com',

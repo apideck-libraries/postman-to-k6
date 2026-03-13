@@ -342,6 +342,20 @@ $ yarn coverage-all
 `docs/superpowers/plans/jest-coverage-baseline.json` with a max drop of `0.30%`
 for lines/statements/functions/branches.
 
+Jest-native testing rules for `tests/**`:
+
+- Use native Jest assertions (`expect(...)`) only.
+- Do not import AVA (`import test from 'ava'`) in `tests/**`.
+- Do not use AVA-specific APIs (`test.serial`, `t.is`, `t.deepEqual`, `t.throws`, etc.).
+- Do not use `mock-require` in `tests/**`; use the shared Jest shim harness in
+  `tests/helpers/shimHarness.js`.
+
+The guard command is:
+
+```shell
+$ yarn test-jest-native-guard
+```
+
 ## Unsupported Features
 
 - Sending requests from scripts using `pm.sendRequest`.

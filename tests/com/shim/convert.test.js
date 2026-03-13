@@ -14,6 +14,9 @@ beforeAll(() => {
 afterEach(() => {
   resetShimState(harness);
 });
+afterAll(() => {
+  resetShimState(harness);
+});
 test('xml2Json', () => {
   const xml = '<root>Text</root>';
   const json = xml2Json(xml);

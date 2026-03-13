@@ -22,6 +22,9 @@ beforeAll(() => {
 afterEach(() => {
   resetShimState(harness);
 });
+afterAll(() => {
+  resetShimState(harness);
+});
 test('require standard', () => {
   expect(() => {
     global.require('console');

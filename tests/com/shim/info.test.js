@@ -14,6 +14,10 @@ afterEach(() => {
   resetShimState(harness);
   delete global.__ITER;
 });
+afterAll(() => {
+  resetShimState(harness);
+  delete global.__ITER;
+});
 test('iteration', () => {
   global.__ITER = 7;
   expect(iteration).toBe(7);

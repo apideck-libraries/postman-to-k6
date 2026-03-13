@@ -12,6 +12,9 @@ beforeAll(() => {
 afterEach(() => {
   resetShimState(harness);
 });
+afterAll(() => {
+  resetShimState(harness);
+});
 test('responseBody', () => {
   http.request.returns({
     body: 'Response body'

@@ -36,6 +36,9 @@ beforeAll(() => {
 afterEach(() => {
   resetShimState(harness);
 });
+afterAll(() => {
+  resetShimState(harness);
+});
 test('tests', () => {
   postman[Request]({
     post() {
