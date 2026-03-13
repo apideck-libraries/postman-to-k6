@@ -2,7 +2,9 @@ const fs = require('fs');
 const path = require('path');
 
 const root = path.resolve(__dirname, '..');
-const baselinePath = process.env.JEST_COVERAGE_BASELINE_PATH || path.join(root, 'docs/superpowers/plans/jest-coverage-baseline.json');
+const baselinePath =
+  process.env.JEST_COVERAGE_BASELINE_PATH ||
+  path.join(root, 'scripts/coverage/jest-coverage-baseline.json');
 const summaryPath = path.join(root, 'coverage/jest/coverage-summary.json');
 
 if (!fs.existsSync(summaryPath)) {

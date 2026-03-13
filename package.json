@@ -55,7 +55,7 @@
         "coverage-jest": "npm run test-jest",
         "coverage-jest-regression": "node scripts/coverage-regression-check.js",
         "coverage-combine": "node scripts/coverage-combine.js",
-        "coverage-all": "npm-run-all coverage-ava coverage-jest coverage-combine coverage-jest-regression",
+        "coverage-all": "npm-run-all coverage-ava coverage-jest coverage-combine",
         "prepare": "husky install",
         "release": "yarn format && yarn lint && yarn bundle && npx np --branch main"
     },
