@@ -1,9 +1,10 @@
 /* global postman pm tests */
 /* eslint-disable no-unused-expressions */
 
-import path from 'path';
+import path from 'node:path';
 import { loadShimCore, resetShimState } from '../../helpers/shimHarness';
-let k6, http;
+let k6;
+let http;
 let harness;
 const Request = Symbol.for('request');
 function expectFail() {

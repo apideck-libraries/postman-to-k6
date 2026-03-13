@@ -4,7 +4,8 @@
 import test from 'ava';
 import mockRequire from 'mock-require';
 
-let k6, http;
+let k6;
+let http;
 
 const Reset = Symbol.for('reset');
 const Request = Symbol.for('request');

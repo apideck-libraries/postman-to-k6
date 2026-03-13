@@ -2,7 +2,8 @@
 
 import { loadShimCore, resetShimState } from '../../helpers/shimHarness';
 import uuidv4 from 'uuid/v4';
-let k6, http;
+let k6;
+let http;
 let harness;
 const undef = void 0; /* eslint-disable-line no-void */
 

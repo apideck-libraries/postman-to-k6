@@ -4,13 +4,13 @@ const convertFile = require('../lib/convert/file');
 const utils = require('../lib/convert/utils');
 const fs = require('fs-extra');
 const outputRequests = require('./requests');
-const path = require('path');
+const path = require('node:path');
 const program = require('commander');
 const pkginfo = require('pkginfo');
 
 pkginfo(module, 'version');
 const version = module.exports.version;
-delete module.exports.version;
+module.exports.version = undefined;
 
 program
   .version(version)
@@ -71,7 +71,8 @@ async function run(...args) {
   options = Object.assign({}, cliOptions, options);
 
   // Convert
-  let main, requests;
+  let main;
+  let requests;
   try {
     [main, requests] = await convertFile(input, translateOptions(options));
   } catch (e) {
@@ -103,7 +104,7 @@ async function run(...args) {
     try {
       fs.writeFileSync(options.output, main);
     } catch (error) {
-      console.error('could not create output ' + options.output);
+      console.error(`could not create output ${options.output}`);
       console.error(error);
     }
   } else {

@@ -3,7 +3,8 @@
 import test from 'ava';
 import mockRequire from 'mock-require';
 import uuidv4 from 'uuid/v4';
-let k6, http;
+let k6;
+let http;
 
 const Reset = Symbol.for('reset');
 const Initial = Symbol.for('initial');
@@ -21,7 +22,7 @@ test.afterEach.always(t => {
   k6[Reset]();
   http[Reset]();
   postman[Reset]();
-  delete global.__ITER;
+  global.__ITER = undefined;
 });
 
 test.serial('iteration', t => {

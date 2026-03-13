@@ -1,7 +1,8 @@
 /* global postman pm globals environment data */
 
 import { loadShimCore, resetShimState } from '../../helpers/shimHarness';
-let k6, http;
+let k6;
+let http;
 let harness;
 const undef = void 0; /* eslint-disable-line no-void */
 const Initial = Symbol.for('initial');

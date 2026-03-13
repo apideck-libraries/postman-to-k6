@@ -13,6 +13,7 @@ describe('shimHarness', () => {
 
   afterEach(() => {
     if (previousPostman === undefined) {
+      // biome-ignore lint/performance/noDelete: this test asserts hasOwnProperty semantics
       delete global.postman;
     } else {
       global.postman = previousPostman;
@@ -21,6 +22,7 @@ describe('shimHarness', () => {
     if (hadOwnRequire) {
       global.require = previousRequire;
     } else {
+      // biome-ignore lint/performance/noDelete: this test asserts hasOwnProperty semantics
       delete global.require;
     }
   });

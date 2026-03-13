@@ -70,7 +70,7 @@ test('request separate --k6-request-tagging=request', async t => {
     options
   );
   // remove ID from requests
-  let lines = requests['TestRequest.js'].split('\n');
+  const lines = requests['TestRequest.js'].split('\n');
   lines.splice(2, 1);
   requests['TestRequest.js'] = lines.join('\n');
   t.snapshot(requests);
@@ -86,7 +86,7 @@ test('request separate --k6-request-tagging=folder-request', async t => {
     options
   );
   // remove ID from requests
-  let lines = requests['TestRequest.js'].split('\n');
+  const lines = requests['TestRequest.js'].split('\n');
   lines.splice(2, 1);
   requests['TestRequest.js'] = lines.join('\n');
   t.snapshot(requests);
@@ -102,7 +102,7 @@ test('request separate no request-tagging', async t => {
     options
   );
   // remove ID from requests
-  let lines = requests['TestRequest.js'].split('\n');
+  const lines = requests['TestRequest.js'].split('\n');
   lines.splice(2, 1);
   requests['TestRequest.js'] = lines.join('\n');
   t.snapshot(requests);
@@ -118,9 +118,9 @@ test('folder request separate --k6-request-tagging=request', async t => {
     options
   );
   // remove ID from requests
-  let lines = requests['TestFolder']['TestRequest.js'].split('\n');
+  const lines = requests.TestFolder['TestRequest.js'].split('\n');
   lines.splice(2, 1);
-  requests['TestFolder']['TestRequest.js'] = lines.join('\n');
+  requests.TestFolder['TestRequest.js'] = lines.join('\n');
   t.snapshot(requests);
 });
 
@@ -134,9 +134,9 @@ test('folder request separate --k6-request-tagging=folder-request', async t => {
     options
   );
   // remove ID from requests
-  let lines = requests['TestFolder']['TestRequest.js'].split('\n');
+  const lines = requests.TestFolder['TestRequest.js'].split('\n');
   lines.splice(2, 1);
-  requests['TestFolder']['TestRequest.js'] = lines.join('\n');
+  requests.TestFolder['TestRequest.js'] = lines.join('\n');
   t.snapshot(requests);
 });
 
@@ -150,8 +150,8 @@ test('folder request separate no request-tagging', async t => {
     options
   );
   // remove ID from requests
-  let lines = requests['TestFolder']['TestRequest.js'].split('\n');
+  const lines = requests.TestFolder['TestRequest.js'].split('\n');
   lines.splice(2, 1);
-  requests['TestFolder']['TestRequest.js'] = lines.join('\n');
+  requests.TestFolder['TestRequest.js'] = lines.join('\n');
   t.snapshot(requests);
 });

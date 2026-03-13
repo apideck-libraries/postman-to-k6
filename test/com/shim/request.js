@@ -3,7 +3,8 @@
 import test from 'ava';
 import mockRequire from 'mock-require';
 import uuidv4 from 'uuid/v4';
-let k6, http;
+let k6;
+let http;
 
 const undef = void 0; /* eslint-disable-line no-void */
 

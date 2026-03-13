@@ -2,7 +2,8 @@
 /* global responseCookies */
 
 import { loadShimCore, resetShimState } from '../../helpers/shimHarness';
-let k6, http;
+let k6;
+let http;
 let harness;
 const Request = Symbol.for('request');
 beforeAll(() => {

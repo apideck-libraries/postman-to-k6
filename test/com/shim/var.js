@@ -2,7 +2,8 @@
 
 import test from 'ava';
 import mockRequire from 'mock-require';
-let k6, http;
+let k6;
+let http;
 
 const undef = void 0; /* eslint-disable-line no-void */
 const Reset = Symbol.for('reset');

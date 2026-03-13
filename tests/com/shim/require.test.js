@@ -1,11 +1,12 @@
 /* global postman */
 
-import path from 'path';
+import path from 'node:path';
 import { loadShimCore, resetShimState } from '../../helpers/shimHarness';
 const lodash = Symbol('lodash');
 const cheerio = Symbol('cheerio');
 const cryptoJs = Symbol('crypto-js');
-let k6, http;
+let k6;
+let http;
 let harness;
 const Request = Symbol.for('request');
 beforeAll(() => {

@@ -5,7 +5,8 @@ import mockRequire from 'mock-require';
 const lodash = Symbol('lodash');
 const cheerio = Symbol('cheerio');
 const cryptoJs = Symbol('crypto-js');
-let k6, http;
+let k6;
+let http;
 
 const Reset = Symbol.for('reset');
 const Request = Symbol.for('request');

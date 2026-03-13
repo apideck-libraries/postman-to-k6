@@ -2,7 +2,8 @@
 
 import uuidv4 from 'uuid/v4';
 import { loadShimCore, resetShimState } from '../../helpers/shimHarness';
-let k6, http;
+let k6;
+let http;
 let harness;
 const Initial = Symbol.for('initial');
 const Request = Symbol.for('request');
@@ -12,11 +13,11 @@ beforeAll(() => {
 });
 afterEach(() => {
   resetShimState(harness);
-  delete global.__ITER;
+  global.__ITER = undefined;
 });
 afterAll(() => {
   resetShimState(harness);
-  delete global.__ITER;
+  global.__ITER = undefined;
 });
 test('iteration', () => {
   global.__ITER = 7;

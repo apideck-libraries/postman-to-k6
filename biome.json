@@ -1,0 +1,22 @@
+{
+  "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
+  "formatter": {
+    "enabled": false
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true
+    }
+  },
+  "files": {
+    "ignore": [
+      "coverage/**",
+      "node_modules/**",
+      "vendor/**",
+      ".codex/**",
+      "tmp/**",
+      ".tmp/**"
+    ]
+  }
+}

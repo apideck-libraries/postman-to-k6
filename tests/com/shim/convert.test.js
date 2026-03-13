@@ -1,8 +1,9 @@
 /* global postman xml2Json xmlToJson */
 
-import path from 'path';
+import path from 'node:path';
 import { loadShimCore, resetShimState } from '../../helpers/shimHarness';
-let k6, http;
+let k6;
+let http;
 let harness;
 beforeAll(() => {
   harness = loadShimCore({
