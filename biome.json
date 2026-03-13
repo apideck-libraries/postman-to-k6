@@ -1,7 +1,17 @@
 {
   "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
   "formatter": {
-    "enabled": false
+    "enabled": true,
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineEnding": "lf"
+  },
+  "javascript": {
+    "formatter": {
+      "quoteStyle": "single",
+      "semicolons": "always",
+      "trailingCommas": "es5"
+    }
   },
   "linter": {
     "enabled": true,
@@ -16,7 +26,8 @@
       "vendor/**",
       ".codex/**",
       "tmp/**",
-      ".tmp/**"
+      ".tmp/**",
+      "lib/shim/faker.js"
     ]
   }
 }

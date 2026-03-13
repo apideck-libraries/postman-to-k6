@@ -7,7 +7,7 @@ function designate(name, container, generators, suffix = '') {
   return name + suffix;
 }
 
-test.before(t => {
+test.before((t) => {
   mockRequire(
     '../../../../../lib/generate/separate/map/designate.js',
     designate
@@ -15,113 +15,109 @@ test.before(t => {
   map = require('../../../../../lib/generate/separate/map/index.js');
 });
 
-test('empty', t => {
+test('empty', (t) => {
   const tree = { items: [], locations: [] };
   const result = map(tree);
   t.deepEqual(result, {});
 });
 
-test('1 item', t => {
+test('1 item', (t) => {
   const tree = {
     items: [{ name: 'apple' }],
-    locations: []
+    locations: [],
   };
   const result = map(tree);
   t.deepEqual(result, {
-    'apple.js': { name: 'apple' }
+    'apple.js': { name: 'apple' },
   });
 });
 
-test('3 items', t => {
+test('3 items', (t) => {
   const tree = {
-    items: [
-      { name: 'apple' },
-      { name: 'orange' },
-      { name: 'pear' }
-    ],
-    locations: []
+    items: [{ name: 'apple' }, { name: 'orange' }, { name: 'pear' }],
+    locations: [],
   };
   const result = map(tree);
   t.deepEqual(result, {
     'apple.js': { name: 'apple' },
     'orange.js': { name: 'orange' },
-    'pear.js': { name: 'pear' }
+    'pear.js': { name: 'pear' },
   });
 });
 
-test('1 location', t => {
+test('1 location', (t) => {
   const tree = {
     items: [],
-    locations: [{ name: 'setup', items: [], locations: [] }]
+    locations: [{ name: 'setup', items: [], locations: [] }],
   };
   const result = map(tree);
   t.deepEqual(result, {
-    setup: {}
+    setup: {},
   });
 });
 
-test('3 locations', t => {
+test('3 locations', (t) => {
   const tree = {
     items: [],
     locations: [
       { name: 'setup', items: [], locations: [] },
       { name: 'exercise', items: [], locations: [] },
-      { name: 'cleanup', items: [], locations: [] }
-    ]
+      { name: 'cleanup', items: [], locations: [] },
+    ],
   };
   const result = map(tree);
   t.deepEqual(result, {
     setup: {},
     exercise: {},
-    cleanup: {}
+    cleanup: {},
   });
 });
 
-test('auth', t => {
+test('auth', (t) => {
   const auth = Symbol('auth');
   const tree = {
     auth,
     items: [],
-    locations: []
+    locations: [],
   };
   const result = map(tree);
   t.deepEqual(result, { [Auth]: auth });
 });
 
-test('nested item', t => {
+test('nested item', (t) => {
   const tree = {
     items: [],
     locations: [
       {
         name: 'exercise',
         items: [{ name: 'home' }],
-        locations: []
-      }
-    ]
+        locations: [],
+      },
+    ],
   };
   const result = map(tree);
   t.deepEqual(result, {
     exercise: {
-      'home.js': { name: 'home' }
-    }
+      'home.js': { name: 'home' },
+    },
   });
 });
 
-test('nested location', t => {
+test('nested location', (t) => {
   const tree = {
     items: [],
     locations: [
       {
         name: 'exercise',
         items: [],
-        locations: [{ name: 'public', items: [], locations: [] }]
-      }
-    ]
+        locations: [{ name: 'public', items: [], locations: [] }],
+      },
+    ],
   };
   const result = map(tree);
   t.deepEqual(result, {
     exercise: {
-      public: {}
-    }
+      public: {},
+    },
   });
 });

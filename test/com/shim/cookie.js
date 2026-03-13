@@ -10,7 +10,7 @@ let http;
 const Reset = Symbol.for('reset');
 const Request = Symbol.for('request');
 
-test.before(t => {
+test.before((t) => {
   mockRequire('k6', 'stub/k6');
   mockRequire('k6/http', 'stub/http');
   k6 = require('k6');
@@ -18,13 +18,13 @@ test.before(t => {
   require('shim/core');
 });
 
-test.afterEach.always(t => {
+test.afterEach.always((t) => {
   k6[Reset]();
   http[Reset]();
   postman[Reset]();
 });
 
-test.serial('responseCookies', t => {
+test.serial('responseCookies', (t) => {
   const cookie = {
     domain: 'example.com',
     httpOnly: false,
@@ -45,7 +45,7 @@ test.serial('responseCookies', t => {
   });
 });
 
-test.serial('cookie.hostOnly', t => {
+test.serial('cookie.hostOnly', (t) => {
   http.request.returns({ cookies: { Theme: [{}] } });
   postman[Request]({
     post() {
@@ -57,7 +57,7 @@ test.serial('cookie.hostOnly', t => {
   });
 });
 
-test.serial('cookie.session', t => {
+test.serial('cookie.session', (t) => {
   http.request.returns({ cookies: { Theme: [{}] } });
   postman[Request]({
     post() {
@@ -69,7 +69,7 @@ test.serial('cookie.session', t => {
   });
 });
 
-test.serial('cookie.storeId', t => {
+test.serial('cookie.storeId', (t) => {
   http.request.returns({ cookies: { Theme: [{}] } });
   postman[Request]({
     post() {
@@ -81,7 +81,7 @@ test.serial('cookie.storeId', t => {
   });
 });
 
-test.serial('postman.getResponseCookie', t => {
+test.serial('postman.getResponseCookie', (t) => {
   const cookie = {
     domain: 'example.com',
     httpOnly: false,
@@ -102,7 +102,7 @@ test.serial('postman.getResponseCookie', t => {
   });
 });
 
-test.serial('pm.cookies.get clear', t => {
+test.serial('pm.cookies.get clear', (t) => {
   postman[Request]({
     post() {
       t.is(pm.cookies.get('Theme'), null);
@@ -110,7 +110,7 @@ test.serial('pm.cookies.get clear', t => {
   });
 });
 
-test.serial('pm.cookies.get set', t => {
+test.serial('pm.cookies.get set', (t) => {
   const cookie = { name: 'Theme', value: 'Aqua' };
   http.request.returns({ cookies: { Theme: [cookie] } });
   postman[Request]({
@@ -120,7 +120,7 @@ test.serial('pm.cookies.get set', t => {
   });
 });
 
-test.serial('pm.cookies.has clear', t => {
+test.serial('pm.cookies.has clear', (t) => {
   postman[Request]({
     post() {
       t.false(pm.cookies.has('Theme'));
@@ -128,7 +128,7 @@ test.serial('pm.cookies.has clear', t => {
   });
 });
 
-test.serial('pm.cookies.has set', t => {
+test.serial('pm.cookies.has set', (t) => {
   http.request.returns({ cookies: { Theme: [{ name: 'Theme' }] } });
   postman[Request]({
     post() {
@@ -137,7 +137,7 @@ test.serial('pm.cookies.has set', t => {
   });
 });
 
-test.serial('pm.cookies.toObject', t => {
+test.serial('pm.cookies.toObject', (t) => {
   http.request.returns({
     cookies: {
       Theme: [{ name: 'Theme', value: 'Aqua' }],

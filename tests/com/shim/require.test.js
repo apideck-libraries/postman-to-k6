@@ -13,10 +13,22 @@ beforeAll(() => {
   harness = loadShimCore({
     withGlobalRequire: true,
     extraMocks: [
-      [path.resolve(__dirname, '../../../lib/lodash.js'), () => lodash, { virtual: true }],
-      [path.resolve(__dirname, '../../../lib/cheerio.js'), () => cheerio, { virtual: true }],
-      [path.resolve(__dirname, '../../../lib/crypto-js.js'), () => cryptoJs, { virtual: true }]
-    ]
+      [
+        path.resolve(__dirname, '../../../lib/lodash.js'),
+        () => lodash,
+        { virtual: true },
+      ],
+      [
+        path.resolve(__dirname, '../../../lib/cheerio.js'),
+        () => cheerio,
+        { virtual: true },
+      ],
+      [
+        path.resolve(__dirname, '../../../lib/crypto-js.js'),
+        () => cryptoJs,
+        { virtual: true },
+      ],
+    ],
   });
   ({ k6, http } = harness);
 });
@@ -37,7 +49,7 @@ test('require prerequest', () => {
       expect(() => {
         global.require('console');
       }).toThrow();
-    }
+    },
   });
 });
 test('require postrequest', () => {
@@ -46,7 +58,7 @@ test('require postrequest', () => {
       expect(() => {
         global.require('console');
       }).toThrow();
-    }
+    },
   });
 });
 test('require released', () => {
@@ -61,7 +73,7 @@ test('lodash missing shim', () => {
       expect(() => {
         global.require('lodash');
       }).toThrow('To use module lodash import ./libs/shim/lodash.js');
-    }
+    },
   });
 });
 test('lodash', () => {
@@ -69,7 +81,7 @@ test('lodash', () => {
   postman[Request]({
     pre() {
       expect(global.require('lodash')).toBe(lodash);
-    }
+    },
   });
 });
 test('cheerio', () => {
@@ -77,7 +89,7 @@ test('cheerio', () => {
   postman[Request]({
     pre() {
       expect(global.require('cheerio')).toBe(cheerio);
-    }
+    },
   });
 });
 test('crypto-js', () => {
@@ -85,6 +97,6 @@ test('crypto-js', () => {
   postman[Request]({
     pre() {
       expect(global.require('crypto-js')).toBe(cryptoJs);
-    }
+    },
   });
 });

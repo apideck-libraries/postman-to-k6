@@ -25,13 +25,13 @@ test('interpolate raw body', () => {
     environment: {
       birch: 'fir',
       pine: 'redwood',
-      willow: 'rosewood'
-    }
+      willow: 'rosewood',
+    },
   });
   global.postman[Request]({
     method: 'GET',
     address: 'http://example.com',
-    data: '{{birch}} {{pine}} {{willow}}'
+    data: '{{birch}} {{pine}} {{willow}}',
   });
 
   const body = http.request.firstCall.args[2];
@@ -44,7 +44,7 @@ test('should pass on tags to the http request', () => {
     method: 'GET',
     address: 'http://example.com',
     data: 'testing',
-    tags: { name: testName }
+    tags: { name: testName },
   });
 
   const params = http.request.firstCall.args[3];

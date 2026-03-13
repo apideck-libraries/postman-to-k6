@@ -2,7 +2,7 @@ import test from 'ava';
 import collection from 'helper/collection';
 import aggregate from 'generate/separate/aggregate';
 
-test('success', t => {
+test('success', (t) => {
   const node = collection('test/material/2.1/tree.json');
   const result = aggregate(node);
   t.is(typeof result, 'object');

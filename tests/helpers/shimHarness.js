@@ -1,7 +1,11 @@
 const Reset = Symbol.for('reset');
 
 function loadShimCore(options = {}) {
-  const { extraMocks = [], preloadModules = [], withGlobalRequire = false } = options;
+  const {
+    extraMocks = [],
+    preloadModules = [],
+    withGlobalRequire = false,
+  } = options;
 
   jest.resetModules();
   jest.clearAllMocks();
@@ -17,7 +21,10 @@ function loadShimCore(options = {}) {
     jest.doMock(name, factory);
   }
 
-  const hadGlobalRequire = Object.prototype.hasOwnProperty.call(global, 'require');
+  const hadGlobalRequire = Object.prototype.hasOwnProperty.call(
+    global,
+    'require'
+  );
   const previousGlobalRequire = global.require;
   if (withGlobalRequire) {
     global.require = require;

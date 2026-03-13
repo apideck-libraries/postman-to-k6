@@ -1,27 +1,27 @@
 import test from 'ava';
 import convertFile from 'convert/file';
 
-test('pre request', async t => {
+test('pre request', async (t) => {
   const [main] = await convertFile('test/material/2/pre-request.json');
   t.snapshot(main);
 });
 
-test('pre collection', async t => {
+test('pre collection', async (t) => {
   const [main] = await convertFile('test/material/2/pre-collection.json');
   t.snapshot(main);
 });
 
-test('pre folder', async t => {
+test('pre folder', async (t) => {
   const [main] = await convertFile('test/material/2/pre-folder.json');
   t.snapshot(main);
 });
 
-test('pre nested', async t => {
+test('pre nested', async (t) => {
   const [main] = await convertFile('test/material/2/pre-nested.json');
   t.snapshot(main);
 });
 
-test('pre request --skip-pre', async t => {
+test('pre request --skip-pre', async (t) => {
   const options = {
     skip: {
       pre: true,
@@ -31,7 +31,7 @@ test('pre request --skip-pre', async t => {
   t.snapshot(main);
 });
 
-test('pre collection --skip-pre', async t => {
+test('pre collection --skip-pre', async (t) => {
   const options = {
     skip: {
       pre: true,
@@ -44,7 +44,7 @@ test('pre collection --skip-pre', async t => {
   t.snapshot(main);
 });
 
-test('pre folder --skip-pre', async t => {
+test('pre folder --skip-pre', async (t) => {
   const options = {
     skip: {
       pre: true,
@@ -54,7 +54,7 @@ test('pre folder --skip-pre', async t => {
   t.snapshot(main);
 });
 
-test('pre nested --skip-pre', async t => {
+test('pre nested --skip-pre', async (t) => {
   const options = {
     skip: {
       pre: true,
@@ -64,27 +64,27 @@ test('pre nested --skip-pre', async t => {
   t.snapshot(main);
 });
 
-test('post request', async t => {
+test('post request', async (t) => {
   const [main] = await convertFile('test/material/2/post-request.json');
   t.snapshot(main);
 });
 
-test('post collection', async t => {
+test('post collection', async (t) => {
   const [main] = await convertFile('test/material/2/post-collection.json');
   t.snapshot(main);
 });
 
-test('post folder', async t => {
+test('post folder', async (t) => {
   const [main] = await convertFile('test/material/2/post-folder.json');
   t.snapshot(main);
 });
 
-test('post nested', async t => {
+test('post nested', async (t) => {
   const [main] = await convertFile('test/material/2/post-nested.json');
   t.snapshot(main);
 });
 
-test('post request --skip-pre', async t => {
+test('post request --skip-pre', async (t) => {
   const options = {
     skip: {
       post: true,
@@ -97,7 +97,7 @@ test('post request --skip-pre', async t => {
   t.snapshot(main);
 });
 
-test('post collection --skip-pre', async t => {
+test('post collection --skip-pre', async (t) => {
   const options = {
     skip: {
       post: true,
@@ -110,7 +110,7 @@ test('post collection --skip-pre', async t => {
   t.snapshot(main);
 });
 
-test('post folder --skip-pre', async t => {
+test('post folder --skip-pre', async (t) => {
   const options = {
     skip: {
       post: true,
@@ -120,7 +120,7 @@ test('post folder --skip-pre', async t => {
   t.snapshot(main);
 });
 
-test('post nested --skip-pre', async t => {
+test('post nested --skip-pre', async (t) => {
   const options = {
     skip: {
       post: true,

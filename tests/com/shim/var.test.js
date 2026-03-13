@@ -33,11 +33,13 @@ test('$randomPhoneNumber', () => {
 });
 test('$isoTimestamp', () => {
   const value = pm[Var]('$isoTimestamp');
-  const regex = new RegExp('^(-?(?:[1-9][0-9]*)?[0-9]{4})' +
-  // match year
-  '-(1[0-2]|0[1-9])-(3[01]|0[1-9]|[12][0-9])' +
-  // match month and day
-  'T(2[0-3]|[01][0-9]):([0-5][0-9]):([0-5][0-9])(\\.[0-9]+)?(Z)?$'); // match time
+  const regex = new RegExp(
+    '^(-?(?:[1-9][0-9]*)?[0-9]{4})' +
+      // match year
+      '-(1[0-2]|0[1-9])-(3[01]|0[1-9]|[12][0-9])' +
+      // match month and day
+      'T(2[0-3]|[01][0-9]):([0-5][0-9]):([0-5][0-9])(\\.[0-9]+)?(Z)?$'
+  ); // match time
   expect(regex.test(value)).toBe(true);
 });
 test('$timestamp', () => {
@@ -50,8 +52,8 @@ test('globals read clear', () => {
 test('globals read set', () => {
   postman[Initial]({
     global: {
-      test: 'a'
-    }
+      test: 'a',
+    },
   });
   expect(globals.test).toBe('a');
 });
@@ -66,8 +68,8 @@ test('environment read clear', () => {
 test('environment read set', () => {
   postman[Initial]({
     environment: {
-      test: 'a'
-    }
+      test: 'a',
+    },
   });
   expect(environment.test).toBe('a');
 });
@@ -78,29 +80,35 @@ test('environment write', () => {
 });
 test('data read clear', () => {
   postman[Initial]({
-    data: []
+    data: [],
   });
   postman[Iteration]();
   expect(data.test).toBe(undef);
 });
 test('data read set', () => {
   postman[Initial]({
-    data: [{
-      test: 'a'
-    }]
+    data: [
+      {
+        test: 'a',
+      },
+    ],
   });
   postman[Iteration]();
   expect(data.test).toBe('a');
 });
 test('data read iterated', () => {
   postman[Initial]({
-    data: [{
-      test: 'a'
-    }, {
-      test: 'b'
-    }, {
-      test: 'c'
-    }]
+    data: [
+      {
+        test: 'a',
+      },
+      {
+        test: 'b',
+      },
+      {
+        test: 'c',
+      },
+    ],
   });
   postman[Iteration]();
   expect(data.test).toBe('a');
@@ -111,7 +119,7 @@ test('data read iterated', () => {
 });
 test('data write', () => {
   postman[Initial]({
-    data: []
+    data: [],
   });
   postman[Iteration]();
   expect(() => {
@@ -124,8 +132,8 @@ test('postman.getGlobalVariable clear', () => {
 test('postman.getGlobalVariable set', () => {
   postman[Initial]({
     global: {
-      test: 'a'
-    }
+      test: 'a',
+    },
   });
   expect(postman.getGlobalVariable('test')).toBe('a');
 });
@@ -137,8 +145,8 @@ test('postman.setGlobalVariable clear', () => {
 test('postman.setGlobalVariable set', () => {
   postman[Initial]({
     global: {
-      test: 'a'
-    }
+      test: 'a',
+    },
   });
   expect(globals.test).toBe('a');
   postman.setGlobalVariable('test', 'b');
@@ -147,8 +155,8 @@ test('postman.setGlobalVariable set', () => {
 test('postman.clearGlobalVariable', () => {
   postman[Initial]({
     global: {
-      test: 'a'
-    }
+      test: 'a',
+    },
   });
   expect(globals.test).toBe('a');
   postman.clearGlobalVariable('test');
@@ -158,8 +166,8 @@ test('postman.clearGlobalVariables', () => {
   postman[Initial]({
     global: {
       test: 'a',
-      test2: 'b'
-    }
+      test2: 'b',
+    },
   });
   expect(globals.test).toBe('a');
   expect(globals.test2).toBe('b');
@@ -169,7 +177,7 @@ test('postman.clearGlobalVariables', () => {
 });
 test('postman.getEnvironmentVariable clear', () => {
   postman[Initial]({
-    environment: {}
+    environment: {},
   });
   expect(postman.getEnvironmentVariable('test')).toBe(undef);
 });
@@ -181,14 +189,14 @@ test('postman.getEnvironmentVariable requires environment', () => {
 test('postman.getEnvironmentVariable set', () => {
   postman[Initial]({
     environment: {
-      test: 'a'
-    }
+      test: 'a',
+    },
   });
   expect(postman.getEnvironmentVariable('test')).toBe('a');
 });
 test('postman.setEnvironmentVariable clear', () => {
   postman[Initial]({
-    environment: {}
+    environment: {},
   });
   expect(environment.test).toBe(undef);
   postman.setEnvironmentVariable('test', 'a');
@@ -197,8 +205,8 @@ test('postman.setEnvironmentVariable clear', () => {
 test('postman.setEnvironmentVariable set', () => {
   postman[Initial]({
     environment: {
-      test: 'a'
-    }
+      test: 'a',
+    },
   });
   expect(environment.test).toBe('a');
   postman.setEnvironmentVariable('test', 'b');
@@ -207,8 +215,8 @@ test('postman.setEnvironmentVariable set', () => {
 test('postman.clearEnvironmentVariable', () => {
   postman[Initial]({
     environment: {
-      test: 'a'
-    }
+      test: 'a',
+    },
   });
   expect(environment.test).toBe('a');
   postman.clearEnvironmentVariable('test');
@@ -218,8 +226,8 @@ test('postman.clearEnvironmentVariables', () => {
   postman[Initial]({
     environment: {
       test: 'a',
-      test2: 'b'
-    }
+      test2: 'b',
+    },
   });
   expect(environment.test).toBe('a');
   expect(environment.test2).toBe('b');
@@ -231,8 +239,8 @@ test('pm.environment.clear', () => {
   postman[Initial]({
     environment: {
       test: 'a',
-      test2: 'b'
-    }
+      test2: 'b',
+    },
   });
   expect(environment.test).toBe('a');
   expect(environment.test2).toBe('b');
@@ -242,35 +250,35 @@ test('pm.environment.clear', () => {
 });
 test('pm.environment.get clear', () => {
   postman[Initial]({
-    environment: {}
+    environment: {},
   });
   expect(pm.environment.get('test')).toBe(undef);
 });
 test('pm.environment.get set', () => {
   postman[Initial]({
     environment: {
-      test: 'a'
-    }
+      test: 'a',
+    },
   });
   expect(pm.environment.get('test')).toBe('a');
 });
 test('pm.environment.has clear', () => {
   postman[Initial]({
-    environment: {}
+    environment: {},
   });
   expect(pm.environment.has('test')).toBe(false);
 });
 test('pm.environment.has set', () => {
   postman[Initial]({
     environment: {
-      test: 'a'
-    }
+      test: 'a',
+    },
   });
   expect(pm.environment.has('test')).toBe(true);
 });
 test('pm.environment.set clear', () => {
   postman[Initial]({
-    environment: {}
+    environment: {},
   });
   expect(environment.test).toBe(undef);
   pm.environment.set('test', 'a');
@@ -279,8 +287,8 @@ test('pm.environment.set clear', () => {
 test('pm.environment.set set', () => {
   postman[Initial]({
     environment: {
-      test: 'a'
-    }
+      test: 'a',
+    },
   });
   expect(environment.test).toBe('a');
   pm.environment.set('test', 'b');
@@ -290,8 +298,8 @@ test('pm.environment.toObject', () => {
   postman[Initial]({
     environment: {
       test: 'a',
-      test2: 'b'
-    }
+      test2: 'b',
+    },
   });
   const values = pm.environment.toObject();
   expect(typeof values).toBe('object');
@@ -301,8 +309,8 @@ test('pm.environment.toObject', () => {
 test('pm.environment.unset', () => {
   postman[Initial]({
     environment: {
-      test: 'a'
-    }
+      test: 'a',
+    },
   });
   expect(environment.test).toBe('a');
   pm.environment.unset('test');
@@ -313,8 +321,8 @@ test('pm.globals.clear', () => {
     global: {
       test: 'a',
       test2: 'b',
-      test3: 'c'
-    }
+      test3: 'c',
+    },
   });
   expect(globals.test).toBe('a');
   expect(globals.test2).toBe('b');
@@ -330,8 +338,8 @@ test('pm.globals.get clear', () => {
 test('pm.globals.get set', () => {
   postman[Initial]({
     global: {
-      test: 'a'
-    }
+      test: 'a',
+    },
   });
   expect(pm.globals.get('test')).toBe('a');
 });
@@ -341,8 +349,8 @@ test('pm.globals.has clear', () => {
 test('pm.globals.has set', () => {
   postman[Initial]({
     global: {
-      test: 'a'
-    }
+      test: 'a',
+    },
   });
   expect(pm.globals.has('test')).toBe(true);
 });
@@ -355,8 +363,8 @@ test('pm.globals.toObject', () => {
   postman[Initial]({
     global: {
       test: 'a',
-      test2: 'b'
-    }
+      test2: 'b',
+    },
   });
   const values = pm.globals.toObject();
   expect(typeof values).toBe('object');
@@ -366,8 +374,8 @@ test('pm.globals.toObject', () => {
 test('pm.globals.unset', () => {
   postman[Initial]({
     global: {
-      test: 'a'
-    }
+      test: 'a',
+    },
   });
   expect(globals.test).toBe('a');
   pm.globals.unset('test');
@@ -378,29 +386,35 @@ test('pm.iterationData unavailable', () => {
 });
 test('pm.iterationData.get clear', () => {
   postman[Initial]({
-    data: [{}]
+    data: [{}],
   });
   postman[Iteration]();
   expect(pm.iterationData.get('test')).toBe(undef);
 });
 test('pm.iterationData.get set', () => {
   postman[Initial]({
-    data: [{
-      test: 'a'
-    }]
+    data: [
+      {
+        test: 'a',
+      },
+    ],
   });
   postman[Iteration]();
   expect(pm.iterationData.get('test')).toBe('a');
 });
 test('pm.iterationData.get iterated', () => {
   postman[Initial]({
-    data: [{
-      test: 'a'
-    }, {
-      test: 'b'
-    }, {
-      test: 'c'
-    }]
+    data: [
+      {
+        test: 'a',
+      },
+      {
+        test: 'b',
+      },
+      {
+        test: 'c',
+      },
+    ],
   });
   postman[Iteration]();
   expect(pm.iterationData.get('test')).toBe('a');
@@ -411,10 +425,12 @@ test('pm.iterationData.get iterated', () => {
 });
 test('pm.iterationData.toObject', () => {
   postman[Initial]({
-    data: [{
-      test: 'a',
-      test2: 'b'
-    }]
+    data: [
+      {
+        test: 'a',
+        test2: 'b',
+      },
+    ],
   });
   postman[Iteration]();
   const values = pm.iterationData.toObject();
@@ -428,63 +444,69 @@ test('pm.variables.get clear', () => {
 test('pm.variables.get global', () => {
   postman[Initial]({
     global: {
-      test: 'a'
-    }
+      test: 'a',
+    },
   });
   expect(pm.variables.get('test')).toBe('a');
 });
 test('pm.variables.get collection', () => {
   postman[Initial]({
     global: {
-      test: 'a'
+      test: 'a',
     },
     collection: {
-      test: 'b'
-    }
+      test: 'b',
+    },
   });
   expect(pm.variables.get('test')).toBe('b');
 });
 test('pm.variables.get environment', () => {
   postman[Initial]({
     global: {
-      test: 'a'
+      test: 'a',
     },
     collection: {
-      test: 'b'
+      test: 'b',
     },
     environment: {
-      test: 'c'
-    }
+      test: 'c',
+    },
   });
   expect(pm.variables.get('test')).toBe('c');
 });
 test('pm.variables.get data', () => {
   postman[Initial]({
     global: {
-      test: 'a'
+      test: 'a',
     },
     collection: {
-      test: 'b'
+      test: 'b',
     },
     environment: {
-      test: 'c'
+      test: 'c',
     },
-    data: [{
-      test: 'd'
-    }]
+    data: [
+      {
+        test: 'd',
+      },
+    ],
   });
   postman[Iteration]();
   expect(pm.variables.get('test')).toBe('d');
 });
 test('pm.variables.get data iterated', () => {
   postman[Initial]({
-    data: [{
-      test: 'a'
-    }, {
-      test: 'b'
-    }, {
-      test: 'c'
-    }]
+    data: [
+      {
+        test: 'a',
+      },
+      {
+        test: 'b',
+      },
+      {
+        test: 'c',
+      },
+    ],
   });
   postman[Iteration]();
   postman[Iteration]();
@@ -493,24 +515,26 @@ test('pm.variables.get data iterated', () => {
 test('pm.variables.get local', () => {
   postman[Initial]({
     global: {
-      test: 'a'
+      test: 'a',
     },
     collection: {
-      test: 'b'
+      test: 'b',
     },
     environment: {
-      test: 'c'
+      test: 'c',
     },
-    data: [{
-      test: 'd'
-    }]
+    data: [
+      {
+        test: 'd',
+      },
+    ],
   });
   postman[Iteration]();
   postman[Request]({
     pre() {
       pm.variables.set('test', 'e');
       expect(pm.variables.get('test')).toBe('e');
-    }
+    },
   });
 });
 test('pm.variables.set scoped', () => {
@@ -529,7 +553,7 @@ test('pm.variables.set clear', () => {
       expect(pm.variables.get('test')).toBe(undef);
       pm.variables.set('test', 'a');
       expect(pm.variables.get('test')).toBe('a');
-    }
+    },
   });
 });
 test('pm.variables.set set', () => {
@@ -539,7 +563,7 @@ test('pm.variables.set set', () => {
       expect(pm.variables.get('test')).toBe('a');
       pm.variables.set('test', 'b');
       expect(pm.variables.get('test')).toBe('b');
-    }
+    },
   });
 });
 test('pm.collectionVariables.set scoped', () => {
@@ -553,7 +577,7 @@ test('pm.collectionVariables.set clear', () => {
       expect(pm.collectionVariables.get('test')).toBe(undef);
       pm.collectionVariables.set('test', 'a');
       expect(pm.collectionVariables.get('test')).toBe('a');
-    }
+    },
   });
 });
 test('pm.collectionVariables.set set', () => {
@@ -563,7 +587,7 @@ test('pm.collectionVariables.set set', () => {
       expect(pm.collectionVariables.get('test')).toBe('a');
       pm.collectionVariables.set('test', 'b');
       expect(pm.collectionVariables.get('test')).toBe('b');
-    }
+    },
   });
 });
 test('pm.collectionVariables.clear', () => {
@@ -573,7 +597,7 @@ test('pm.collectionVariables.clear', () => {
       expect(pm.collectionVariables.get('test')).toBe('a');
       pm.collectionVariables.clear();
       expect(pm.collectionVariables.get('test')).toBe(undef);
-    }
+    },
   });
 });
 test('pm.collectionVariables.unset', () => {
@@ -584,14 +608,14 @@ test('pm.collectionVariables.unset', () => {
       pm.collectionVariables.unset('test');
       expect(pm.collectionVariables.get('test')).toBe(undef);
       expect(pm.collectionVariables.get('keep')).toBe('b');
-    }
+    },
   });
 });
 test('pm[Var] simple', () => {
   postman[Initial]({
     global: {
-      test: 'a'
-    }
+      test: 'a',
+    },
   });
   expect(pm[Var]('test')).toBe('a');
 });
@@ -609,8 +633,8 @@ test('pm.variables.replaceIn passthrough', () => {
 test('pm.variables.replaceIn standard variables', () => {
   postman[Initial]({
     global: {
-      planet: 'earth'
-    }
+      planet: 'earth',
+    },
   });
   expect(pm.variables.replaceIn('hello {{planet}}')).toBe('hello earth');
 });

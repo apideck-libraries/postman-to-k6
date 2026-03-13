@@ -7,7 +7,7 @@ let http;
 
 const Reset = Symbol.for('reset');
 
-test.before(t => {
+test.before((t) => {
   mockRequire('k6', 'stub/k6');
   mockRequire('k6/http', 'stub/http');
   mockRequire('../../../lib/xml2js.js', 'xml2js');
@@ -17,19 +17,19 @@ test.before(t => {
   require('shim/xml2Json');
 });
 
-test.afterEach.always(t => {
+test.afterEach.always((t) => {
   k6[Reset]();
   http[Reset]();
   postman[Reset]();
 });
 
-test.serial('xml2Json', t => {
+test.serial('xml2Json', (t) => {
   const xml = '<root>Text</root>';
   const json = xml2Json(xml);
   t.deepEqual(json, { root: 'Text' });
 });
 
-test.serial('xmlToJson', t => {
+test.serial('xmlToJson', (t) => {
   t.throws(() => {
     xmlToJson();
   });

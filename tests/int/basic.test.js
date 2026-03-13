@@ -44,6 +44,8 @@ test('iterations', async () => {
 });
 
 test('multiple requests', async () => {
-  const [main] = await convertFile('test/material/2.1/multi-request-headers.json');
+  const [main] = await convertFile(
+    'test/material/2.1/multi-request-headers.json'
+  );
   expect(main).toMatchSnapshot();
 });

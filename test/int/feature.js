@@ -1,7 +1,7 @@
 import test from 'ava';
 import convertFile from 'convert/file';
 
-test('cheerio --separate', async t => {
+test('cheerio --separate', async (t) => {
   const options = {
     separate: true,
   };
@@ -16,7 +16,7 @@ test('cheerio --separate', async t => {
   t.snapshot([main, requestsClean]);
 });
 
-test('CryptoJS --separate', async t => {
+test('CryptoJS --separate', async (t) => {
   const options = {
     separate: true,
   };
@@ -31,7 +31,7 @@ test('CryptoJS --separate', async t => {
   t.snapshot([main, requestsClean]);
 });
 
-test('moment --separate', async t => {
+test('moment --separate', async (t) => {
   const options = {
     separate: true,
   };
@@ -46,7 +46,7 @@ test('moment --separate', async t => {
   t.snapshot([main, requestsClean]);
 });
 
-test('lodash --separate', async t => {
+test('lodash --separate', async (t) => {
   const options = {
     separate: true,
   };
@@ -61,7 +61,7 @@ test('lodash --separate', async t => {
   t.snapshot([main, requestsClean]);
 });
 
-test('xml2json --separate', async t => {
+test('xml2json --separate', async (t) => {
   const options = {
     separate: true,
   };

@@ -2,7 +2,7 @@ import Aws from '../../lib/auth/awsv4';
 
 test('Should use service name if available', () => {
   const mockParams = {
-    has: s => s === 'service',
+    has: (s) => s === 'service',
     get: () => 'exampleParam',
   };
 

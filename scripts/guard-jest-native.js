@@ -5,9 +5,13 @@ const root = path.resolve(__dirname, '..');
 const testsDir = path.join(root, 'tests');
 
 const patterns = [
-  { name: "AVA import", regex: /import\s+test\s+from\s+['\"]ava['\"]/ },
+  { name: 'AVA import', regex: /import\s+test\s+from\s+['\"]ava['\"]/ },
   { name: 'AVA serial', regex: /\btest\.serial\s*\(/ },
-  { name: 'AVA assertion API', regex: /\bt\.(is|deepEqual|throws|notThrows|true|false|pass|fail|plan)\s*\(/ },
+  {
+    name: 'AVA assertion API',
+    regex:
+      /\bt\.(is|deepEqual|throws|notThrows|true|false|pass|fail|plan)\s*\(/,
+  },
   { name: 'mock-require usage', regex: /mock-require|\bmockRequire\s*\(/ },
 ];
 
@@ -53,7 +57,9 @@ for (const filePath of walk(testsDir)) {
 if (violations.length > 0) {
   process.stderr.write('Native Jest guard failed. Found forbidden patterns:\n');
   for (const item of violations) {
-    process.stderr.write(`- ${item.file}:${item.line} [${item.name}] ${item.source}\n`);
+    process.stderr.write(
+      `- ${item.file}:${item.line} [${item.name}] ${item.source}\n`
+    );
   }
   process.exit(1);
 }

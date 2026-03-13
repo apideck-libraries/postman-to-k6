@@ -1,9 +1,9 @@
 import test from 'ava';
 import Aws from 'auth/awsv4';
 
-test('Should use service name if available', t => {
+test('Should use service name if available', (t) => {
   const mockParams = {
-    has: s => s === 'service',
+    has: (s) => s === 'service',
     get: () => 'exampleParam',
   };
 
@@ -11,9 +11,9 @@ test('Should use service name if available', t => {
   t.is(aws.getServiceName(mockParams), 'service: "exampleParam"');
 });
 
-test('Should default to execute-api if service name is not available', t => {
+test('Should default to execute-api if service name is not available', (t) => {
   const mockParams = {
-    has: s => false,
+    has: (s) => false,
     get: () => 'exampleParam',
   };
 

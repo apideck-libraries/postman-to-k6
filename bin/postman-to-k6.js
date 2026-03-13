@@ -20,12 +20,24 @@ program
   .option('-i, --iterations <count>', 'Number of iterations.')
   .option('-g, --global <path>', 'JSON export of global variables.')
   .option('-e, --environment <path>', 'JSON export of environment.')
-  .option('--cli-options-file <path>','postman-to-k6 CLI options file. Useful for CI/CD integrations.')
+  .option(
+    '--cli-options-file <path>',
+    'postman-to-k6 CLI options file. Useful for CI/CD integrations.'
+  )
   .option('-c, --csv <path>', 'CSV data file. Used to fill data variables.')
   .option('-j, --json <path>', 'JSON data file. Used to fill data variables.')
-  .option('--k6-params <path>', 'K6 param options config file. Sets K6 params used during HTTP requests.')
-  .option('--k6-handle-summary-json <path>', 'Output the K6 handle summary as a JSON file.')
-  .option('--k6-request-tagging <value>', 'Apply K6 tags to the requests for reporting.')
+  .option(
+    '--k6-params <path>',
+    'K6 param options config file. Sets K6 params used during HTTP requests.'
+  )
+  .option(
+    '--k6-handle-summary-json <path>',
+    'Output the K6 handle summary as a JSON file.'
+  )
+  .option(
+    '--k6-request-tagging <value>',
+    'Apply K6 tags to the requests for reporting.'
+  )
   .option('--skip-pre', 'Skips pre-request scripts')
   .option('--skip-post', 'Skips post-request scripts')
   .option('--oauth1-consumer-key <value>', 'OAuth1 consumer key.')

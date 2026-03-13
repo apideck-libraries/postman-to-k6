@@ -7,8 +7,14 @@ let http;
 let harness;
 beforeAll(() => {
   harness = loadShimCore({
-    extraMocks: [[path.resolve(__dirname, '../../../lib/xml2js.js'), () => require('xml2js'), { virtual: true }]],
-    preloadModules: ['../../lib/shim/xml2Json']
+    extraMocks: [
+      [
+        path.resolve(__dirname, '../../../lib/xml2js.js'),
+        () => require('xml2js'),
+        { virtual: true },
+      ],
+    ],
+    preloadModules: ['../../lib/shim/xml2Json'],
   });
   ({ k6, http } = harness);
 });
@@ -22,7 +28,7 @@ test('xml2Json', () => {
   const xml = '<root>Text</root>';
   const json = xml2Json(xml);
   expect(json).toEqual({
-    root: 'Text'
+    root: 'Text',
   });
 });
 test('xmlToJson', () => {

@@ -47,26 +47,20 @@ function setDiff(left, right) {
 }
 
 test('jest suite covers all ava test case names', () => {
-  const avaCases = collectCases(
-    path.join(root, 'test'),
-    /\.js$/,
-    {
-      strip: /\.js$/,
-      replaceWith: '.test.js',
-      regex: /test(?:\.serial)?\('([^']+)'/g,
-    }
-  );
+  const avaCases = collectCases(path.join(root, 'test'), /\.js$/, {
+    strip: /\.js$/,
+    replaceWith: '.test.js',
+    regex: /test(?:\.serial)?\('([^']+)'/g,
+  });
 
-  const jestCases = collectCases(
-    path.join(root, 'tests'),
-    /\.test\.js$/,
-    {
-      strip: /\.test\.js$/,
-      replaceWith: '.test.js',
-      regex: /test\('([^']+)'/g,
-    }
-  );
+  const jestCases = collectCases(path.join(root, 'tests'), /\.test\.js$/, {
+    strip: /\.test\.js$/,
+    replaceWith: '.test.js',
+    regex: /test\('([^']+)'/g,
+  });
 
-  const missing = setDiff(avaCases, jestCases).filter((item) => !ALLOWLIST.has(item));
+  const missing = setDiff(avaCases, jestCases).filter(
+    (item) => !ALLOWLIST.has(item)
+  );
   expect(missing).toEqual([]);
 });

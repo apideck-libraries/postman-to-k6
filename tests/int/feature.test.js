@@ -11,22 +11,22 @@ async function expectSeparateSnapshot(materialFile) {
   expect([main, cleanRequests(requests)]).toMatchSnapshot();
 }
 
-test('cheerio --separate', async() => {
+test('cheerio --separate', async () => {
   await expectSeparateSnapshot('test/material/2.1/echo-cheerio.json');
 });
 
-test('CryptoJS --separate', async() => {
+test('CryptoJS --separate', async () => {
   await expectSeparateSnapshot('test/material/2.1/echo-crypto.json');
 });
 
-test('moment --separate', async() => {
+test('moment --separate', async () => {
   await expectSeparateSnapshot('test/material/2.1/echo-moment.json');
 });
 
-test('lodash --separate', async() => {
+test('lodash --separate', async () => {
   await expectSeparateSnapshot('test/material/2.1/echo-lodash.json');
 });
 
-test('xml2json --separate', async() => {
+test('xml2json --separate', async () => {
   await expectSeparateSnapshot('test/material/2.1/echo-xml2json.json');
 });

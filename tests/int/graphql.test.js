@@ -7,7 +7,9 @@ function render(body) {
   return `'${escaped}'`;
 }
 test('body simple', async () => {
-  const [main] = await convertFile('test/material/2.1/graphql-body-simple.json');
+  const [main] = await convertFile(
+    'test/material/2.1/graphql-body-simple.json'
+  );
   expect(main).toMatchSnapshot();
 
   //   const query =
