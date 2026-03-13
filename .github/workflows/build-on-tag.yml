@@ -33,38 +33,6 @@ jobs:
       - name: Bundle
         run: yarn bundle
 
-  coverage-report:
-    runs-on: ubuntu-latest
-    needs: build-on-tag
-    continue-on-error: true
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Use Node.js 24.x
-        uses: actions/setup-node@v4
-        with:
-          node-version: '24.x'
-          registry-url: 'https://registry.npmjs.org'
-
-      - name: Install dependencies
-        run: yarn install
-
-      - name: Coverage (Ava + Jest + Combined)
-        run: yarn coverage-all
-
-      - name: Upload combined coverage artifacts
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: coverage-combined
-          if-no-files-found: ignore
-          path: |
-            coverage/combined-summary.json
-            coverage/combined-summary.md
-            coverage/history.jsonl
-
 #      - name: Publish to NPM
 #        env:
 #          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
