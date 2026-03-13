@@ -20,10 +20,10 @@ module.exports = {
   collectCoverage: true,
 
   // An array of glob patterns indicating a set of files for which coverage information should be collected
-  collectCoverageFrom: ['<rootDir>/../lib/**/*.js'],
+  collectCoverageFrom: ['<rootDir>/lib/**/*.js'],
 
   // The directory where Jest should output its coverage files
-  coverageDirectory: '../coverage/jest',
+  coverageDirectory: 'coverage/jest',
 
   // An array of regexp pattern strings used to skip coverage collection
   // coveragePathIgnorePatterns: [
@@ -63,8 +63,8 @@ module.exports = {
   // An array of directory names to be searched recursively up from the requiring module's location
   moduleDirectories: [
     'node_modules',
-    '<rootDir>/../lib',
-    '<rootDir>/../test',
+    '<rootDir>/lib',
+    '<rootDir>/test',
   ],
 
   // An array of file extensions your modules use
@@ -79,8 +79,8 @@ module.exports = {
 
   // A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
   moduleNameMapper: {
-    '^k6$': '<rootDir>/../test/stub/k6.jest.js',
-    '^k6/http$': '<rootDir>/../test/stub/http.jest.js',
+    '^k6$': '<rootDir>/test/stub/k6.js',
+    '^k6/http$': '<rootDir>/test/stub/http.js',
   },
 
   // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader
@@ -114,10 +114,10 @@ module.exports = {
   // restoreMocks: false,
 
   // The root directory that Jest should scan for tests and modules within
-  rootDir: "tests",
+  rootDir: '.',
 
   // A list of paths to directories that Jest should use to search for files in
-  roots: ['<rootDir>', '<rootDir>/../lib', '<rootDir>/../test'],
+  roots: ['<rootDir>/tests', '<rootDir>/lib', '<rootDir>/test'],
 
   // Allows you to use a custom runner instead of Jest's default test runner
   // runner: "jest-runner",
@@ -126,7 +126,7 @@ module.exports = {
   setupFiles: ['@babel/register'],
 
   // A list of paths to modules that run some code to configure or set up the testing framework before each test
-  setupFilesAfterEnv: ['<rootDir>/helpers/resetShimGlobals.js'],
+  setupFilesAfterEnv: ['<rootDir>/tests/helpers/resetShimGlobals.js'],
 
   // The number of seconds after which a test is considered as slow and reported as such in the results.
   // slowTestThreshold: 5,

@@ -6,6 +6,7 @@ let k6, http;
 const Reset = Symbol.for('reset');
 
 beforeAll(() => {
+  jest.resetModules();
   mockRequire('k6', 'stub/k6');
   mockRequire('k6/http', 'stub/http');
   mockRequire('../../../lib/xml2js.js', 'xml2js');

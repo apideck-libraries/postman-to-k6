@@ -37,3 +37,4 @@ testem.log
 tests/coverage
 docs/superpowers
 .agents
+/.codex/superpowers/

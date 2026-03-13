@@ -28,6 +28,7 @@ function define(logic) {
 }
 
 beforeAll(() => {
+  jest.resetModules();
   mockRequire('k6', 'stub/k6');
   mockRequire('k6/http', 'stub/http');
   mockRequire('../../../lib/ajv.js', 'ajv');

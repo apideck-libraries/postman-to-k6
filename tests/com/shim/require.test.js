@@ -10,6 +10,7 @@ const Reset = Symbol.for('reset');
 const Request = Symbol.for('request');
 
 beforeAll(() => {
+  jest.resetModules();
   global.require = require; // Simulate k6 global require
   mockRequire('k6', 'stub/k6');
   mockRequire('k6/http', 'stub/http');
