@@ -42,6 +42,7 @@ Feel free to contribute or pass any suggestion to improve postman-to-k6.
     - [Skip Post](#skip-post)
     - [CLI options file](#cli-options-file)
 - [Examples](#examples)
+- [Testing](#testing)
 - [Unsupported Features](#unsupported-features)
 - [Other similar tools](#other-similar-tools)
 - [Credits](#credits)
@@ -312,6 +313,47 @@ other command:
 
 ```shell
 $ postman-to-k6 example/v2/echo.json -o k6-script.js
+```
+
+## Testing
+
+Run suites independently:
+
+```shell
+$ yarn test-ava
+$ yarn test-jest
+```
+
+`yarn test-jest` includes a native-Jest guard for `tests/**` (fails on AVA-style APIs or `mock-require`).
+
+Run both suites:
+
+```shell
+$ yarn test-all
+```
+
+Run coverage for both suites and generate a combined summary/trend artifact:
+
+```shell
+$ yarn coverage-all
+```
+
+`yarn coverage-all` also enforces a Jest coverage regression gate against
+`docs/superpowers/plans/jest-coverage-baseline.json` with a max drop of `0.30%`
+for lines/statements/functions/branches.
+
+Jest-native testing rules for `tests/**`:
+
+- Use native Jest assertions (`expect(...)`) only.
+- Do not import AVA (`import test from 'ava'`) in `tests/**`.
+- Do not use AVA-specific APIs (`test.serial`, `t.is`, `t.deepEqual`, `t.throws`, etc.).
+- Do not use `mock-require` in `tests/**`; use the shared Jest shim harness in
+  `tests/helpers/shimHarness.js`.
+
+The guard command is:
+
+```shell
+$ yarn test-jest-native-guard
 ```
 
 ## Unsupported Features

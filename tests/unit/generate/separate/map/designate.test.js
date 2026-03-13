@@ -1,42 +1,26 @@
-import test from 'ava';
-import mockRequire from 'mock-require';
-import sinon from 'sinon';
-const deconflict = sinon.stub();
-let designate;
-
-test.before(t => {
-  mockRequire(
-    '../../../../../lib/generate/separate/map/deconflict',
-    deconflict
-  );
-  designate = require('../../../../../lib/generate/separate/map/designate');
+const mockDeconflict = jest.fn();
+jest.mock('../../../../../lib/generate/separate/map/deconflict', () => mockDeconflict);
+const designate = require('../../../../../lib/generate/separate/map/designate');
+afterEach(() => {
+  mockDeconflict.mockReset();
 });
-
-test.afterEach.always(t => {
-  deconflict.reset();
+test('basic', () => {
+  mockDeconflict.mockImplementation(name => name);
+  expect(designate('apple', {}, {})).toBe('apple');
 });
-
-test.serial('basic', t => {
-  deconflict.returnsArg(0);
-  t.is(designate('apple', {}, {}), 'apple');
+test('suffix', () => {
+  mockDeconflict.mockImplementation(name => name);
+  expect(designate('apple', {}, {}, '.js')).toBe('apple.js');
 });
-
-test.serial('suffix', t => {
-  deconflict.returnsArg(0);
-  t.is(designate('apple', {}, {}, '.js'), 'apple.js');
+test('encode', () => {
+  mockDeconflict.mockImplementation(name => name);
+  expect(designate('About/Company', {}, {})).toBe('AboutCompany');
 });
-
-test.serial('encode', t => {
-  deconflict.returnsArg(0);
-  t.is(designate('About/Company', {}, {}), 'AboutCompany');
+test('deconflict', () => {
+  mockDeconflict.mockReturnValue('apple.A');
+  expect(designate('apple', {}, {})).toBe('apple.A');
 });
-
-test.serial('deconflict', t => {
-  deconflict.returns('apple.A');
-  t.is(designate('apple', {}, {}), 'apple.A');
-});
-
-test.serial('deconflict suffix', t => {
-  deconflict.returns('apple.A');
-  t.is(designate('apple', {}, {}, '.js'), 'apple.A.js');
+test('deconflict suffix', () => {
+  mockDeconflict.mockReturnValue('apple.A');
+  expect(designate('apple', {}, {}, '.js')).toBe('apple.A.js');
 });
