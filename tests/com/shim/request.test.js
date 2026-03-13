@@ -245,6 +245,22 @@ test('pm.request.url', () => {
     }
   });
 });
+test('pm.request.url defaults', () => {
+  postman[Request]({
+    address: 'https://example.com',
+    pre() {
+      expect(pm.request.url).toEqual({
+        fragment: '',
+        host: ['example', 'com'],
+        path: [],
+        port: '443',
+        protocol: 'https',
+        query: [],
+        variable: []
+      });
+    }
+  });
+});
 test('pm.request.url invalid', () => {
   postman[Request]({
     address: 'not-a-url',
@@ -345,6 +361,12 @@ test('pm.sendRequest', () => {
   expect(() => {
     pm.sendRequest();
   }).toThrow();
+});
+test('postman[Initial] cannot run twice', () => {
+  postman[Initial]({});
+  expect(() => {
+    postman[Initial]({});
+  }).toThrow('Scope already initialized');
 });
 test('request.body.raw', () => {
   const rawBody = JSON.stringify({

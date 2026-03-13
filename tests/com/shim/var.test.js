@@ -565,6 +565,27 @@ test('pm.collectionVariables.set set', () => {
     }
   });
 });
+test('pm.collectionVariables.clear', () => {
+  postman[Request]({
+    pre() {
+      pm.collectionVariables.set('test', 'a');
+      expect(pm.collectionVariables.get('test')).toBe('a');
+      pm.collectionVariables.clear();
+      expect(pm.collectionVariables.get('test')).toBe(undef);
+    }
+  });
+});
+test('pm.collectionVariables.unset', () => {
+  postman[Request]({
+    pre() {
+      pm.collectionVariables.set('test', 'a');
+      pm.collectionVariables.set('keep', 'b');
+      pm.collectionVariables.unset('test');
+      expect(pm.collectionVariables.get('test')).toBe(undef);
+      expect(pm.collectionVariables.get('keep')).toBe('b');
+    }
+  });
+});
 test('pm[Var] simple', () => {
   postman[Initial]({
     global: {
