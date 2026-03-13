@@ -5,7 +5,7 @@ const root = path.resolve(__dirname, '..');
 const testsDir = path.join(root, 'tests');
 
 const patterns = [
-  { name: 'AVA import', regex: /import\s+test\s+from\s+['\"]ava['\"]/ },
+  { name: 'AVA import', regex: /import\s+test\s+from\s+['"]ava['"]/ },
   { name: 'AVA serial', regex: /\btest\.serial\s*\(/ },
   {
     name: 'AVA assertion API',

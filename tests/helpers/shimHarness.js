@@ -21,7 +21,7 @@ function loadShimCore(options = {}) {
     jest.doMock(name, factory);
   }
 
-  const hadGlobalRequire = Object.prototype.hasOwnProperty.call(
+  const hadGlobalRequire = Object.hasOwn(
     global,
     'require'
   );
