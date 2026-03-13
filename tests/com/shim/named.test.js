@@ -1,70 +1,64 @@
 /* global postman */
 
-import mockRequire from 'mock-require';
+import { loadShimCore, resetShimState } from '../../helpers/shimHarness';
 let k6, http;
-
+let harness;
 const Define = Symbol.for('define');
 const Request = Symbol.for('request');
-const Reset = Symbol.for('reset');
-
 beforeAll(() => {
-  mockRequire('k6', 'stub/k6');
-  mockRequire('k6/http', 'stub/http');
-  k6 = require('k6');
-  http = require('k6/http');
-  require('shim/core');
+  harness = loadShimCore();
+  ({ k6, http } = harness);
 });
-
 afterEach(() => {
-  k6[Reset]();
-  http[Reset]();
-  postman[Reset]();
+  resetShimState(harness);
 });
-
-test('undefined', t => {
-  t.throws(() => {
+test('undefined', () => {
+  expect(() => {
     postman[Request]('Home Page');
-  });
+  }).toThrow();
 });
-
-test('1', t => {
+test('1', () => {
   const response = Symbol('response');
   http.request.returns(response);
-  t.plan(4);
   postman[Define]({
     name: 'Home Page',
     method: 'GET',
     address: 'http://example.com',
     pre() {
-      t.pass();
+      expect(true).toBe(true);
     },
     post() {
-      t.pass();
+      expect(true).toBe(true);
     }
   });
   const result = postman[Request]('Home Page');
-  t.true(http.request.calledOnce);
-  t.is(result, response);
+  expect(http.request.calledOnce).toBe(true);
+  expect(result).toBe(response);
 });
-
-test('3', t => {
+test('3', () => {
   postman[Define]({
     name: 'Home Page',
     method: 'GET',
     address: 'http://1.example.com',
-    pre() { t.fail(); }
+    pre() {
+      throw new Error("Expected failure");
+    }
   });
   postman[Define]({
     name: 'Home Page',
     method: 'GET',
     address: 'http://2.example.com',
-    pre() { t.fail(); }
+    pre() {
+      throw new Error("Expected failure");
+    }
   });
   postman[Define]({
     name: 'Home Page',
     method: 'GET',
     address: 'http://3.example.com',
-    pre() { t.pass(); }
+    pre() {
+      expect(true).toBe(true);
+    }
   });
   postman[Request]('Home Page', 3);
 });

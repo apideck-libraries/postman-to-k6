@@ -1,54 +1,54 @@
 import deconflict from 'generate/separate/map/deconflict';
-
-test('clear', t => {
-  t.is(deconflict('apple', {}, {}), 'apple');
+test('clear', () => {
+  expect(deconflict('apple', {}, {})).toBe('apple');
 });
-
-test('noncollision', t => {
-  const container = { apple: {} };
-  t.is(deconflict('orange', container, {}), 'orange');
+test('noncollision', () => {
+  const container = {
+    apple: {}
+  };
+  expect(deconflict('orange', container, {})).toBe('orange');
 });
-
-test('collision', t => {
-  const container = { apple: {} };
-  t.is(deconflict('apple', container, {}), 'apple.A');
+test('collision', () => {
+  const container = {
+    apple: {}
+  };
+  expect(deconflict('apple', container, {})).toBe('apple.A');
 });
-
-test('collision repeated', t => {
+test('collision repeated', () => {
   const container = {
     apple: {},
     'apple.A': {},
     'apple.B': {}
   };
-  t.is(deconflict('apple', container, {}), 'apple.C');
+  expect(deconflict('apple', container, {})).toBe('apple.C');
 });
-
-test('noncollision suffix', t => {
-  const container = { apple: {} };
-  t.is(deconflict('apple', container, {}, '.js'), 'apple');
+test('noncollision suffix', () => {
+  const container = {
+    apple: {}
+  };
+  expect(deconflict('apple', container, {}, '.js')).toBe('apple');
 });
-
-test('collision suffix', t => {
-  const container = { 'apple.js': {} };
-  t.is(deconflict('apple', container, {}, '.js'), 'apple.A');
+test('collision suffix', () => {
+  const container = {
+    'apple.js': {}
+  };
+  expect(deconflict('apple', container, {}, '.js')).toBe('apple.A');
 });
-
-test('collision repeated suffix', t => {
+test('collision repeated suffix', () => {
   const container = {
     'apple.js': {},
     'apple.A.js': {},
     'apple.B.js': {}
   };
-  t.is(deconflict('apple', container, {}, '.js'), 'apple.C');
+  expect(deconflict('apple', container, {}, '.js')).toBe('apple.C');
 });
-
-test('generator reuse', t => {
+test('generator reuse', () => {
   const container = {};
   const generators = {};
-  t.is(deconflict('apple', container, generators), 'apple');
+  expect(deconflict('apple', container, generators)).toBe('apple');
   container.apple = {};
-  t.is(deconflict('apple', container, generators), 'apple.A');
+  expect(deconflict('apple', container, generators)).toBe('apple.A');
   container['apple.A'] = {};
-  t.is(deconflict('apple', container, generators), 'apple.B');
-  t.is(generators.apple.next().value, 'C');
+  expect(deconflict('apple', container, generators)).toBe('apple.B');
+  expect(generators.apple.next().value).toBe('C');
 });

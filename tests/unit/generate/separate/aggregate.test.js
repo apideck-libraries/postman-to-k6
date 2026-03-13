@@ -1,22 +1,21 @@
 import collection from 'helper/collection';
 import aggregate from 'generate/separate/aggregate';
-
-test('success', t => {
+test('success', () => {
   const node = collection('test/material/2.1/tree.json');
   const result = aggregate(node);
-  t.is(typeof result, 'object');
-  t.is(result.items.length, 1);
-  t.is(result.locations.length, 4);
-  t.is(result.locations[0].items.length, 0);
-  t.is(result.locations[0].locations.length, 2);
-  t.is(result.locations[0].locations[0].items.length, 1);
-  t.is(result.locations[0].locations[0].locations.length, 0);
-  t.is(result.locations[0].locations[1].items.length, 2);
-  t.is(result.locations[0].locations[1].locations.length, 0);
-  t.is(result.locations[1].items.length, 1);
-  t.is(result.locations[1].locations.length, 0);
-  t.is(result.locations[2].items.length, 3);
-  t.is(result.locations[2].locations.length, 0);
-  t.is(result.locations[3].items.length, 3);
-  t.is(result.locations[3].locations.length, 0);
+  expect(typeof result).toBe('object');
+  expect(result.items.length).toBe(1);
+  expect(result.locations.length).toBe(4);
+  expect(result.locations[0].items.length).toBe(0);
+  expect(result.locations[0].locations.length).toBe(2);
+  expect(result.locations[0].locations[0].items.length).toBe(1);
+  expect(result.locations[0].locations[0].locations.length).toBe(0);
+  expect(result.locations[0].locations[1].items.length).toBe(2);
+  expect(result.locations[0].locations[1].locations.length).toBe(0);
+  expect(result.locations[1].items.length).toBe(1);
+  expect(result.locations[1].locations.length).toBe(0);
+  expect(result.locations[2].items.length).toBe(3);
+  expect(result.locations[2].locations.length).toBe(0);
+  expect(result.locations[3].items.length).toBe(3);
+  expect(result.locations[3].locations.length).toBe(0);
 });

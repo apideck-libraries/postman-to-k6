@@ -1,153 +1,173 @@
 /* global postman pm */
 /* global responseCookies */
 
-import mockRequire from 'mock-require';
-
+import { loadShimCore, resetShimState } from '../../helpers/shimHarness';
 let k6, http;
-
-const Reset = Symbol.for('reset');
+let harness;
 const Request = Symbol.for('request');
-
 beforeAll(() => {
-  mockRequire('k6', 'stub/k6');
-  mockRequire('k6/http', 'stub/http');
-  k6 = require('k6');
-  http = require('k6/http');
-  require('shim/core');
+  harness = loadShimCore();
+  ({ k6, http } = harness);
 });
-
 afterEach(() => {
-  k6[Reset]();
-  http[Reset]();
-  postman[Reset]();
+  resetShimState(harness);
 });
-
-test('responseCookies', t => {
+test('responseCookies', () => {
   const cookie = {
     domain: 'example.com',
     httpOnly: false,
     name: 'Theme',
     path: '/',
     secure: false,
-    value: 'Aqua',
+    value: 'Aqua'
   };
-  http.request.returns({ cookies: { Theme: [cookie] } });
+  http.request.returns({
+    cookies: {
+      Theme: [cookie]
+    }
+  });
   postman[Request]({
     post() {
-      t.is(responseCookies.length, 1);
+      expect(responseCookies.length).toBe(1);
       const responseCookie = responseCookies[0];
       for (const key of Object.keys(cookie)) {
-        t.is(responseCookie[key], cookie[key]);
+        expect(responseCookie[key]).toBe(cookie[key]);
       }
-    },
+    }
   });
 });
-
-test('cookie.hostOnly', t => {
-  http.request.returns({ cookies: { Theme: [{}] } });
+test('cookie.hostOnly', () => {
+  http.request.returns({
+    cookies: {
+      Theme: [{}]
+    }
+  });
   postman[Request]({
     post() {
-      t.throws(() => {
+      expect(() => {
         /* eslint-disable-next-line no-unused-expressions */
         responseCookies[0].hostOnly;
-      });
-    },
+      }).toThrow();
+    }
   });
 });
-
-test('cookie.session', t => {
-  http.request.returns({ cookies: { Theme: [{}] } });
+test('cookie.session', () => {
+  http.request.returns({
+    cookies: {
+      Theme: [{}]
+    }
+  });
   postman[Request]({
     post() {
-      t.throws(() => {
+      expect(() => {
         /* eslint-disable-next-line no-unused-expressions */
         responseCookies[0].session;
-      });
-    },
+      }).toThrow();
+    }
   });
 });
-
-test('cookie.storeId', t => {
-  http.request.returns({ cookies: { Theme: [{}] } });
+test('cookie.storeId', () => {
+  http.request.returns({
+    cookies: {
+      Theme: [{}]
+    }
+  });
   postman[Request]({
     post() {
-      t.throws(() => {
+      expect(() => {
         /* eslint-disable-next-line no-unused-expressions */
         responseCookies[0].storeId;
-      });
-    },
+      }).toThrow();
+    }
   });
 });
-
-test('postman.getResponseCookie', t => {
+test('postman.getResponseCookie', () => {
   const cookie = {
     domain: 'example.com',
     httpOnly: false,
     name: 'Theme',
     path: '/',
     secure: false,
-    value: 'Aqua',
+    value: 'Aqua'
   };
-  http.request.returns({ cookies: { Theme: [cookie] } });
+  http.request.returns({
+    cookies: {
+      Theme: [cookie]
+    }
+  });
   postman[Request]({
     post() {
       const responseCookie = postman.getResponseCookie('Theme');
-      t.is(typeof responseCookie, 'object');
+      expect(typeof responseCookie).toBe('object');
       for (const key of Object.keys(cookie)) {
-        t.is(responseCookie[key], cookie[key]);
+        expect(responseCookie[key]).toBe(cookie[key]);
       }
-    },
+    }
   });
 });
-
-test('pm.cookies.get clear', t => {
+test('pm.cookies.get clear', () => {
   postman[Request]({
     post() {
-      t.is(pm.cookies.get('Theme'), null);
-    },
+      expect(pm.cookies.get('Theme')).toBe(null);
+    }
   });
 });
-
-test('pm.cookies.get set', t => {
-  const cookie = { name: 'Theme', value: 'Aqua' };
-  http.request.returns({ cookies: { Theme: [cookie] } });
-  postman[Request]({
-    post() {
-      t.is(pm.cookies.get('Theme'), 'Aqua');
-    },
-  });
-});
-
-test('pm.cookies.has clear', t => {
-  postman[Request]({
-    post() {
-      t.false(pm.cookies.has('Theme'));
-    },
-  });
-});
-
-test('pm.cookies.has set', t => {
-  http.request.returns({ cookies: { Theme: [{ name: 'Theme' }] } });
-  postman[Request]({
-    post() {
-      t.true(pm.cookies.has('Theme'));
-    },
-  });
-});
-
-test('pm.cookies.toObject', t => {
+test('pm.cookies.get set', () => {
+  const cookie = {
+    name: 'Theme',
+    value: 'Aqua'
+  };
   http.request.returns({
     cookies: {
-      Theme: [{ name: 'Theme', value: 'Aqua' }],
-      Session: [{ name: 'Session', value: 'abc123' }],
-    },
+      Theme: [cookie]
+    }
   });
   postman[Request]({
     post() {
-      t.deepEqual(pm.cookies.toObject(), {
+      expect(pm.cookies.get('Theme')).toBe('Aqua');
+    }
+  });
+});
+test('pm.cookies.has clear', () => {
+  postman[Request]({
+    post() {
+      expect(pm.cookies.has('Theme')).toBe(false);
+    }
+  });
+});
+test('pm.cookies.has set', () => {
+  http.request.returns({
+    cookies: {
+      Theme: [{
+        name: 'Theme'
+      }]
+    }
+  });
+  postman[Request]({
+    post() {
+      expect(pm.cookies.has('Theme')).toBe(true);
+    }
+  });
+});
+test('pm.cookies.toObject', () => {
+  http.request.returns({
+    cookies: {
+      Theme: [{
+        name: 'Theme',
+        value: 'Aqua'
+      }],
+      Session: [{
+        name: 'Session',
+        value: 'abc123'
+      }]
+    }
+  });
+  postman[Request]({
+    post() {
+      expect(pm.cookies.toObject()).toEqual({
         Theme: 'Aqua',
-        Session: 'abc123',
+        Session: 'abc123'
       });
-    },
+    }
   });
 });

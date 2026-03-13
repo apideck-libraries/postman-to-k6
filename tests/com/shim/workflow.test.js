@@ -1,26 +1,17 @@
 /* global postman */
 
-import mockRequire from 'mock-require';
+import { loadShimCore, resetShimState } from '../../helpers/shimHarness';
 let k6, http;
-
-const Reset = Symbol.for('reset');
-
+let harness;
 beforeAll(() => {
-  mockRequire('k6', 'stub/k6');
-  mockRequire('k6/http', 'stub/http');
-  k6 = require('k6');
-  http = require('k6/http');
-  require('shim/core');
+  harness = loadShimCore();
+  ({ k6, http } = harness);
 });
-
 afterEach(() => {
-  k6[Reset]();
-  http[Reset]();
-  postman[Reset]();
+  resetShimState(harness);
 });
-
-test('setNextRequest', t => {
-  t.throws(() => {
+test('setNextRequest', () => {
+  expect(() => {
     postman.setNextRequest();
-  });
+  }).toThrow();
 });

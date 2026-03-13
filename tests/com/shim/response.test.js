@@ -1,65 +1,56 @@
 /* global postman pm */
 /* global responseBody responseCode responseHeaders responseTime */
 
-import mockRequire from 'mock-require';
+import { loadShimCore, resetShimState } from '../../helpers/shimHarness';
 let k6, http;
-
-const Reset = Symbol.for('reset');
+let harness;
 const Request = Symbol.for('request');
-
 beforeAll(() => {
-  mockRequire('k6', 'stub/k6');
-  mockRequire('k6/http', 'stub/http');
-  k6 = require('k6');
-  http = require('k6/http');
-  require('shim/core');
+  harness = loadShimCore();
+  ({ k6, http } = harness);
 });
-
 afterEach(() => {
-  k6[Reset]();
-  http[Reset]();
-  postman[Reset]();
+  resetShimState(harness);
 });
-
-test('responseBody', t => {
-  http.request.returns({ body: 'Response body' });
+test('responseBody', () => {
+  http.request.returns({
+    body: 'Response body'
+  });
   postman[Request]({
     post() {
-      t.is(responseBody, 'Response body');
+      expect(responseBody).toBe('Response body');
     }
   });
 });
-
-test('responseCode.code', t => {
-  http.request.returns({ status: 418 });
+test('responseCode.code', () => {
+  http.request.returns({
+    status: 418
+  });
   postman[Request]({
     post() {
-      t.is(responseCode.code, 418);
+      expect(responseCode.code).toBe(418);
     }
   });
 });
-
-test('responseCode.detail', t => {
+test('responseCode.detail', () => {
   postman[Request]({
     post() {
-      t.throws(() => {
+      expect(() => {
         responseCode.detail; /* eslint-disable-line no-unused-expressions */
-      });
+      }).toThrow();
     }
   });
 });
-
-test('responseCode.name', t => {
+test('responseCode.name', () => {
   postman[Request]({
     post() {
-      t.throws(() => {
+      expect(() => {
         responseCode.name; /* eslint-disable-line no-unused-expressions */
-      });
+      }).toThrow();
     }
   });
 });
-
-test('responseHeaders', t => {
+test('responseHeaders', () => {
   http.request.returns({
     headers: {
       Server: 'MasterControlProgram',
@@ -68,42 +59,48 @@ test('responseHeaders', t => {
   });
   postman[Request]({
     post() {
-      t.deepEqual(responseHeaders, {
+      expect(responseHeaders).toEqual({
         Server: 'MasterControlProgram',
         Allow: 'GET, POST, HEAD'
       });
     }
   });
 });
-
-test('responseTime', t => {
-  http.request.returns({ timings: { duration: 556 } });
+test('responseTime', () => {
+  http.request.returns({
+    timings: {
+      duration: 556
+    }
+  });
   postman[Request]({
     post() {
-      t.is(responseTime, 556);
+      expect(responseTime).toBe(556);
     }
   });
 });
-
-test('postman.getResponseHeader', t => {
-  http.request.returns({ headers: { Server: 'MasterControlProgram' } });
+test('postman.getResponseHeader', () => {
+  http.request.returns({
+    headers: {
+      Server: 'MasterControlProgram'
+    }
+  });
   postman[Request]({
     post() {
-      t.is(postman.getResponseHeader('server'), 'MasterControlProgram');
+      expect(postman.getResponseHeader('server')).toBe('MasterControlProgram');
     }
   });
 });
-
-test('pm.response.code', t => {
-  http.request.returns({ status: 418 });
+test('pm.response.code', () => {
+  http.request.returns({
+    status: 418
+  });
   postman[Request]({
     post() {
-      t.is(pm.response.code, 418);
+      expect(pm.response.code).toBe(418);
     }
   });
 });
-
-test('pm.response.headers.get', t => {
+test('pm.response.headers.get', () => {
   http.request.returns({
     headers: {
       'Content-Type': 'application/json',
@@ -112,14 +109,11 @@ test('pm.response.headers.get', t => {
   });
   postman[Request]({
     post() {
-      t.deepEqual(pm.response.headers.get('Server'),
-        'GitHub Copilot'
-      );
+      expect(pm.response.headers.get('Server')).toEqual('GitHub Copilot');
     }
   });
 });
-
-test('pm.response.headers.all', t => {
+test('pm.response.headers.all', () => {
   http.request.returns({
     headers: {
       'Content-Type': 'application/json',
@@ -128,56 +122,64 @@ test('pm.response.headers.all', t => {
   });
   postman[Request]({
     post() {
-      t.deepEqual(pm.response.headers.all(), {
+      expect(pm.response.headers.all()).toEqual({
         'Content-Type': 'application/json',
         'Server': 'GitHub Copilot'
       });
     }
   });
 });
-
-test('pm.response.json', t => {
-  http.request.returns({ body: '{ "test": "a", "test2": "b" }' });
-  postman[Request]({
-    post() {
-      t.deepEqual(pm.response.json(), { test: 'a', test2: 'b' });
-    }
+test('pm.response.json', () => {
+  http.request.returns({
+    body: '{ "test": "a", "test2": "b" }'
   });
-});
-
-test('pm.response.reason', t => {
   postman[Request]({
     post() {
-      t.throws(() => {
-        pm.response.reason();
+      expect(pm.response.json()).toEqual({
+        test: 'a',
+        test2: 'b'
       });
     }
   });
 });
-
-test('pm.response.responseTime', t => {
-  http.request.returns({ timings: { duration: 556 } });
+test('pm.response.reason', () => {
   postman[Request]({
     post() {
-      t.is(pm.response.responseTime, 556);
+      expect(() => {
+        pm.response.reason();
+      }).toThrow();
     }
   });
 });
-
-test('pm.response.text string', t => {
-  http.request.returns({ body: 'Response body' });
+test('pm.response.responseTime', () => {
+  http.request.returns({
+    timings: {
+      duration: 556
+    }
+  });
   postman[Request]({
     post() {
-      t.is(pm.response.text(), 'Response body');
+      expect(pm.response.responseTime).toBe(556);
     }
   });
 });
-
-test('pm.response.text binary', t => {
-  http.request.returns({ body: [0x01, 0x02, 0x03] });
+test('pm.response.text string', () => {
+  http.request.returns({
+    body: 'Response body'
+  });
   postman[Request]({
     post() {
-      t.is(pm.response.text(), null);
+      expect(pm.response.text()).toBe('Response body');
+    }
+  });
+});
+test('pm.response.text binary', () => {
+  http.request.returns({
+    body: [0x01, 0x02, 0x03]
+  });
+  postman[Request]({
+    post() {
+      expect(pm.response.text()).toBe(null);
     }
   });
 });

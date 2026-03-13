@@ -1,13 +1,24 @@
 const Reset = Symbol.for('reset');
 
-function loadShimCore(extraMocks = []) {
+function loadShimCore(options = {}) {
+  const { extraMocks = [], preloadModules = [], withGlobalRequire = false } = options;
+
   jest.resetModules();
+  jest.clearAllMocks();
 
-  jest.doMock('k6', () => require('../../test/stub/k6.jest'));
-  jest.doMock('k6/http', () => require('../../test/stub/http.jest'));
+  jest.doMock('k6', () => jest.requireActual('../../test/stub/k6'));
+  jest.doMock('k6/http', () => jest.requireActual('../../test/stub/http'));
 
-  for (const [name, factory] of extraMocks) {
+  for (const [name, factory, mockOptions] of extraMocks) {
+    if (mockOptions) {
+      jest.doMock(name, factory, mockOptions);
+      continue;
+    }
     jest.doMock(name, factory);
+  }
+
+  if (withGlobalRequire) {
+    global.require = require;
   }
 
   let k6;
@@ -17,6 +28,9 @@ function loadShimCore(extraMocks = []) {
     k6 = require('k6');
     http = require('k6/http');
     require('../../lib/shim/core');
+    for (const modulePath of preloadModules) {
+      require(modulePath);
+    }
   });
 
   return { k6, http, Reset, postman: global.postman, pm: global.pm };

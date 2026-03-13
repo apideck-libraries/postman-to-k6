@@ -1,89 +1,77 @@
 /* global postman */
 
-import mockRequire from 'mock-require';
 import path from 'path';
+import { loadShimCore, resetShimState } from '../../helpers/shimHarness';
 const lodash = Symbol('lodash');
 const cheerio = Symbol('cheerio');
 const cryptoJs = Symbol('crypto-js');
 let k6, http;
-
-const Reset = Symbol.for('reset');
+let harness;
 const Request = Symbol.for('request');
-
 beforeAll(() => {
-  global.require = require; // Simulate k6 global require
-  mockRequire('k6', 'stub/k6');
-  mockRequire('k6/http', 'stub/http');
-  jest.doMock(path.resolve(__dirname, '../../../lib/lodash.js'), () => lodash, { virtual: true });
-  jest.doMock(path.resolve(__dirname, '../../../lib/cheerio.js'), () => cheerio, { virtual: true });
-  jest.doMock(path.resolve(__dirname, '../../../lib/crypto-js.js'), () => cryptoJs, { virtual: true });
-  k6 = require('k6');
-  http = require('k6/http');
-  require('shim/core');
-});
-
-afterEach(() => {
-  k6[Reset]();
-  http[Reset]();
-  postman[Reset]();
-});
-
-test('require standard', t => {
-  t.notThrows(() => {
-    global.require('console');
+  harness = loadShimCore({
+    withGlobalRequire: true,
+    extraMocks: [
+      [path.resolve(__dirname, '../../../lib/lodash.js'), () => lodash, { virtual: true }],
+      [path.resolve(__dirname, '../../../lib/cheerio.js'), () => cheerio, { virtual: true }],
+      [path.resolve(__dirname, '../../../lib/crypto-js.js'), () => cryptoJs, { virtual: true }]
+    ]
   });
+  ({ k6, http } = harness);
 });
-
-test('require prerequest', t => {
+afterEach(() => {
+  resetShimState(harness);
+});
+test('require standard', () => {
+  expect(() => {
+    global.require('console');
+  }).not.toThrow();
+});
+test('require prerequest', () => {
   postman[Request]({
     pre() {
-      t.throws(() => {
+      expect(() => {
         global.require('console');
-      });
+      }).toThrow();
     }
   });
 });
-
-test('require postrequest', t => {
+test('require postrequest', () => {
   postman[Request]({
     post() {
-      t.throws(() => {
+      expect(() => {
         global.require('console');
-      });
+      }).toThrow();
     }
   });
 });
-
-test('require released', t => {
+test('require released', () => {
   postman[Request]({});
-  t.notThrows(() => {
+  expect(() => {
     global.require('console');
-  });
+  }).not.toThrow();
 });
-
-test('lodash', t => {
+test('lodash', () => {
   require('shim/lodash');
   postman[Request]({
     pre() {
-      t.is(global.require('lodash'), lodash);
+      expect(global.require('lodash')).toBe(lodash);
     }
   });
 });
-
-test('cheerio', t => {
+test('cheerio', () => {
   require('shim/cheerio');
   postman[Request]({
     pre() {
-      t.is(global.require('cheerio'), cheerio);
+      expect(global.require('cheerio')).toBe(cheerio);
     }
   });
 });
-
-test('crypto-js', t => {
+test('crypto-js', () => {
   require('shim/crypto-js');
   postman[Request]({
     pre() {
-      t.is(global.require('crypto-js'), cryptoJs);
+      expect(global.require('crypto-js')).toBe(cryptoJs);
     }
   });
 });

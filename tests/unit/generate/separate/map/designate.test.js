@@ -1,34 +1,26 @@
 const mockDeconflict = jest.fn();
-
 jest.mock('../../../../../lib/generate/separate/map/deconflict', () => mockDeconflict);
-
 const designate = require('../../../../../lib/generate/separate/map/designate');
-
 afterEach(() => {
   mockDeconflict.mockReset();
 });
-
-test('basic', t => {
-  mockDeconflict.mockImplementation((name) => name);
-  t.is(designate('apple', {}, {}), 'apple');
+test('basic', () => {
+  mockDeconflict.mockImplementation(name => name);
+  expect(designate('apple', {}, {})).toBe('apple');
 });
-
-test('suffix', t => {
-  mockDeconflict.mockImplementation((name) => name);
-  t.is(designate('apple', {}, {}, '.js'), 'apple.js');
+test('suffix', () => {
+  mockDeconflict.mockImplementation(name => name);
+  expect(designate('apple', {}, {}, '.js')).toBe('apple.js');
 });
-
-test('encode', t => {
-  mockDeconflict.mockImplementation((name) => name);
-  t.is(designate('About/Company', {}, {}), 'AboutCompany');
+test('encode', () => {
+  mockDeconflict.mockImplementation(name => name);
+  expect(designate('About/Company', {}, {})).toBe('AboutCompany');
 });
-
-test('deconflict', t => {
+test('deconflict', () => {
   mockDeconflict.mockReturnValue('apple.A');
-  t.is(designate('apple', {}, {}), 'apple.A');
+  expect(designate('apple', {}, {})).toBe('apple.A');
 });
-
-test('deconflict suffix', t => {
+test('deconflict suffix', () => {
   mockDeconflict.mockReturnValue('apple.A');
-  t.is(designate('apple', {}, {}, '.js'), 'apple.A.js');
+  expect(designate('apple', {}, {}, '.js')).toBe('apple.A.js');
 });

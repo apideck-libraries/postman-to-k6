@@ -1,23 +1,23 @@
 /* global postman */
 
+import { loadShimCore, resetShimState } from '../../helpers/shimHarness';
+
 const Initial = Symbol.for('initial');
-const Reset = Symbol.for('reset');
 const Request = Symbol.for('request');
 
+let harness;
 let http;
 
 beforeAll(() => {
-  jest.resetModules();
-  http = require('k6/http');
-  require('shim/core');
+  harness = loadShimCore();
+  ({ http } = harness);
 });
 
 afterEach(() => {
-  global.postman[Reset]();
-  http[Reset]();
+  resetShimState(harness);
 });
 
-test('interpolate raw body', t => {
+test('interpolate raw body', () => {
   global.postman[Initial]({
     environment: {
       birch: 'fir',
@@ -30,11 +30,12 @@ test('interpolate raw body', t => {
     address: 'http://example.com',
     data: '{{birch}} {{pine}} {{willow}}'
   });
+
   const body = http.request.firstCall.args[2];
-  t.is(body, 'fir redwood rosewood');
+  expect(body).toBe('fir redwood rosewood');
 });
 
-test('should pass on tags to the http request', t => {
+test('should pass on tags to the http request', () => {
   const testName = 'request tagged with a name';
   global.postman[Request]({
     method: 'GET',
@@ -42,10 +43,7 @@ test('should pass on tags to the http request', t => {
     data: 'testing',
     tags: { name: testName }
   });
-  const params = http.request.firstCall.args[3];
 
-  t.is(
-    params.tags.name,
-    testName,
-  );
+  const params = http.request.firstCall.args[3];
+  expect(params.tags.name).toBe(testName);
 });

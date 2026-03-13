@@ -324,6 +324,8 @@ $ yarn test-ava
 $ yarn test-jest
 ```
 
+`yarn test-jest` includes a native-Jest guard for `tests/**` (fails on AVA-style APIs or `mock-require`).
+
 Run both suites:
 
 ```shell
@@ -335,6 +337,10 @@ Run coverage for both suites and generate a combined summary/trend artifact:
 ```shell
 $ yarn coverage-all
 ```
+
+`yarn coverage-all` also enforces a Jest coverage regression gate against
+`docs/superpowers/plans/jest-coverage-baseline.json` with a max drop of `0.30%`
+for lines/statements/functions/branches.
 
 ## Unsupported Features
 

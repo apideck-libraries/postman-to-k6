@@ -1,39 +1,28 @@
 /* global postman xml2Json xmlToJson */
 
-import mockRequire from 'mock-require';
 import path from 'path';
+import { loadShimCore, resetShimState } from '../../helpers/shimHarness';
 let k6, http;
-
-const Reset = Symbol.for('reset');
-
+let harness;
 beforeAll(() => {
-  mockRequire('k6', 'stub/k6');
-  mockRequire('k6/http', 'stub/http');
-  jest.doMock(
-    path.resolve(__dirname, '../../../lib/xml2js.js'),
-    () => require('xml2js'),
-    { virtual: true }
-  );
-  k6 = require('k6');
-  http = require('k6/http');
-  require('shim/core');
-  require('shim/xml2Json');
+  harness = loadShimCore({
+    extraMocks: [[path.resolve(__dirname, '../../../lib/xml2js.js'), () => require('xml2js'), { virtual: true }]],
+    preloadModules: ['../../lib/shim/xml2Json']
+  });
+  ({ k6, http } = harness);
 });
-
 afterEach(() => {
-  k6[Reset]();
-  http[Reset]();
-  postman[Reset]();
+  resetShimState(harness);
 });
-
-test('xml2Json', t => {
+test('xml2Json', () => {
   const xml = '<root>Text</root>';
   const json = xml2Json(xml);
-  t.deepEqual(json, { root: 'Text' });
-});
-
-test('xmlToJson', t => {
-  t.throws(() => {
-    xmlToJson();
+  expect(json).toEqual({
+    root: 'Text'
   });
+});
+test('xmlToJson', () => {
+  expect(() => {
+    xmlToJson();
+  }).toThrow();
 });
