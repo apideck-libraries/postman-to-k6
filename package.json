@@ -43,7 +43,6 @@
     "postinstall": "node scripts/bundle.js",
     "test": "npm run test-all",
     "test-ava-suite": "npm --prefix tests/ava-suite run test-all",
-    "test-hoc": "cross-env NODE_PATH=lib:test ava",
     "test-jest:runner": "jest --colors --verbose --reporters=default --collectCoverage --no-cache",
     "test-jest-native-guard": "node scripts/guard-jest-native.js",
     "test-jest": "npm-run-all test-jest-native-guard test-jest:runner",
@@ -85,12 +84,9 @@
     "@babel/register": "^7.28.6",
     "@babel/runtime": "^7.28.6",
     "@biomejs/biome": "^2.4.7",
-    "ava": "^2.4.0",
-    "c8": "^11.0.0",
     "cross-env": "^7.0.3",
     "husky": "^7.0.4",
     "jest": "^30.3.0",
-    "mock-require": "^3.0.3",
     "npm-run-all": "^4.1.5",
     "sinon": "^7.5.0"
   },
@@ -98,12 +94,6 @@
     "node": ">=18"
   },
   "preferGlobal": true,
-  "ava": {
-    "verbose": true,
-    "require": [
-      "@babel/register"
-    ]
-  },
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org"
