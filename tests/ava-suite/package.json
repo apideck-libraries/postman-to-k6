@@ -1,0 +1,36 @@
+{
+  "name": "@apideck/postman-to-k6-ava",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "test-unit": "cd ../.. && cross-env NODE_PATH=lib:test ava test/unit/**/*.js",
+    "test-com": "cd ../.. && cross-env NODE_PATH=lib:test ava test/com/**/*.js",
+    "test-int": "cd ../.. && cross-env NODE_PATH=lib:test ava test/int/*.js",
+    "test-ava": "npm-run-all test-unit test-com test-int",
+    "test-all": "npm-run-all test-unit test-com test-int",
+    "coverage-ava": "c8 --reporter=json-summary --reporter=text-summary --report-dir coverage/ava npm run test-ava",
+    "lint": "biome lint ../lib ../test"
+  },
+  "devDependencies": {
+    "@babel/register": "^7.28.6",
+    "@babel/runtime": "^7.28.6",
+    "@babel/plugin-transform-runtime": "^7.28.6",
+    "@babel/preset-env": "^7.28.6",
+    "@biomejs/biome": "^2.4.7",
+    "ava": "^2.4.0",
+    "c8": "^11.0.0",
+    "cross-env": "^7.0.3",
+    "mock-require": "^3.0.3",
+    "npm-run-all": "^4.1.5",
+    "sinon": "^7.5.0"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "ava": {
+    "verbose": true,
+    "require": [
+      "@babel/register"
+    ]
+  }
+}

@@ -23,7 +23,7 @@ jobs:
           node-version: 24.x
 
       - name: Install dependencies
-        run: yarn install
+        run: npm install
 
       - name: Format
         run: yarn format
@@ -31,8 +31,14 @@ jobs:
       - name: Lint
         run: yarn lint
 
-      - name: Test (Ava + Jest)
-        run: yarn test-all
+      - name: Test (Jest)
+        run: npm run test-jest
+
+      - name: Install Ava suite dependencies
+        run: npm install --prefix tests/ava-suite
+
+      - name: Test (Ava)
+        run: npm --prefix tests/ava-suite run test-all
 
       - name: Bundle
-        run: yarn bundle
+        run: npm run bundle
