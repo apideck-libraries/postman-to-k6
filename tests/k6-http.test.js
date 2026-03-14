@@ -15,9 +15,7 @@ describe('packages/k6/http shim', () => {
       },
     };
 
-    global.fetch = jest
-      .fn()
-      .mockResolvedValue({ status: 201, text, headers });
+    global.fetch = jest.fn().mockResolvedValue({ status: 201, text, headers });
 
     const http = require('../packages/k6/http-fetch');
     const response = await http.request(
