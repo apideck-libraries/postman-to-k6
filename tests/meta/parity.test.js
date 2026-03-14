@@ -8,8 +8,13 @@ const ALLOWLIST = new Set([]);
 function walk(dir) {
   const entries = fs.readdirSync(dir, { withFileTypes: true });
   const out = [];
+  const excluded = new Set(['node_modules', '.git']);
 
   for (const entry of entries) {
+    if (entry.isDirectory() && excluded.has(entry.name)) {
+      continue;
+    }
+
     const fullPath = path.join(dir, entry.name);
     if (entry.isDirectory()) {
       out.push(...walk(fullPath));

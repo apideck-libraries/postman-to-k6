@@ -320,22 +320,22 @@ $ postman-to-k6 example/v2/echo.json -o k6-script.js
 Run suites independently:
 
 ```shell
-$ yarn test-ava
-$ yarn test-jest
+$ npm run test-legacy
+$ npm run test-jest
 ```
 
 `yarn test-jest` includes a native-Jest guard for `tests/**` (fails on AVA-style APIs or `mock-require`).
 
-Run both suites:
+Run both suites (legacy + Jest):
 
 ```shell
-$ yarn test-all
+$ npm run test-legacy && npm run test-jest
 ```
 
-Run coverage for both suites and generate a combined summary/trend artifact:
+Run coverage for both suites and generate a combined summary/trend artifact (the legacy coverage command now runs with the isolated package):
 
 ```shell
-$ yarn coverage-all
+$ npm run coverage-all
 ```
 
 `yarn coverage-all` also enforces a Jest coverage regression gate against
@@ -355,6 +355,15 @@ The guard command is:
 ```shell
 $ yarn test-jest-native-guard
 ```
+
+### k6/http-fetch shim
+
+The new `packages/k6/http-fetch.js` shim proxies to the global `fetch` API so that
+Jest exercises the same HTTP inbound shape that `k6/http` exposes at runtime.
+Node 18+ already ships with `fetch`; add a polyfill such as `undici` when running
+in older environments. The new `tests/k6-http.test.js` suite keeps this behavior
+aligned with the converter without affecting the default `k6/http` stub used by
+the legacy Ava suite.
 
 ## Unsupported Features
 

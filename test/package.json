@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "test-unit": "cd ../.. && cross-env NODE_PATH=lib:test ava test/unit/**/*.js",
-    "test-com": "cd ../.. && cross-env NODE_PATH=lib:test ava test/com/**/*.js",
-    "test-int": "cd ../.. && cross-env NODE_PATH=lib:test ava test/int/*.js",
+    "test-unit": "cross-env AVA_REQUIRE=@babel/register NODE_PATH=../lib:../test ava ../test/unit/**/*.js",
+    "test-com": "cross-env AVA_REQUIRE=@babel/register NODE_PATH=../lib:../test ava ../test/com/**/*.js",
+    "test-int": "cross-env AVA_REQUIRE=@babel/register NODE_PATH=../lib:../test ava ../test/int/*.js",
     "test-ava": "npm-run-all test-unit test-com test-int",
     "test-all": "npm-run-all test-unit test-com test-int",
     "coverage-ava": "c8 --reporter=json-summary --reporter=text-summary --report-dir coverage/ava npm run test-ava",

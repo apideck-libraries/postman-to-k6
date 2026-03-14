@@ -1,4 +1,4 @@
-import sinon from 'sinon';
+const sinon = require('sinon');
 
 const Reset = Symbol.for('reset');
 
