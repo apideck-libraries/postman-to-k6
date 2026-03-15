@@ -17,7 +17,7 @@
     "@babel/plugin-transform-runtime": "^7.28.6",
     "@babel/preset-env": "^7.28.6",
     "@biomejs/biome": "^2.4.7",
-    "ava": "^2.4.0",
+    "ava": "^7.0.0",
     "c8": "^11.0.0",
     "cross-env": "^7.0.3",
     "mock-require": "^3.0.3",
