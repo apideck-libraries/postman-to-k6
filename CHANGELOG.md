@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased](https://github.com/apideck-libraries/postman-to-k6/compare/v1.8.7...HEAD)
 
+## [1.14.1] - 2026-03-14
+
 - chore: remove AVA and related dependencies
 - chore: Remove Husky
 - chore: Bump dependencies
