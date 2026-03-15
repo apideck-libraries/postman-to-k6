@@ -125,12 +125,13 @@ function parseArgs(argv) {
       argv.includes('--check') ||
       (!argv.includes('--report-only') && !argv.includes('--no-fail')),
     outputPath:
-      argv.find((arg) => arg.startsWith('--output='))?.slice('--output='.length) ||
-      defaultOutputPath,
+      argv
+        .find((arg) => arg.startsWith('--output='))
+        ?.slice('--output='.length) || defaultOutputPath,
     allowlistPath:
-      argv.find((arg) => arg.startsWith('--allowlist='))?.slice(
-        '--allowlist='.length
-      ) || defaultAllowlistPath,
+      argv
+        .find((arg) => arg.startsWith('--allowlist='))
+        ?.slice('--allowlist='.length) || defaultAllowlistPath,
     failOnExtra:
       argv.includes('--fail-on-extra') ||
       process.env.PARITY_FAIL_ON_EXTRA === '1',
