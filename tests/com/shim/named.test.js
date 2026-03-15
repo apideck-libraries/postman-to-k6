@@ -23,7 +23,7 @@ test('undefined', () => {
 });
 test('1', () => {
   const response = Symbol('response');
-  http.request.returns(response);
+  http.request.mockReturnValue(response);
   postman[Define]({
     name: 'Home Page',
     method: 'GET',
@@ -36,7 +36,7 @@ test('1', () => {
     },
   });
   const result = postman[Request]('Home Page');
-  expect(http.request.calledOnce).toBe(true);
+  expect(http.request).toHaveBeenCalledTimes(1);
   expect(result).toBe(response);
 });
 test('3', () => {

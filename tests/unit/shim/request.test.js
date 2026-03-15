@@ -34,7 +34,7 @@ test('interpolate raw body', () => {
     data: '{{birch}} {{pine}} {{willow}}',
   });
 
-  const body = http.request.firstCall.args[2];
+  const body = http.request.mock.calls[0][2];
   expect(body).toBe('fir redwood rosewood');
 });
 
@@ -47,6 +47,6 @@ test('should pass on tags to the http request', () => {
     tags: { name: testName },
   });
 
-  const params = http.request.firstCall.args[3];
+  const params = http.request.mock.calls[0][3];
   expect(params.tags.name).toBe(testName);
 });

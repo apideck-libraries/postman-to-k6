@@ -8,10 +8,9 @@ function loadShimCore(options = {}) {
   } = options;
 
   jest.resetModules();
-  jest.clearAllMocks();
 
-  jest.doMock('k6', () => jest.requireActual('../../test/stub/k6'));
-  jest.doMock('k6/http', () => jest.requireActual('../../test/stub/http'));
+  jest.doMock('k6', () => jest.requireActual('./jestStubs/k6'));
+  jest.doMock('k6/http', () => jest.requireActual('./jestStubs/http'));
 
   for (const [name, factory, mockOptions] of extraMocks) {
     if (mockOptions) {

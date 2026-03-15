@@ -1,11 +1,9 @@
-import sinon from 'sinon';
-
 const Reset = Symbol.for('reset');
 
 const http = {
-  request: sinon.stub(),
+  request: jest.fn(),
   [Reset]() {
-    this.request.reset();
+    this.request.mockReset();
   },
 };
 

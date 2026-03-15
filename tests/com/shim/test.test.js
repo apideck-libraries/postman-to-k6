@@ -8,12 +8,12 @@ let http;
 let harness;
 const Request = Symbol.for('request');
 function expectFail() {
-  k6.check.callsFake((response, tests) => {
+  k6.check.mockImplementation((response, tests) => {
     expect(tests.test(response)).toBe(false);
   });
 }
 function expectPass() {
-  k6.check.callsFake((response, tests) => {
+  k6.check.mockImplementation((response, tests) => {
     expect(tests.test(response)).toBe(true);
   });
 }
@@ -58,14 +58,14 @@ test('tests', () => {
       });
     },
   });
-  expect(k6.check.calledThrice).toBe(true);
-  const call1 = k6.check.getCall(0).args[1];
+  expect(k6.check).toHaveBeenCalledTimes(3);
+  const call1 = k6.check.mock.calls[0][1];
   expect('first' in call1).toBe(true);
   expect(call1.first()).toBe(true);
-  const call2 = k6.check.getCall(1).args[1];
+  const call2 = k6.check.mock.calls[1][1];
   expect('second' in call2).toBe(true);
   expect(call2.second()).toBe(false);
-  const call3 = k6.check.getCall(2).args[1];
+  const call3 = k6.check.mock.calls[2][1];
   expect('third' in call3).toBe(true);
   expect(call3.third()).toBe(true);
 });
@@ -88,7 +88,7 @@ test('pm.test rethrows non-assertion errors', () => {
   }).toThrow('boom');
 });
 test('pm.response.to.be.accepted fail', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     status: 200,
   });
   expectFail();
@@ -97,7 +97,7 @@ test('pm.response.to.be.accepted fail', () => {
   });
 });
 test('pm.response.to.be.accepted pass', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     status: 202,
   });
   expectPass();
@@ -106,7 +106,7 @@ test('pm.response.to.be.accepted pass', () => {
   });
 });
 test('pm.response.to.be.badRequest fail', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     status: 476,
   });
   expectFail();
@@ -115,7 +115,7 @@ test('pm.response.to.be.badRequest fail', () => {
   });
 });
 test('pm.response.to.be.badRequest pass', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     status: 400,
   });
   expectPass();
@@ -124,7 +124,7 @@ test('pm.response.to.be.badRequest pass', () => {
   });
 });
 test('pm.response.to.be.clientError fail', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     status: 100,
   });
   expectFail();
@@ -133,7 +133,7 @@ test('pm.response.to.be.clientError fail', () => {
   });
 });
 test('pm.response.to.be.clientError pass', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     status: 473,
   });
   expectPass();
@@ -142,7 +142,7 @@ test('pm.response.to.be.clientError pass', () => {
   });
 });
 test('pm.response.to.be.error fail', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     status: 100,
   });
   expectFail();
@@ -151,7 +151,7 @@ test('pm.response.to.be.error fail', () => {
   });
 });
 test('pm.response.to.be.error 4xx', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     status: 498,
   });
   expectPass();
@@ -160,7 +160,7 @@ test('pm.response.to.be.error 4xx', () => {
   });
 });
 test('pm.response.to.be.error 5xx', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     status: 543,
   });
   expectPass();
@@ -169,7 +169,7 @@ test('pm.response.to.be.error 5xx', () => {
   });
 });
 test('pm.response.to.be.forbidden fail', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     status: 400,
   });
   expectFail();
@@ -178,7 +178,7 @@ test('pm.response.to.be.forbidden fail', () => {
   });
 });
 test('pm.response.to.be.forbidden pass', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     status: 403,
   });
   expectPass();
@@ -187,7 +187,7 @@ test('pm.response.to.be.forbidden pass', () => {
   });
 });
 test('pm.response.to.be.info fail', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     status: 200,
   });
   expectFail();
@@ -196,7 +196,7 @@ test('pm.response.to.be.info fail', () => {
   });
 });
 test('pm.response.to.be.info pass', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     status: 156,
   });
   expectPass();
@@ -205,7 +205,7 @@ test('pm.response.to.be.info pass', () => {
   });
 });
 test('pm.response.to.be.notFound fail', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     status: 400,
   });
   expectFail();
@@ -214,7 +214,7 @@ test('pm.response.to.be.notFound fail', () => {
   });
 });
 test('pm.response.to.be.notFound pass', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     status: 404,
   });
   expectPass();
@@ -223,7 +223,7 @@ test('pm.response.to.be.notFound pass', () => {
   });
 });
 test('pm.response.to.be.ok fail', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     status: 202,
   });
   expectFail();
@@ -232,7 +232,7 @@ test('pm.response.to.be.ok fail', () => {
   });
 });
 test('pm.response.to.be.ok pass', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     status: 200,
   });
   expectPass();
@@ -241,7 +241,7 @@ test('pm.response.to.be.ok pass', () => {
   });
 });
 test('pm.response.to.be.rateLimited fail', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     status: 400,
   });
   expectFail();
@@ -250,7 +250,7 @@ test('pm.response.to.be.rateLimited fail', () => {
   });
 });
 test('pm.response.to.be.rateLimited pass', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     status: 429,
   });
   expectPass();
@@ -259,7 +259,7 @@ test('pm.response.to.be.rateLimited pass', () => {
   });
 });
 test('pm.response.to.be.redirection fail', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     status: 100,
   });
   expectFail();
@@ -268,7 +268,7 @@ test('pm.response.to.be.redirection fail', () => {
   });
 });
 test('pm.response.to.be.redirection pass', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     status: 344,
   });
   expectPass();
@@ -277,7 +277,7 @@ test('pm.response.to.be.redirection pass', () => {
   });
 });
 test('pm.response.to.be.serverError fail', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     status: 100,
   });
   expectFail();
@@ -286,7 +286,7 @@ test('pm.response.to.be.serverError fail', () => {
   });
 });
 test('pm.response.to.be.serverError pass', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     status: 523,
   });
   expectPass();
@@ -295,7 +295,7 @@ test('pm.response.to.be.serverError pass', () => {
   });
 });
 test('pm.response.to.be.success fail', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     status: 100,
   });
   expectFail();
@@ -304,7 +304,7 @@ test('pm.response.to.be.success fail', () => {
   });
 });
 test('pm.response.to.be.success pass', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     status: 275,
   });
   expectPass();
@@ -313,7 +313,7 @@ test('pm.response.to.be.success pass', () => {
   });
 });
 test('pm.response.to.be.unauthorized fail', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     status: 400,
   });
   expectFail();
@@ -322,7 +322,7 @@ test('pm.response.to.be.unauthorized fail', () => {
   });
 });
 test('pm.response.to.be.unauthorized pass', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     status: 401,
   });
   expectPass();
@@ -331,14 +331,14 @@ test('pm.response.to.be.unauthorized pass', () => {
   });
 });
 test('pm.response.to.have.body exist fail', () => {
-  http.request.returns({});
+  http.request.mockReturnValue({});
   expectFail();
   define(() => {
     pm.response.to.have.body();
   });
 });
 test('pm.response.to.have.body exist pass', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     body: 'Response body',
   });
   expectPass();
@@ -347,7 +347,7 @@ test('pm.response.to.have.body exist pass', () => {
   });
 });
 test('pm.response.to.have.body string fail', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     body: 'Response body',
   });
   expectFail();
@@ -356,7 +356,7 @@ test('pm.response.to.have.body string fail', () => {
   });
 });
 test('pm.response.to.have.body string pass', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     body: 'Response body',
   });
   expectPass();
@@ -365,7 +365,7 @@ test('pm.response.to.have.body string pass', () => {
   });
 });
 test('pm.response.to.have.body regex fail', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     body: 'Response body',
   });
   expectFail();
@@ -374,7 +374,7 @@ test('pm.response.to.have.body regex fail', () => {
   });
 });
 test('pm.response.to.have.body regex pass', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     body: 'Response body',
   });
   expectPass();
@@ -396,7 +396,7 @@ test('pm.response.to.have.header exist fail', () => {
   });
 });
 test('pm.response.to.have.header exist pass', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     headers: {
       Allow: 'GET',
     },
@@ -407,7 +407,7 @@ test('pm.response.to.have.header exist pass', () => {
   });
 });
 test('pm.response.to.have.header value fail', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     headers: {
       Allow: 'GET',
     },
@@ -418,7 +418,7 @@ test('pm.response.to.have.header value fail', () => {
   });
 });
 test('pm.response.to.have.header value pass', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     headers: {
       Allow: 'GET',
     },
@@ -429,7 +429,7 @@ test('pm.response.to.have.header value pass', () => {
   });
 });
 test('pm.response.to.have.jsonBody exist fail', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     body: 'not a json body',
   });
   expectFail();
@@ -438,7 +438,7 @@ test('pm.response.to.have.jsonBody exist fail', () => {
   });
 });
 test('pm.response.to.have.jsonBody exist pass', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     body: '{"test":"a","test2":"b"}',
   });
   expectPass();
@@ -447,7 +447,7 @@ test('pm.response.to.have.jsonBody exist pass', () => {
   });
 });
 test('pm.response.to.have.jsonBody equal fail', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     body: '{"test":"a","test2":"b"}',
   });
   expectFail();
@@ -458,7 +458,7 @@ test('pm.response.to.have.jsonBody equal fail', () => {
   });
 });
 test('pm.response.to.have.jsonBody equal pass', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     body: '{"test":"a","test2":"b"}',
   });
   expectPass();
@@ -470,7 +470,7 @@ test('pm.response.to.have.jsonBody equal pass', () => {
   });
 });
 test('pm.response.to.have.jsonBody path fail', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     body: '{"test":"a"}',
   });
   expectFail();
@@ -479,7 +479,7 @@ test('pm.response.to.have.jsonBody path fail', () => {
   });
 });
 test('pm.response.to.have.jsonBody path pass', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     body: '{"test":"a","test2":"b"}',
   });
   expectPass();
@@ -488,7 +488,7 @@ test('pm.response.to.have.jsonBody path pass', () => {
   });
 });
 test('pm.response.to.have.jsonBody invalid path', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     body: '{"test":"a"}',
   });
   expectFail();
@@ -497,7 +497,7 @@ test('pm.response.to.have.jsonBody invalid path', () => {
   });
 });
 test('pm.response.to.have.jsonBody value fail', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     body: '{"test":"a"}',
   });
   expectFail();
@@ -506,7 +506,7 @@ test('pm.response.to.have.jsonBody value fail', () => {
   });
 });
 test('pm.response.to.have.jsonBody value pass', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     body: '{"test":"a"}',
   });
   expectPass();
@@ -522,7 +522,7 @@ test('pm.response.to.have.jsonBody invalid argument type', () => {
   });
 });
 test('pm.response.to.have.jsonSchema fail', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     body: '{"test":"a"}',
   });
   expectFail();
@@ -538,7 +538,7 @@ test('pm.response.to.have.jsonSchema fail', () => {
   });
 });
 test('pm.response.to.have.jsonSchema pass', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     body: '{"test":7}',
   });
   expectPass();
@@ -568,7 +568,7 @@ test('pm.response.to.have.status string', () => {
   });
 });
 test('pm.response.to.have.status fail', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     status: 404,
   });
   expectFail();
@@ -577,7 +577,7 @@ test('pm.response.to.have.status fail', () => {
   });
 });
 test('pm.response.to.have.status pass', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     status: 200,
   });
   expectPass();
@@ -586,7 +586,7 @@ test('pm.response.to.have.status pass', () => {
   });
 });
 test('pm.response.to.not.be.accepted fail', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     status: 202,
   });
   expectFail();
@@ -595,7 +595,7 @@ test('pm.response.to.not.be.accepted fail', () => {
   });
 });
 test('pm.response.to.not.be.accepted pass', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     status: 200,
   });
   expectPass();
@@ -604,7 +604,7 @@ test('pm.response.to.not.be.accepted pass', () => {
   });
 });
 test('pm.response.to.not.be.badRequest fail', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     status: 400,
   });
   expectFail();
@@ -613,7 +613,7 @@ test('pm.response.to.not.be.badRequest fail', () => {
   });
 });
 test('pm.response.to.not.be.badRequest pass', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     status: 401,
   });
   expectPass();
@@ -622,7 +622,7 @@ test('pm.response.to.not.be.badRequest pass', () => {
   });
 });
 test('pm.response.to.not.be.clientError fail', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     status: 434,
   });
   expectFail();
@@ -631,7 +631,7 @@ test('pm.response.to.not.be.clientError fail', () => {
   });
 });
 test('pm.response.to.not.be.clientError pass', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     status: 100,
   });
   expectPass();
@@ -640,7 +640,7 @@ test('pm.response.to.not.be.clientError pass', () => {
   });
 });
 test('pm.response.to.not.be.error 4xx', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     status: 487,
   });
   expectFail();
@@ -649,7 +649,7 @@ test('pm.response.to.not.be.error 4xx', () => {
   });
 });
 test('pm.response.to.not.be.error 5xx', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     status: 523,
   });
   expectFail();
@@ -658,7 +658,7 @@ test('pm.response.to.not.be.error 5xx', () => {
   });
 });
 test('pm.response.to.not.be.error pass', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     status: 200,
   });
   expectPass();
@@ -667,7 +667,7 @@ test('pm.response.to.not.be.error pass', () => {
   });
 });
 test('pm.response.to.not.be.forbidden fail', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     status: 403,
   });
   expectFail();
@@ -676,7 +676,7 @@ test('pm.response.to.not.be.forbidden fail', () => {
   });
 });
 test('pm.response.to.not.be.forbidden pass', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     status: 400,
   });
   expectPass();
@@ -685,7 +685,7 @@ test('pm.response.to.not.be.forbidden pass', () => {
   });
 });
 test('pm.response.to.not.be.info fail', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     status: 156,
   });
   expectFail();
@@ -694,7 +694,7 @@ test('pm.response.to.not.be.info fail', () => {
   });
 });
 test('pm.response.to.not.be.info pass', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     status: 200,
   });
   expectPass();
@@ -703,7 +703,7 @@ test('pm.response.to.not.be.info pass', () => {
   });
 });
 test('pm.response.to.not.be.notFound fail', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     status: 404,
   });
   expectFail();
@@ -712,7 +712,7 @@ test('pm.response.to.not.be.notFound fail', () => {
   });
 });
 test('pm.response.to.not.be.notFound pass', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     status: 400,
   });
   expectPass();
@@ -721,7 +721,7 @@ test('pm.response.to.not.be.notFound pass', () => {
   });
 });
 test('pm.response.to.not.be.ok fail', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     status: 200,
   });
   expectFail();
@@ -730,7 +730,7 @@ test('pm.response.to.not.be.ok fail', () => {
   });
 });
 test('pm.response.to.not.be.ok pass', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     status: 202,
   });
   expectPass();
@@ -739,7 +739,7 @@ test('pm.response.to.not.be.ok pass', () => {
   });
 });
 test('pm.response.to.not.be.rateLimited fail', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     status: 429,
   });
   expectFail();
@@ -748,7 +748,7 @@ test('pm.response.to.not.be.rateLimited fail', () => {
   });
 });
 test('pm.response.to.not.be.rateLimited pass', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     status: 400,
   });
   expectPass();
@@ -757,7 +757,7 @@ test('pm.response.to.not.be.rateLimited pass', () => {
   });
 });
 test('pm.response.to.not.be.redirection fail', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     status: 387,
   });
   expectFail();
@@ -766,7 +766,7 @@ test('pm.response.to.not.be.redirection fail', () => {
   });
 });
 test('pm.response.to.not.be.redirection pass', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     status: 100,
   });
   expectPass();
@@ -775,7 +775,7 @@ test('pm.response.to.not.be.redirection pass', () => {
   });
 });
 test('pm.response.to.not.be.serverError fail', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     status: 584,
   });
   expectFail();
@@ -784,7 +784,7 @@ test('pm.response.to.not.be.serverError fail', () => {
   });
 });
 test('pm.response.to.not.be.serverError pass', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     status: 100,
   });
   expectPass();
@@ -793,7 +793,7 @@ test('pm.response.to.not.be.serverError pass', () => {
   });
 });
 test('pm.response.to.not.be.success fail', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     status: 254,
   });
   expectFail();
@@ -802,7 +802,7 @@ test('pm.response.to.not.be.success fail', () => {
   });
 });
 test('pm.response.to.not.be.success pass', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     status: 100,
   });
   expectPass();
@@ -811,7 +811,7 @@ test('pm.response.to.not.be.success pass', () => {
   });
 });
 test('pm.response.to.not.be.unauthorized fail', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     status: 401,
   });
   expectFail();
@@ -820,7 +820,7 @@ test('pm.response.to.not.be.unauthorized fail', () => {
   });
 });
 test('pm.response.to.not.be.unauthorized pass', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     status: 400,
   });
   expectPass();
@@ -829,7 +829,7 @@ test('pm.response.to.not.be.unauthorized pass', () => {
   });
 });
 test('pm.response.to.not.have.body exist fail', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     body: 'Response body',
   });
   expectFail();
@@ -838,14 +838,14 @@ test('pm.response.to.not.have.body exist fail', () => {
   });
 });
 test('pm.response.to.not.have.body exist pass', () => {
-  http.request.returns({});
+  http.request.mockReturnValue({});
   expectPass();
   define(() => {
     pm.response.to.not.have.body();
   });
 });
 test('pm.response.to.not.have.body string fail', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     body: 'Response body',
   });
   expectFail();
@@ -854,7 +854,7 @@ test('pm.response.to.not.have.body string fail', () => {
   });
 });
 test('pm.response.to.not.have.body string pass', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     body: 'Response body',
   });
   expectPass();
@@ -863,7 +863,7 @@ test('pm.response.to.not.have.body string pass', () => {
   });
 });
 test('pm.response.to.not.have.body regex fail', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     body: 'Response body',
   });
   expectFail();
@@ -872,7 +872,7 @@ test('pm.response.to.not.have.body regex fail', () => {
   });
 });
 test('pm.response.to.not.have.body regex pass', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     body: 'Response body',
   });
   expectPass();
@@ -888,7 +888,7 @@ test('pm.response.to.not.have.body invalid argument type', () => {
   });
 });
 test('pm.response.to.not.have.header exist fail', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     headers: {
       Allow: 'GET',
     },
@@ -899,7 +899,7 @@ test('pm.response.to.not.have.header exist fail', () => {
   });
 });
 test('pm.response.to.not.have.header exist pass', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     headers: {
       Server: 'MasterControlProgram',
     },
@@ -910,7 +910,7 @@ test('pm.response.to.not.have.header exist pass', () => {
   });
 });
 test('pm.response.to.not.have.header value fail', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     headers: {
       Server: 'MasterControlProgram',
     },
@@ -928,7 +928,7 @@ test('pm.response.to.not.have.header value pass clear', () => {
   });
 });
 test('pm.response.to.not.have.header value pass set', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     headers: {
       Server: 'AlanHome',
     },
@@ -939,7 +939,7 @@ test('pm.response.to.not.have.header value pass set', () => {
   });
 });
 test('pm.response.to.not.have.jsonBody exist fail', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     body: '{"test":"a"}',
   });
   expectFail();
@@ -948,7 +948,7 @@ test('pm.response.to.not.have.jsonBody exist fail', () => {
   });
 });
 test('pm.response.to.not.have.jsonBody exist pass', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     body: 'Response body',
   });
   expectPass();
@@ -957,7 +957,7 @@ test('pm.response.to.not.have.jsonBody exist pass', () => {
   });
 });
 test('pm.response.to.not.have.jsonBody equal fail', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     body: '{"test":"a"}',
   });
   expectFail();
@@ -968,7 +968,7 @@ test('pm.response.to.not.have.jsonBody equal fail', () => {
   });
 });
 test('pm.response.to.not.have.jsonBody equal pass', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     body: '{"test":"b"}',
   });
   expectPass();
@@ -979,7 +979,7 @@ test('pm.response.to.not.have.jsonBody equal pass', () => {
   });
 });
 test('pm.response.to.not.have.jsonBody path fail', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     body: '{"test":"a","test2":"b"}',
   });
   expectFail();
@@ -988,7 +988,7 @@ test('pm.response.to.not.have.jsonBody path fail', () => {
   });
 });
 test('pm.response.to.not.have.jsonBody path pass', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     body: '{"test":"a"}',
   });
   expectPass();
@@ -997,7 +997,7 @@ test('pm.response.to.not.have.jsonBody path pass', () => {
   });
 });
 test('pm.response.to.not.have.jsonBody value fail', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     body: '{"test":"a"}',
   });
   expectFail();
@@ -1006,7 +1006,7 @@ test('pm.response.to.not.have.jsonBody value fail', () => {
   });
 });
 test('pm.response.to.not.have.jsonBody value pass', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     body: '{"test":"a"}',
   });
   expectPass();
@@ -1022,7 +1022,7 @@ test('pm.response.to.not.have.jsonBody invalid argument type', () => {
   });
 });
 test('pm.response.to.not.have.jsonSchema fail', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     body: '{"test":7}',
   });
   expectFail();
@@ -1038,7 +1038,7 @@ test('pm.response.to.not.have.jsonSchema fail', () => {
   });
 });
 test('pm.response.to.not.have.jsonSchema pass', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     body: '{"test":"a"}',
   });
   expectPass();
@@ -1068,7 +1068,7 @@ test('pm.response.to.not.have.status string', () => {
   });
 });
 test('pm.response.to.not.have.status fail', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     status: 576,
   });
   expectFail();
@@ -1077,7 +1077,7 @@ test('pm.response.to.not.have.status fail', () => {
   });
 });
 test('pm.response.to.not.have.status pass', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     status: 500,
   });
   expectPass();

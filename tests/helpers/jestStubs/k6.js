@@ -1,11 +1,9 @@
-import sinon from 'sinon';
-
 const Reset = Symbol.for('reset');
 
 const k6 = {
-  check: sinon.stub(),
+  check: jest.fn(),
   [Reset]() {
-    this.check.reset();
+    this.check.mockReset();
   },
 };
 

@@ -294,8 +294,8 @@ test('variable', () => {
   postman[Request]({
     address: 'http://{{domain}}{{path}}',
   });
-  expect(http.request.calledOnce).toBe(true);
-  const args = http.request.firstCall.args;
+  expect(http.request).toHaveBeenCalledTimes(1);
+  const args = http.request.mock.calls[0];
   expect(args[1].startsWith('http://')).toBe(true);
   expect(args[1]).toContain('example.com/index.html');
 });
@@ -315,8 +315,8 @@ test('args', () => {
       auth: 'basic',
     },
   });
-  expect(http.request.calledOnce).toBe(true);
-  const args = http.request.firstCall.args;
+  expect(http.request).toHaveBeenCalledTimes(1);
+  const args = http.request.mock.calls[0];
   expect(args[0]).toBe('GET');
   expect(args[1]).toBe('http://example.com');
   expect(args[2]).toEqual({
@@ -340,8 +340,8 @@ test('args tags object', () => {
       mode: 'shim',
     },
   });
-  expect(http.request.calledOnce).toBe(true);
-  const args = http.request.firstCall.args;
+  expect(http.request).toHaveBeenCalledTimes(1);
+  const args = http.request.mock.calls[0];
   expect(args[3].tags).toEqual({
     suite: 'jest',
     mode: 'shim',
@@ -363,8 +363,8 @@ test('args with initial options headers executes reset/merge path', () => {
       Request: 'two',
     },
   });
-  expect(http.request.calledOnce).toBe(true);
-  const args = http.request.firstCall.args;
+  expect(http.request).toHaveBeenCalledTimes(1);
+  const args = http.request.mock.calls[0];
   expect(args[3]).toEqual({
     redirects: 0,
     headers: {
@@ -396,8 +396,8 @@ test('request.body.raw', () => {
       expect(request.body).toBe(rawBody);
     },
   });
-  expect(http.request.calledOnce).toBe(true);
-  const args = http.request.firstCall.args;
+  expect(http.request).toHaveBeenCalledTimes(1);
+  const args = http.request.mock.calls[0];
   expect(args[0]).toBe('POST');
   expect(args[1]).toBe('http://example.com');
   expect(args[2]).toBe(rawBody);
@@ -437,8 +437,8 @@ test('variable at address start defaults protocol with urijs shim', () => {
     address: '{{domain}}/index.html',
   });
 
-  expect(http.request.calledOnce).toBe(true);
-  const args = http.request.firstCall.args;
+  expect(http.request).toHaveBeenCalledTimes(1);
+  const args = http.request.mock.calls[0];
   expect(args[1].startsWith('http://')).toBe(true);
   expect(args[1]).toContain('example.com/index.html');
 });
@@ -455,6 +455,6 @@ test('pm.execution.skipRequest skips http call', () => {
   });
 
   expect(result).toBe(undefined);
-  expect(http.request.called).toBe(false);
+  expect(http.request).not.toHaveBeenCalled();
   expect(ranPost).toBe(false);
 });

@@ -13,6 +13,15 @@ const patterns = [
       /\bt\.(is|deepEqual|throws|notThrows|true|false|pass|fail|plan)\s*\(/,
   },
   { name: 'mock-require usage', regex: /mock-require|\bmockRequire\s*\(/ },
+  { name: 'Sinon firstCall', regex: /\.firstCall\b/ },
+  { name: 'Sinon getCall', regex: /\.getCall\s*\(/ },
+  { name: 'Sinon calledOnce', regex: /\.calledOnce\b/ },
+  { name: 'Sinon calledTwice', regex: /\.calledTwice\b/ },
+  { name: 'Sinon calledThrice', regex: /\.calledThrice\b/ },
+  { name: 'Sinon returns', regex: /\.returns\s*\(/ },
+  { name: 'Sinon callsFake', regex: /\.callsFake\s*\(/ },
+  { name: 'Sinon calledWith', regex: /\.calledWith\s*\(/ },
+  { name: 'Sinon calledWithExactly', regex: /\.calledWithExactly\s*\(/ },
 ];
 
 function walk(dir) {
