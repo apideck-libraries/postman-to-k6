@@ -86,8 +86,7 @@
     "@biomejs/biome": "^2.4.7",
     "husky": "^7.0.4",
     "jest": "^30.3.0",
-    "npm-run-all": "^4.1.5",
-    "sinon": "^7.5.0"
+    "npm-run-all": "^4.1.5"
   },
   "engines": {
     "node": ">=18"
