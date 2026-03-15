@@ -8,7 +8,6 @@ function loadShimCore(options = {}) {
   } = options;
 
   jest.resetModules();
-  jest.clearAllMocks();
 
   jest.doMock('k6', () => jest.requireActual('./jestStubs/k6'));
   jest.doMock('k6/http', () => jest.requireActual('./jestStubs/http'));
