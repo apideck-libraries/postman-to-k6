@@ -26,19 +26,13 @@ jobs:
         run: npm install
 
       - name: Format
-        run: yarn format
+        run: npm run format
 
       - name: Lint
-        run: yarn lint
+        run: npm run lint
 
-      - name: Test (Jest)
-        run: npm run test-jest
-
-      - name: Install Ava suite dependencies
-        run: npm install --prefix tests/ava-suite
-
-      - name: Test (Ava)
-        run: npm --prefix tests/ava-suite run test-all
+      - name: Test
+        run: npm run test-all
 
       - name: Bundle
         run: npm run bundle

@@ -317,29 +317,28 @@ $ postman-to-k6 example/v2/echo.json -o k6-script.js
 
 ## Testing
 
-Run suites independently:
+Run the test suite:
 
 ```shell
-$ yarn test-ava
-$ yarn test-jest
+$ npm run test-jest
 ```
 
-`yarn test-jest` includes a native-Jest guard for `tests/**` (fails on AVA-style APIs or `mock-require`).
+`npm run test-jest` includes a native-Jest guard for `tests/**` (fails on AVA-style APIs or `mock-require`).
 
-Run both suites:
+Run the default test entrypoint:
 
 ```shell
-$ yarn test-all
+$ npm run test-all
 ```
 
-Run coverage for both suites and generate a combined summary/trend artifact:
+Run coverage and generate a combined summary/trend artifact:
 
 ```shell
-$ yarn coverage-all
+$ npm run coverage-all
 ```
 
-`yarn coverage-all` also enforces a Jest coverage regression gate against
-`docs/superpowers/plans/jest-coverage-baseline.json` with a max drop of `0.30%`
+`npm run coverage-jest-regression` enforces a Jest coverage regression gate against
+`scripts/coverage/jest-coverage-baseline.json` with a max drop of `0.30%`
 for lines/statements/functions/branches.
 
 Jest-native testing rules for `tests/**`:
@@ -353,7 +352,7 @@ Jest-native testing rules for `tests/**`:
 The guard command is:
 
 ```shell
-$ yarn test-jest-native-guard
+$ npm run test-jest-native-guard
 ```
 
 ## Unsupported Features

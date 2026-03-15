@@ -15,9 +15,12 @@ const combinedJsonPath = path.join(coverageDir, 'combined-summary.json');
 const combinedMdPath = path.join(coverageDir, 'combined-summary.md');
 const historyPath = path.join(coverageDir, 'history.jsonl');
 
-function readSummary(candidates, key) {
+function readSummary(candidates, key, required = true) {
   const filePath = candidates.find((candidate) => fs.existsSync(candidate));
   if (!filePath) {
+    if (!required) {
+      return null;
+    }
     throw new Error(
       `${key} summary not found in any of: ${candidates.join(', ')}`
     );
@@ -42,7 +45,8 @@ function main() {
   fs.mkdirSync(coverageDir, { recursive: true });
 
   const jest = pickMetrics(readSummary(jestSummaryCandidates, 'Jest'));
-  const ava = pickMetrics(readSummary(avaSummaryCandidates, 'Ava'));
+  const avaSummary = readSummary(avaSummaryCandidates, 'Ava', false);
+  const ava = avaSummary ? pickMetrics(avaSummary) : null;
   const timestamp = new Date().toISOString();
 
   const combined = {
@@ -59,7 +63,9 @@ function main() {
     '',
     '| Suite | Lines | Statements | Functions | Branches |',
     '| --- | ---: | ---: | ---: | ---: |',
-    `| Ava | ${ava.lines.toFixed(2)}% | ${ava.statements.toFixed(2)}% | ${ava.functions.toFixed(2)}% | ${ava.branches.toFixed(2)}% |`,
+    ava
+      ? `| Ava | ${ava.lines.toFixed(2)}% | ${ava.statements.toFixed(2)}% | ${ava.functions.toFixed(2)}% | ${ava.branches.toFixed(2)}% |`
+      : '| Ava | N/A | N/A | N/A | N/A |',
     `| Jest | ${jest.lines.toFixed(2)}% | ${jest.statements.toFixed(2)}% | ${jest.functions.toFixed(2)}% | ${jest.branches.toFixed(2)}% |`,
     '',
   ].join('\n');
