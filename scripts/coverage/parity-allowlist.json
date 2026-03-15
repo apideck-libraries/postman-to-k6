@@ -1,4 +1,6 @@
 {
+  "expectedAvaCases": 346,
+  "expectedJestCases": 393,
   "missingInJest": [],
   "extraInJest": []
 }

@@ -64,10 +64,24 @@ function setDiff(left, right) {
 
 function readAllowlist(allowlistPath) {
   if (!fs.existsSync(allowlistPath)) {
-    return { missingInJest: [], extraInJest: [] };
+    return {
+      expectedAvaCases: null,
+      expectedJestCases: null,
+      missingInJest: [],
+      extraInJest: [],
+    };
   }
   const parsed = JSON.parse(fs.readFileSync(allowlistPath, 'utf8'));
   return {
+    expectedAvaCases:
+      Number.isInteger(parsed.expectedAvaCases) && parsed.expectedAvaCases >= 0
+        ? parsed.expectedAvaCases
+        : null,
+    expectedJestCases:
+      Number.isInteger(parsed.expectedJestCases) &&
+      parsed.expectedJestCases >= 0
+        ? parsed.expectedJestCases
+        : null,
     missingInJest: Array.isArray(parsed.missingInJest)
       ? parsed.missingInJest
       : [],
@@ -104,6 +118,24 @@ function buildParityInventory(options = {}) {
   const disallowedExtraInJest = extraInJest.filter(
     (item) => !allowExtra.has(item)
   );
+  const totalCountRegressions = [];
+
+  if (
+    allowlist.expectedAvaCases !== null &&
+    avaCases.size < allowlist.expectedAvaCases
+  ) {
+    totalCountRegressions.push(
+      `Ava total dropped: ${avaCases.size} < expected floor ${allowlist.expectedAvaCases}`
+    );
+  }
+  if (
+    allowlist.expectedJestCases !== null &&
+    jestCases.size < allowlist.expectedJestCases
+  ) {
+    totalCountRegressions.push(
+      `Jest total dropped: ${jestCases.size} < expected floor ${allowlist.expectedJestCases}`
+    );
+  }
 
   return {
     generatedAt: new Date().toISOString(),
@@ -116,6 +148,7 @@ function buildParityInventory(options = {}) {
     allowlist,
     disallowedMissingInJest,
     disallowedExtraInJest,
+    totalCountRegressions,
   };
 }
 
@@ -155,12 +188,26 @@ function main() {
   process.stdout.write(
     `Extra in Jest: ${inventory.extraInJest.length} (${inventory.disallowedExtraInJest.length} disallowed)\n`
   );
+  if (
+    inventory.allowlist.expectedAvaCases !== null ||
+    inventory.allowlist.expectedJestCases !== null
+  ) {
+    process.stdout.write(
+      `Expected floors: Ava ${
+        inventory.allowlist.expectedAvaCases ?? 'none'
+      }, Jest ${inventory.allowlist.expectedJestCases ?? 'none'}\n`
+    );
+  }
 
   if (
     args.failOnDisallowed &&
     (inventory.disallowedMissingInJest.length > 0 ||
-      (args.failOnExtra && inventory.disallowedExtraInJest.length > 0))
+      (args.failOnExtra && inventory.disallowedExtraInJest.length > 0) ||
+      inventory.totalCountRegressions.length > 0)
   ) {
+    for (const regression of inventory.totalCountRegressions) {
+      process.stderr.write(`${regression}\n`);
+    }
     process.stderr.write('Parity inventory check failed.\n');
     process.exit(1);
   }
