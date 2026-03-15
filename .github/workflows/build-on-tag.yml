@@ -19,19 +19,19 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
 
       - name: Install dependencies
-        run: yarn install
+        run: npm install
 
       - name: Format
-        run: yarn format
+        run: npm run format
 
       - name: Lint
-        run: yarn lint
+        run: npm run lint
 
-      - name: Test (Ava + Jest)
-        run: yarn test-all
+      - name: Test
+        run: npm run test-all
 
       - name: Bundle
-        run: yarn bundle
+        run: npm run bundle
 
 #      - name: Publish to NPM
 #        env:
