@@ -17,7 +17,7 @@ afterAll(() => {
   resetShimState(harness);
 });
 test('responseBody', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     body: 'Response body',
   });
   postman[Request]({
@@ -27,7 +27,7 @@ test('responseBody', () => {
   });
 });
 test('responseCode.code', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     status: 418,
   });
   postman[Request]({
@@ -55,7 +55,7 @@ test('responseCode.name', () => {
   });
 });
 test('responseHeaders', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     headers: {
       Server: 'MasterControlProgram',
       Allow: 'GET, POST, HEAD',
@@ -71,7 +71,7 @@ test('responseHeaders', () => {
   });
 });
 test('responseTime', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     timings: {
       duration: 556,
     },
@@ -83,7 +83,7 @@ test('responseTime', () => {
   });
 });
 test('postman.getResponseHeader', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     headers: {
       Server: 'MasterControlProgram',
     },
@@ -95,7 +95,7 @@ test('postman.getResponseHeader', () => {
   });
 });
 test('pm.response.code', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     status: 418,
   });
   postman[Request]({
@@ -105,7 +105,7 @@ test('pm.response.code', () => {
   });
 });
 test('pm.response.headers.get', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     headers: {
       'Content-Type': 'application/json',
       Server: 'GitHub Copilot',
@@ -118,7 +118,7 @@ test('pm.response.headers.get', () => {
   });
 });
 test('pm.response.headers.all', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     headers: {
       'Content-Type': 'application/json',
       Server: 'GitHub Copilot',
@@ -148,7 +148,7 @@ test('pm.response.headers.all missing', () => {
   });
 });
 test('pm.response.json', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     body: '{ "test": "a", "test2": "b" }',
   });
   postman[Request]({
@@ -161,7 +161,7 @@ test('pm.response.json', () => {
   });
 });
 test('pm.response.json invalid', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     body: 'not-json',
   });
   postman[Request]({
@@ -182,7 +182,7 @@ test('pm.response.reason', () => {
   });
 });
 test('pm.response.responseTime', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     timings: {
       duration: 556,
     },
@@ -194,7 +194,7 @@ test('pm.response.responseTime', () => {
   });
 });
 test('pm.response.text string', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     body: 'Response body',
   });
   postman[Request]({
@@ -204,7 +204,7 @@ test('pm.response.text string', () => {
   });
 });
 test('pm.response.text binary', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     body: [0x01, 0x02, 0x03],
   });
   postman[Request]({

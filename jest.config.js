@@ -79,8 +79,8 @@ module.exports = {
 
   // A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
   moduleNameMapper: {
-    '^k6$': '<rootDir>/test/stub/k6.js',
-    '^k6/http$': '<rootDir>/test/stub/http.js',
+    '^k6$': '<rootDir>/tests/helpers/jestStubs/k6.js',
+    '^k6/http$': '<rootDir>/tests/helpers/jestStubs/http.js',
   },
 
   // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader

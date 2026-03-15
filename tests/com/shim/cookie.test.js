@@ -25,7 +25,7 @@ test('responseCookies', () => {
     secure: false,
     value: 'Aqua',
   };
-  http.request.returns({
+  http.request.mockReturnValue({
     cookies: {
       Theme: [cookie],
     },
@@ -41,7 +41,7 @@ test('responseCookies', () => {
   });
 });
 test('cookie.hostOnly', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     cookies: {
       Theme: [{}],
     },
@@ -56,7 +56,7 @@ test('cookie.hostOnly', () => {
   });
 });
 test('cookie.session', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     cookies: {
       Theme: [{}],
     },
@@ -71,7 +71,7 @@ test('cookie.session', () => {
   });
 });
 test('cookie.storeId', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     cookies: {
       Theme: [{}],
     },
@@ -94,7 +94,7 @@ test('postman.getResponseCookie', () => {
     secure: false,
     value: 'Aqua',
   };
-  http.request.returns({
+  http.request.mockReturnValue({
     cookies: {
       Theme: [cookie],
     },
@@ -121,7 +121,7 @@ test('pm.cookies.get set', () => {
     name: 'Theme',
     value: 'Aqua',
   };
-  http.request.returns({
+  http.request.mockReturnValue({
     cookies: {
       Theme: [cookie],
     },
@@ -140,7 +140,7 @@ test('pm.cookies.has clear', () => {
   });
 });
 test('pm.cookies.has set', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     cookies: {
       Theme: [
         {
@@ -156,7 +156,7 @@ test('pm.cookies.has set', () => {
   });
 });
 test('pm.cookies.toObject', () => {
-  http.request.returns({
+  http.request.mockReturnValue({
     cookies: {
       Theme: [
         {
