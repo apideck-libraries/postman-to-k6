@@ -62,7 +62,7 @@
     "cheerio": "1.0.0-rc.6",
     "commander": "^2.20.3",
     "crypto-js": "^4.2.0",
-    "fs-extra": "^8.1.0",
+    "fs-extra": "^11.3.4",
     "lodash": "^4.17.23",
     "oauth-1.0a": "^2.2.6",
     "papaparse": "^5.5.3",
