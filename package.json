@@ -67,7 +67,7 @@
     "oauth-1.0a": "^2.2.6",
     "papaparse": "^5.5.3",
     "pkginfo": "^0.4.1",
-    "postman-collection": "^4.5.0",
+    "postman-collection": "^5.3.0",
     "postman-collection-transformer": "^4.1.13",
     "prettier": "^1.19.1",
     "spo-gpo": "^1.0.0",
