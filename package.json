@@ -71,7 +71,7 @@
     "postman-collection-transformer": "^4.1.13",
     "prettier": "^1.19.1",
     "spo-gpo": "^1.0.0",
-    "strip-json-comments": "^3.1.1",
+    "strip-json-comments": "^5.0.3",
     "urijs": "^1.19.11",
     "uuid": "^3.4.0",
     "verror": "^1.10.1",
