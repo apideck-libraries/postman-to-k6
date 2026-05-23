@@ -1,0 +1,254 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`postman collection normalization snapshot 1`] = `
+{
+  "_": {
+    "postman_id": "c67436d8-7184-4d7e-9c71-b40d6fd1460e",
+  },
+  "event": [],
+  "info": {
+    "_postman_id": "c67436d8-7184-4d7e-9c71-b40d6fd1460e",
+    "name": "Tree",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "version": undefined,
+  },
+  "item": [
+    {
+      "event": [],
+      "id": "__normalized_id__",
+      "item": [
+        {
+          "_": {
+            "postman_isSubFolder": true,
+          },
+          "event": [],
+          "id": "__normalized_id__",
+          "item": [
+            {
+              "event": [],
+              "id": "__normalized_id__",
+              "name": "DoLogin",
+              "request": {
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                },
+                "method": "GET",
+                "url": {
+                  "query": [],
+                  "variable": [],
+                },
+              },
+              "response": [],
+            },
+          ],
+          "name": "Login",
+        },
+        {
+          "_": {
+            "postman_isSubFolder": true,
+          },
+          "event": [],
+          "id": "__normalized_id__",
+          "item": [
+            {
+              "event": [],
+              "id": "__normalized_id__",
+              "name": "DoLogin",
+              "request": {
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                },
+                "method": "GET",
+                "url": {
+                  "query": [],
+                  "variable": [],
+                },
+              },
+              "response": [],
+            },
+            {
+              "event": [],
+              "id": "__normalized_id__",
+              "name": "DoLogin",
+              "request": {
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                },
+                "method": "GET",
+                "url": {
+                  "query": [],
+                  "variable": [],
+                },
+              },
+              "response": [],
+            },
+          ],
+          "name": "Login",
+        },
+      ],
+      "name": "First",
+    },
+    {
+      "event": [],
+      "id": "__normalized_id__",
+      "item": [
+        {
+          "event": [],
+          "id": "__normalized_id__",
+          "name": "ExerciseHome",
+          "request": {
+            "body": {
+              "mode": "raw",
+              "raw": "",
+            },
+            "method": "GET",
+            "url": {
+              "query": [],
+              "variable": [],
+            },
+          },
+          "response": [],
+        },
+      ],
+      "name": "Second",
+    },
+    {
+      "event": [],
+      "id": "__normalized_id__",
+      "item": [
+        {
+          "event": [],
+          "id": "__normalized_id__",
+          "name": "LoadTest",
+          "request": {
+            "body": {
+              "mode": "raw",
+              "raw": "",
+            },
+            "method": "GET",
+            "url": {
+              "query": [],
+              "variable": [],
+            },
+          },
+          "response": [],
+        },
+        {
+          "event": [],
+          "id": "__normalized_id__",
+          "name": "LoadTest",
+          "request": {
+            "body": {
+              "mode": "raw",
+              "raw": "",
+            },
+            "method": "GET",
+            "url": {
+              "query": [],
+              "variable": [],
+            },
+          },
+          "response": [],
+        },
+        {
+          "event": [],
+          "id": "__normalized_id__",
+          "name": "LoadTest",
+          "request": {
+            "body": {
+              "mode": "raw",
+              "raw": "",
+            },
+            "method": "GET",
+            "url": {
+              "query": [],
+              "variable": [],
+            },
+          },
+          "response": [],
+        },
+      ],
+      "name": "Third",
+    },
+    {
+      "event": [],
+      "id": "__normalized_id__",
+      "item": [
+        {
+          "event": [],
+          "id": "__normalized_id__",
+          "name": "Exercise Home",
+          "request": {
+            "body": {
+              "mode": "raw",
+              "raw": "",
+            },
+            "method": "GET",
+            "url": {
+              "query": [],
+              "variable": [],
+            },
+          },
+          "response": [],
+        },
+        {
+          "event": [],
+          "id": "__normalized_id__",
+          "name": "Exercise About",
+          "request": {
+            "body": {
+              "mode": "raw",
+              "raw": "",
+            },
+            "method": "GET",
+            "url": {
+              "query": [],
+              "variable": [],
+            },
+          },
+          "response": [],
+        },
+        {
+          "event": [],
+          "id": "__normalized_id__",
+          "name": "Exercise Search",
+          "request": {
+            "body": {
+              "mode": "raw",
+              "raw": "",
+            },
+            "method": "GET",
+            "url": {
+              "query": [],
+              "variable": [],
+            },
+          },
+          "response": [],
+        },
+      ],
+      "name": "Second",
+    },
+    {
+      "event": [],
+      "id": "__normalized_id__",
+      "name": "Request1",
+      "request": {
+        "body": {
+          "mode": "raw",
+          "raw": "",
+        },
+        "method": "GET",
+        "url": {
+          "query": [],
+          "variable": [],
+        },
+      },
+      "response": [],
+    },
+  ],
+  "variable": [],
+}
+`;
