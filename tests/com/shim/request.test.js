@@ -1,7 +1,7 @@
 /* global postman pm request */
 
 import { loadShimCore, resetShimState } from '../../helpers/shimHarness';
-import uuidv4 from 'uuid/v4';
+import { randomUUID as uuidv4 } from 'node:crypto';
 let k6;
 let http;
 let harness;

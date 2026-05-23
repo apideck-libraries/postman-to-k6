@@ -1,6 +1,6 @@
 /* global postman pm iteration */
 
-import uuidv4 from 'uuid/v4';
+import { randomUUID as uuidv4 } from 'node:crypto';
 import { loadShimCore, resetShimState } from '../../helpers/shimHarness';
 let k6;
 let http;

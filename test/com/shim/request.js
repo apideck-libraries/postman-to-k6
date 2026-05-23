@@ -2,7 +2,7 @@
 
 import test from 'ava';
 import mockRequire from 'mock-require';
-import uuidv4 from 'uuid/v4';
+const { randomUUID: uuidv4 } = require('node:crypto');
 let k6;
 let http;
 
