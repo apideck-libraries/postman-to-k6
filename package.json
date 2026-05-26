@@ -74,7 +74,7 @@
     "strip-json-comments": "^3.1.1",
     "urijs": "^1.19.11",
     "verror": "^1.10.1",
-    "xml2js": "^0.5.0"
+    "xml2js": "^0.6.2"
   },
   "devDependencies": {
     "@babel/plugin-transform-runtime": "^7.29.0",
