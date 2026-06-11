@@ -60,7 +60,7 @@
     "browserify": "^17.0.1",
     "chai": "^4.5.0",
     "cheerio": "1.0.0-rc.6",
-    "commander": "^2.20.3",
+    "commander": "^15.0.0",
     "crypto-js": "^4.2.0",
     "fs-extra": "^11.3.4",
     "lodash": "^4.18.1",
