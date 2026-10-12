@@ -5,7 +5,7 @@ const utils = require('../lib/convert/utils');
 const fs = require('fs-extra');
 const outputRequests = require('./requests');
 const path = require('node:path');
-const program = require('commander');
+const { program } = require('commander');
 const pkginfo = require('pkginfo');
 
 pkginfo(module, 'version');
@@ -16,6 +16,7 @@ program
   .version(version)
   .usage('<path> [options]')
   .description('Convert a Postman collection to k6 script')
+  .argument('[path]', 'Path to Postman collection')
   .option('-o, --output <path>', 'Output file path. Default stdout.')
   .option('-i, --iterations <count>', 'Number of iterations.')
   .option('-g, --global <path>', 'JSON export of global variables.')
@@ -54,15 +55,13 @@ program
   .option('--oauth1-realm <value>', 'OAuth1 realm.')
   .option('-s, --separate', 'Generate a separate file for each request.')
   .action(run)
-  .parse(process.argv);
+  .parseAsync(process.argv);
 
-async function run(...args) {
-  if (args.length <= 1) {
+async function run(input, options) {
+  if (!input) {
     console.error('Provide path to Postman collection');
     return;
   }
-  let options = args.pop();
-  const input = args.shift();
 
   let cliOptions = {};
   if (options.cliOptionsFile) {
