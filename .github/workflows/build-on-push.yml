@@ -12,15 +12,18 @@ on:
 jobs:
   build-on-push:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [22.x, 24.x]
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Use Node.js 24.x
+      - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
         with:
-          node-version: 24.x
+          node-version: ${{ matrix.node-version }}
 
       - name: Install dependencies
         run: npm install
