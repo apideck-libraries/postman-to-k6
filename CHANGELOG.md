@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased](https://github.com/apideck-libraries/postman-to-k6/compare/v1.8.7...HEAD)
 
+## [1.14.4] - 2026-10-12
+
 - Upgrade Commander from 2.20.3 to 15.0.0 and migrate CLI argument and option handling.
 - Raise the minimum Node.js version from 18 to 22.12.0, as required by Commander 15.
 - Reject unexpected extra collection paths instead of silently ignoring them.
