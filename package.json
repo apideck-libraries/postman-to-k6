@@ -59,7 +59,7 @@
     "aws4": "^1.13.2",
     "browserify": "^17.0.1",
     "chai": "^4.5.0",
-    "cheerio": "1.0.0-rc.6",
+    "cheerio": "1.2.0",
     "commander": "^2.20.3",
     "crypto-js": "^4.2.0",
     "fs-extra": "^11.3.4",
