@@ -1,0 +1,19 @@
+README.md
+  s_2075e0810faefb::t_d4b2fadf31ee5b 388-395
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "029c59914edf28fc9f40752810593a6e2a26e876",
+  "prompts": {},
+  "sessions": {
+    "s_2075e0810faefb": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "dae35396-9bcf-4862-acff-edbe2ad9dbf1",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "GJ <info@gertjandewilde.com>"
+    }
+  }
+}
