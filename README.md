@@ -385,6 +385,14 @@ A collection of blog posts and resources about postman-to-k6
 - [Postman to K6 Automating Performance Testing with Auto Script Generation](https://www.youtube.com/watch?v=e0QdBoWS72k) by [Huzaifa Asif](https://www.youtube.com/@huzaifa-io)
 - [Postman to k6 in under 5 minutes](https://medium.com/@t79877005/postman-to-k6-in-under-5-minutes-fb98fabaf468) / [YouTube](https://www.youtube.com/watch?v=ddP4HcFfXRw) by [loan Solderea](https://www.linkedin.com/in/%F0%9F%95%B5ioan-s-b0928516/)
 
+## Related projects
+
+Open-source tools from the same maintainers:
+
+- [Portman](https://getportman.com): generate a Postman collection with contract tests from an OpenAPI spec, then convert it with postman-to-k6 to load test the same requests.
+- [openapi-format](https://github.com/thim81/openapi-format): format, sort and filter OpenAPI documents.
+- [Inspectr](https://github.com/inspectr-hq/inspectr): inspect API requests, MCP server calls and webhook events.
+
 ## Other similar tools
 
 - [jmeter-to-k6](https://github.com/loadimpact/jmeter-to-k6/): Convert JMeter JMX files to k6 JS.
