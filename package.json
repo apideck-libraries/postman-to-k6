@@ -55,7 +55,7 @@
     "release": "npm run format && npm run lint && npm run bundle && npx np --branch main"
   },
   "dependencies": {
-    "ajv": "^6.14.0",
+    "ajv": "^8.20.0",
     "aws4": "^1.13.2",
     "browserify": "^17.0.1",
     "chai": "^4.5.0",
