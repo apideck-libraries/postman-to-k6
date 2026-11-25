@@ -79,7 +79,7 @@
   "devDependencies": {
     "@babel/plugin-transform-runtime": "^7.29.0",
     "@babel/preset-env": "^7.29.0",
-    "@babel/register": "^7.28.6",
+    "@babel/register": "^8.0.6",
     "@babel/runtime": "^7.28.6",
     "@biomejs/biome": "^2.5.15",
     "jest": "^30.5.2",
